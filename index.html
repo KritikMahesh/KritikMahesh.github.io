@@ -872,7 +872,7 @@ html[lang="ar"] .rl{--roll:2.2em;padding-block:.35em;margin-block:-.35em}
         alt:"IEEE Certificate of Participation certifying that Kritik Kumar participated, as part of a team, in the IEEEXtreme 18.0 Programming Competition, which hosted more than 19,000 participants, on 26 October 2024." }] },
     makex:{ title:"MakeX Robotics", sub:"Runner-up, twice", year:"2023–2024", genres:["Robotics", "Competition"], art:"robot", bg:"#33195A", badge:"2×",
       syn:"Runner-up at the MakeX Robotics Competition in 2023 and again in 2024." },
-    khda:{ title:"E33 CoLabs", sub:"KHDA · Nov 2025", year:"2025", genres:["Education", "Community"], art:"circles", bg:"#0F2B57", badge:"Certificate",
+    khda:{ title:"E33 CoLabs", sub:"KHDA · Nov 2025", year:"2025", genres:["Education", "Community"], art:"e33", bg:"#0F2B57", badge:"Certificate",
       syn:"A Certificate of Appreciation from Dubai's Knowledge and Human Development Authority (KHDA), for my part in the E33 CoLabs 2025 event and contributing to shaping the future of Dubai's education landscape.",
       certs:[{ src:"certs/e33-colabs-2025.jpg", w:978, h:691, cap:"Certificate of Appreciation · KHDA · November 2025",
         alt:"Certificate of Appreciation from KHDA, Government of Dubai, presented to Kritik Mahesh Kumar for participating in the E33 CoLabs 2025 event and contributing to shaping the future of Dubai's education landscape. November 2025." }] },
@@ -1206,6 +1206,8 @@ html[lang="ar"] .rl{--roll:2.2em;padding-block:.35em;margin-block:-.35em}
       c.strokeStyle = "#f00"; c.lineCap = "round"; c.beginPath(); c.moveTo(cx, cy); c.lineTo(cx, cy - s * .24); c.moveTo(cx, cy); c.lineTo(cx + s * .17, cy + s * .05); c.stroke(); },
     robot:(c, w, h) => { const s = Math.min(w, h), cx = w / 2, cy = h * .55; rr(c, cx - s * .3, cy - s * .22, s * .6, s * .44, s * .08); c.fill(); c.fillRect(cx - s * .02, cy - s * .38, s * .04, s * .16);
       c.fillStyle = "#f00"; c.beginPath(); c.arc(cx, cy - s * .4, s * .05, 0, 7); c.fill(); c.globalCompositeOperation = "destination-out"; c.beginPath(); c.arc(cx - s * .13, cy - s * .04, s * .07, 0, 7); c.arc(cx + s * .13, cy - s * .04, s * .07, 0, 7); c.fill(); c.fillRect(cx - s * .14, cy + s * .1, s * .28, s * .04); c.globalCompositeOperation = "source-over"; },
+    e33:(c, w, h) => { const s = Math.min(w, h); c.save(); fitText(c, "E33", w * .92, h * .62, 900, '"Inter Tight", ' + FAM); c.fillText("E33", w / 2, h * .38);
+      c.fillStyle = "#f00"; fitText(c, "KHDA", w * .62, h * .24, 900, '"Inter Tight", ' + FAM); c.fillText("KHDA", w / 2, h * .82); c.restore(); },
     circles:(c, w, h) => { const s = Math.min(w, h); c.lineWidth = s * .04; [[-.13, -.08, 0], [.13, -.08, 1], [0, .14, 0]].forEach(([dx, dy, a]) => { c.strokeStyle = a ? "#f00" : "#fff"; c.beginPath(); c.arc(w / 2 + dx * s, h / 2 + dy * s, s * .22, 0, 7); c.stroke(); }); },
     cap:(c, w, h) => { const s = Math.min(w, h), cx = w / 2, cy = h * .45; c.beginPath(); c.moveTo(cx - s * .42, cy); c.lineTo(cx, cy - s * .2); c.lineTo(cx + s * .42, cy); c.lineTo(cx, cy + s * .2); c.closePath(); c.fill();
       c.beginPath(); c.moveTo(cx - s * .24, cy + s * .1); c.lineTo(cx - s * .24, cy + s * .3); c.quadraticCurveTo(cx, cy + s * .42, cx + s * .24, cy + s * .3); c.lineTo(cx + s * .24, cy + s * .1); c.fill(); c.strokeStyle = "#f00"; c.lineWidth = s * .025; c.beginPath(); c.moveTo(cx + s * .3, cy + s * .03); c.lineTo(cx + s * .3, cy + s * .3); c.stroke(); c.fillStyle = "#f00"; c.beginPath(); c.arc(cx + s * .3, cy + s * .33, s * .04, 0, 7); c.fill(); },
@@ -1248,7 +1250,7 @@ html[lang="ar"] .rl{--roll:2.2em;padding-block:.35em;margin-block:-.35em}
     aivh:{ style:"halftone", pal:["#06243A", "#0F1B55", "#6FE7FF"], art:"versus", big:"38" },
     xtreme:{ style:"contour", pal:["#160A3A", "#34106B", "#D08BFF"], big:"8TH" },
     makex:{ style:"mosaic", pal:["#0A1B3F", "#13306E", "#7EA0FF"], big:"2×" },
-    khda:{ style:"stipple", pal:["#0C1F4D", "#2A1A63", "#B9A8FF"] },
+    khda:{ style:"glow", pal:["#0C1F4D", "#2A1A63", "#B9A8FF"] },
     mahe:{ style:"glow", pal:["#101436", "#25307A", "#C7D4FF"] },
     ieee:{ style:"halftone", pal:["#071B4A", "#123A8C", "#9CC2FF"] },
     gdsc:{ style:"ascii", pal:["#0B0E26", "#1F1452", "#A08BFF"] },
