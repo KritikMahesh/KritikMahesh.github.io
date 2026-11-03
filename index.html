@@ -61,12 +61,12 @@
 
 /* ---------- each profile tints the whole service: recruiter blue, engineer violet, curious purple ---------- */
 :root[data-prof="recruiter"]{--acc:#2F5BEA;--acc-rgb:47,91,234;--acc2:#5B3FD9;--dot-acc:#2F5BEA;--glow:47,91,234}
-:root[data-theme="dark"][data-prof="recruiter"]{--acc:#6C9CFF;--acc-rgb:108,156,255;--acc2:#A08BFF;--dot-acc:#6C9CFF}
+:root[data-theme="dark"][data-prof="recruiter"]{--acc:#3F6FF0;--acc-rgb:63,111,240;--acc2:#A08BFF;--dot-acc:#5A86FF}
 :root[data-prof="engineer"]{--acc:#5B3FD9;--acc-rgb:91,63,217;--acc2:#2F5BEA;--dot-acc:#5B3FD9;--glow:106,75,224}
 :root[data-theme="dark"][data-prof="engineer"]{--acc:#A08BFF;--acc-rgb:160,139,255;--acc2:#6C9CFF;--dot-acc:#A08BFF}
 :root[data-prof="curious"]{--acc:#9333EA;--acc-rgb:147,51,234;--acc2:#5B3FD9;--dot-acc:#9333EA;--glow:160,70,210}
 :root[data-theme="dark"][data-prof="curious"]{--acc:#D08BFF;--acc-rgb:208,139,255;--acc2:#A08BFF;--dot-acc:#D08BFF}
-@media (prefers-color-scheme:dark){:root[data-prof="recruiter"]:not([data-theme="light"]){--acc:#6C9CFF;--acc-rgb:108,156,255;--acc2:#A08BFF;--dot-acc:#6C9CFF}:root[data-prof="engineer"]:not([data-theme="light"]){--acc:#A08BFF;--acc-rgb:160,139,255;--acc2:#6C9CFF;--dot-acc:#A08BFF}:root[data-prof="curious"]:not([data-theme="light"]){--acc:#D08BFF;--acc-rgb:208,139,255;--acc2:#A08BFF;--dot-acc:#D08BFF}}
+@media (prefers-color-scheme:dark){:root[data-prof="recruiter"]:not([data-theme="light"]){--acc:#3F6FF0;--acc-rgb:63,111,240;--acc2:#A08BFF;--dot-acc:#5A86FF}:root[data-prof="engineer"]:not([data-theme="light"]){--acc:#A08BFF;--acc-rgb:160,139,255;--acc2:#6C9CFF;--dot-acc:#A08BFF}:root[data-prof="curious"]:not([data-theme="light"]){--acc:#D08BFF;--acc-rgb:208,139,255;--acc2:#A08BFF;--dot-acc:#D08BFF}}
 ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
 ::view-transition-old(root){z-index:1}::view-transition-new(root){z-index:2}
 *,*::before,*::after{box-sizing:border-box}
@@ -112,10 +112,11 @@ button{font:inherit;color:inherit}
 .prof>.lg{position:absolute;inset:0;z-index:0;display:block}
 liquid-glass:not(:defined){background:rgba(255,255,255,.08);-webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%);border-radius:inherit}
 .prof::before{content:"";position:absolute;inset:0;z-index:1;border-radius:inherit;pointer-events:none;
-  background:linear-gradient(160deg,rgba(var(--tint),.30),rgba(var(--tint),.06) 60%);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 0 0 1px rgba(255,255,255,.08),0 24px 60px -24px rgba(0,0,0,.75)}
+  background:linear-gradient(160deg,rgba(var(--tint),.5),rgba(var(--tint),.2) 60%),rgba(12,8,36,.3);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),inset 0 0 0 1px rgba(255,255,255,.08),0 24px 60px -24px rgba(0,0,0,.75)}
 .prof::after{content:"";position:absolute;inset:0;z-index:2;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .35s ease;
   background:radial-gradient(220px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.22),transparent 60%)}
 .prof:hover::after,.prof:focus-visible::after{opacity:1}
+:root[data-theme="light"] .prof::before{background:linear-gradient(160deg,rgba(var(--tint),.44),rgba(var(--tint),.16) 60%)}
 .prof>:not(.lg){position:relative;z-index:3}
 .prof.cur::before{box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 0 0 1.5px rgba(var(--acc-rgb),.9),0 24px 60px -24px rgba(0,0,0,.75)}
 .prof .av{width:76px;height:76px;border-radius:22px;display:grid;place-items:center;margin-bottom:12px;
@@ -125,9 +126,9 @@ liquid-glass:not(:defined){background:rgba(255,255,255,.08);-webkit-backdrop-fil
 .prof small{font-size:.8rem;color:rgba(var(--ink-rgb),.7);line-height:1.35;letter-spacing:.01em}
 .prof:focus-visible{outline:none}
 .prof:focus-visible::before{box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 0 0 2px rgba(var(--ink-rgb),.95),0 24px 60px -24px rgba(0,0,0,.75)}
-.av.r{--tint:47,91,234}.av.e{--tint:106,75,224}.av.c{--tint:160,70,210}
-.prof[data-prof="recruiter"]{--tint:47,91,234}.prof[data-prof="engineer"]{--tint:106,75,224}.prof[data-prof="curious"]{--tint:160,70,210}
-.av.r,.av.e,.av.c{background:linear-gradient(160deg,rgb(var(--tint)),rgba(var(--tint),.6))}
+.av.r{--tint:36,72,210}.av.e{--tint:86,56,200}.av.c{--tint:136,48,190}
+.prof[data-prof="recruiter"]{--tint:36,72,210}.prof[data-prof="engineer"]{--tint:86,56,200}.prof[data-prof="curious"]{--tint:136,48,190}
+.av.r,.av.e,.av.c{background:linear-gradient(160deg,rgb(var(--tint)),color-mix(in srgb,rgb(var(--tint)) 70%,#0A0620))} /* deeper, richer profile colours */
 .av svg *{stroke:#F4F2FF;fill:none;stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
 .skip{display:block;margin:30px auto 0;border:0;border-radius:999px;padding:12px 24px;color:var(--ink);font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent}
 
@@ -139,18 +140,19 @@ liquid-glass:not(:defined){background:rgba(255,255,255,.08);-webkit-backdrop-fil
 .top-in{display:flex;align-items:center;gap:clamp(14px,2.4vw,30px);height:68px}
 .brand{display:flex;align-items:center;gap:7px;text-decoration:none}
 .brand .bm{width:26px;height:30px;flex:none;transition:transform .2s cubic-bezier(.23,1,.32,1)}
-.brand .bm-s,.brand .bm-a{fill:var(--acc);stroke:var(--acc)}.brand .bm rect,.brand .bm path{stroke:none} /* no outlines: stem, arm and leg are exactly equal and line up top and bottom */ /* no outline on arm and leg, so their shared edge stays one straight line */.brand .bm-l{fill:color-mix(in oklab,var(--acc) 72%,#05040F);stroke:color-mix(in oklab,var(--acc) 72%,#05040F)}.brand .bm-f{fill:url(#bmFold)}
+.brand .bm-s{fill:url(#bmStemG)}.brand .bm-a{fill:url(#bmArm)}.brand .bm rect,.brand .bm path{stroke:none} /* no outlines: stem, arm and leg are exactly equal and line up top and bottom */ /* no outline on arm and leg, so their shared edge stays one straight line */.brand .bm-l{fill:url(#bmLegG)}.brand .bm-f{fill:url(#bmFold)}
 @supports not (color:color-mix(in oklab,red,blue)){.brand .bm-l{fill:var(--acc);opacity:.75}.brand .bm-f{fill:url(#bmFold)}}
 .brand:active .bm{transform:scale(.94)}
 .brand .bm *{transform-box:fill-box}
 @media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
-.brand:hover .bm-s{transform-origin:50% 100%;animation:bmStem .42s cubic-bezier(.23,1,.32,1) both}
-.brand:hover .bm-a{animation:bmArm .34s cubic-bezier(.55,0,.85,.35) .32s both}
-.brand:hover .bm-l{animation:bmLeg .4s cubic-bezier(.23,1,.32,1) .66s both}
-.brand:hover .bm-f{animation:bmFade .3s ease .66s both}}
+.brand:hover .bm-s{transform-box:fill-box;transform-origin:50% 0;animation:bmStem .6s cubic-bezier(.65,0,.35,1) both}
+.brand:hover .bm-a{animation:bmArm .3s cubic-bezier(.65,0,.9,.6) both}
+.brand:hover .bm-l{animation:bmLeg .3s cubic-bezier(.1,.4,.35,1) .3s both}
+.brand:hover .bm-f{animation:bmFade .25s ease .3s both}}
+/* same as the intro: the stem and the arm-into-leg stroke draw together, top to bottom */
 @keyframes bmStem{from{transform:scaleY(0)}}
-@keyframes bmArm{from{transform:translate(7px,-9px);opacity:0}40%{opacity:1}}
-@keyframes bmLeg{from{clip-path:inset(0 100% 100% 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes bmArm{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes bmLeg{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
 @keyframes bmFade{from{opacity:0}}
 .brand b{line-height:1}.brand span{align-self:flex-end;margin-bottom:3px}
 .brand b{font-family:var(--f-display);font-weight:800;font-size:1.55rem;letter-spacing:-.04em;color:var(--acc)}
@@ -637,6 +639,12 @@ html[lang="ar"] .lsw .ca b,.lsw .ce b{transform:none}
 /* theme switch: no cross-fade underneath the circle (that double image is what flickered) */
 html.vt-theme::view-transition-old(root),html.vt-theme::view-transition-new(root){animation:none;mix-blend-mode:normal}
 html.vt-theme *,html.vt-theme *::before,html.vt-theme *::after{transition:none!important} /* colours land at once inside the circle, not fading in behind it */
+/* QA fixes: no sideways wobble from decorative glows; finger-sized hit areas on touch without changing the look */
+html{overflow-x:clip}
+@media (pointer:coarse){
+  .brand{position:relative}.brand::after{content:"";position:absolute;inset:-8px -10px}
+  .gn-main .gooey-nav__link{position:relative}.gn-main .gooey-nav__link::after{content:"";position:absolute;inset:-8px -2px}
+}
 /* ---------- light theme refinements ---------- */
 @media (prefers-color-scheme:light){
 :root:not([data-theme="dark"]){--shadow-rgb:40,30,110;--shadow-a:.38}
@@ -788,7 +796,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
 </section>
 
 <header class="top" id="top"><div class="top-in wrap">
-  <a class="brand" href="#home" aria-label="KMK Originals, home"><svg class="bm" viewBox="0 0 22.4 28" aria-hidden="true"><defs><linearGradient id="bmFold" gradientUnits="userSpaceOnUse" x1="8.07" y1="15.3" x2="10" y2="16.8"><stop offset="0" stop-color="#05040F" stop-opacity=".55"/><stop offset="1" stop-color="#05040F" stop-opacity="0"/></linearGradient></defs><path class="bm-l" d="M9.38 14.01 19.95 26H14.35L6.55 17.15z"/><rect class="bm-s" x="1.6" y="2" width="4.2" height="24" rx="1.5"/><path class="bm-f" d="M9.38 14.01 6.55 17.15 8.82 18.96 11.65 15.82z"/><path class="bm-a" d="M5.8 11.71 14.53 2H20.18L9.38 14.01 6.55 17.15 5.8 16.29z"/></svg><span>originals</span></a>
+  <a class="brand" href="#home" aria-label="KMK Originals, home"><svg class="bm" viewBox="0 0 22.4 28" aria-hidden="true"><defs><linearGradient id="bmStemG" gradientUnits="userSpaceOnUse" x1="0" y1="2" x2="0" y2="26"><stop offset="0" stop-color="#2A4BC8"/><stop offset="1" stop-color="#2A1880"/></linearGradient><linearGradient id="bmLegG" gradientUnits="userSpaceOnUse" x1="8" y1="15" x2="19" y2="26"><stop offset="0" stop-color="#4527B8"/><stop offset="1" stop-color="#A43BD8"/></linearGradient><linearGradient id="bmArm" gradientUnits="userSpaceOnUse" x1="6" y1="17" x2="20" y2="2"><stop offset="0" stop-color="#6447EE"/><stop offset="1" stop-color="#38A6EE"/></linearGradient><linearGradient id="bmFold" gradientUnits="userSpaceOnUse" x1="8.07" y1="15.3" x2="10" y2="16.8"><stop offset="0" stop-color="#05040F" stop-opacity=".55"/><stop offset="1" stop-color="#05040F" stop-opacity="0"/></linearGradient><clipPath id="bmBow"><path d="M0 0H22.4V27.2H20.18V26Q10.89 24.56 1.6 26V27.2H0z"/></clipPath></defs><g clip-path="url(#bmBow)"><path class="bm-l" d="M9.38 13.97 19.95 26H14.81L6.78 16.86z"/><rect class="bm-s" x="1.6" y="2" width="4.56" height="24" rx="1.5"/><path class="bm-f" d="M9.38 13.97 6.78 16.86 9.05 18.67 11.65 15.78z"/><path class="bm-a" d="M5.95 12.08 15.04 2H20.18L9.38 13.97 6.78 16.86 5.95 15.92z"/></g></svg><span>originals</span></a>
   <nav class="nav gooey-nav gooey-nav--md gooey-nav--framed" aria-label="Browse">
     <span class="gooey-nav__rim"></span>
     <div class="gooey-nav__stage">
@@ -1276,7 +1284,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
       "<b>وصيف</b>، مسابقة ميك إكس للروبوتات 2023 و2024", "تدرّبت في برودجي إنفوتك (ذكاء اصطناعي توليدي) وكودينج ساموراي (تعلم الآلة)"],
     langs:"الإنجليزية، الهندية، المالايالامية، التيلوغوية، الماراثية", name:"كريتيك ماهيش كومار" };
   function renderCredits() { const set = CREDITS[isAR() ? "ar" : "en"].map(([a, b]) => `<div><dt>${a}</dt><dd>${b}</dd></div>`).join("");
-    $(".roll-in").innerHTML = `<div class="rset">${set}<div class="rsep" aria-hidden="true"><i></i><b><svg viewBox="0 0 22.4 28"><rect x="1.6" y="2" width="4.2" height="24" rx="1.5"/><path d="M5.8 11.71 14.53 2H20.18L9.38 14.01 6.55 17.15 5.8 16.29z"/><path class="lg2" d="M9.38 14.01 19.95 26H14.35L6.55 17.15z"/></svg></b><i></i></div></div><div class="rset" aria-hidden="true">${set}<div class="rsep" aria-hidden="true"><i></i><b><svg viewBox="0 0 22.4 28"><rect x="1.6" y="2" width="4.2" height="24" rx="1.5"/><path d="M5.8 11.71 14.53 2H20.18L9.38 14.01 6.55 17.15 5.8 16.29z"/><path class="lg2" d="M9.38 14.01 19.95 26H14.35L6.55 17.15z"/></svg></b><i></i></div></div>`; if (window.__roll) window.__roll.reset(); }
+    $(".roll-in").innerHTML = `<div class="rset">${set}<div class="rsep" aria-hidden="true"><i></i><b><svg viewBox="0 0 22.4 28"><rect x="1.6" y="2" width="4.56" height="24" rx="1.5"/><path d="M5.95 12.08 15.04 2H20.18L9.38 13.97 6.78 16.86 5.95 15.92z"/><path class="lg2" d="M9.38 13.97 19.95 26H14.81L6.78 16.86z"/></svg></b><i></i></div></div><div class="rset" aria-hidden="true">${set}<div class="rsep" aria-hidden="true"><i></i><b><svg viewBox="0 0 22.4 28"><rect x="1.6" y="2" width="4.56" height="24" rx="1.5"/><path d="M5.95 12.08 15.04 2H20.18L9.38 13.97 6.78 16.86 5.95 15.92z"/><path class="lg2" d="M9.38 13.97 19.95 26H14.81L6.78 16.86z"/></svg></b><i></i></div></div>`; if (window.__roll) window.__roll.reset(); }
   // static text: [selector, English, split mode or null, attribute]
   const STATIC = [
     ["#sting small", "Click or press any key to skip"], ["#gate-h", "Who's watching?", "w"], ["#gate .lead", "Pick a profile. The whole service rearranges for you."],
@@ -1478,7 +1486,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
       N.forEach(([x, y], i) => { c.fillStyle = i === 3 ? "#f00" : "#fff"; rr(c, x - nw / 2, y - nh / 2, nw, nh, nh * .3); c.fill(); }); },
     // the same K as the logo: stem and arm in white, the folded leg in the accent colour
     kmark:(c, w, h) => { const k = Math.min(w / 22.4, h / 28) * .92; c.save(); c.translate(w / 2 - 22.4 * k / 2, h / 2 - 28 * k / 2); c.scale(k, k);
-      rr(c, 1.6, 2, 4.2, 24, 1.5); c.fill(); c.fill(new Path2D("M5.8 11.71 14.53 2H20.18L9.38 14.01 6.55 17.15 5.8 16.29z")); c.fillStyle = "#f00"; c.fill(new Path2D("M9.38 14.01 19.95 26H14.35L6.55 17.15z")); c.restore(); },
+      rr(c, 1.6, 2, 4.56, 24, 1.5); c.fill(); c.fill(new Path2D("M5.95 12.08 15.04 2H20.18L9.38 13.97 6.78 16.86 5.95 15.92z")); c.fillStyle = "#f00"; c.fill(new Path2D("M9.38 13.97 19.95 26H14.81L6.78 16.86z")); c.restore(); },
     script:(c, w, h, it) => { fitText(c, it.script, w * .86, h * .8, 600, it.font); c.fillText(it.script, w / 2, h * .55); },
   };
   function star(c, cx, cy, R, r) { c.beginPath(); for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, d = i % 2 ? r : R; i ? c.lineTo(cx + Math.cos(a) * d, cy + Math.sin(a) * d) : c.moveTo(cx + Math.cos(a) * d, cy + Math.sin(a) * d); } c.closePath(); c.fill(); }
@@ -3755,12 +3763,12 @@ I am looking for AI engineering and software roles in Dubai.`;
     fit(); addEventListener("resize", fit);
     const ph = (a, b, x) => clamp((x - a) / (b - a), 0, 1), sm = (a, b, x) => { const t = ph(a, b, x); return t * t * (3 - 2 * t); };
     const quint = x => 1 - Math.pow(1 - x, 5), lerp = (a, b, k) => a + (b - a) * k;
-    const SW = 0.175, LEG = { p0:[0.214, 0.56], p1:[0.6594, 1], th:0.21 }, ARM = { p0:[0.2234, 0.56], p1:[0.6691, 0], th:0.21 }; // same K as the logo mark, slim strokes
+    const SW = 0.19, LEG = { p0:[0.214, 0.56], p1:[0.6594, 1], th:0.21 }, ARM = { p0:[0.2234, 0.56], p1:[0.6691, 0], th:0.21 }; // same K as the logo mark, slim strokes
     // the arm and leg as one folded ribbon: VI is where their inner edges meet, FL is where the arm's lower edge reaches the leg's outer edge
-    const VI = [0.3242, 0.5002], FL = [0.2064, 0.6312], PA = [[SW, 0.4044], [0.5387, 0], [0.7741, 0], VI, FL, [SW, 0.5956]], PL = [VI, [0.7644, 1], [0.5312, 1], FL]; // stem, arm and leg all exactly SW thick
+    const VI = [0.3242, 0.4988], FL = [0.2158, 0.619], PA = [[SW - .006, 0.417], [0.5601, 0], [0.7741, 0], VI, FL, [SW - .006, 0.5828]], PL = [VI, [0.7644, 1], [0.5504, 1], FL]; // the slanted ends are cut a touch wider than the stem so all three read as the same width // stem, arm and leg all exactly SW thick
     // soft corners drawn inside the shape itself, so the same path can be used to clip (nothing pokes outside it)
     const pathP = (P, KH) => { const n = P.length, r = KH * .022, X = i => P[(i + n) % n][0] * KH, Y = i => P[(i + n) % n][1] * KH; c.beginPath(); c.moveTo((X(-1) + X(0)) / 2, (Y(-1) + Y(0)) / 2);
-      for (let i = 0; i < n; i++) { const q = P[i], sharp = q === VI || q === FL || q[0] === SW; c.arcTo(X(i), Y(i), X(i + 1), Y(i + 1), sharp ? 0 : r); } c.closePath(); }; // only the free ends are rounded: where arm, leg and stem meet the edges run straight through
+      for (let i = 0; i < n; i++) { const q = P[i], sharp = q === VI || q === FL || q[0] <= SW; c.arcTo(X(i), Y(i), X(i + 1), Y(i + 1), sharp ? 0 : r); } c.closePath(); }; // only the free ends are rounded: where arm, leg and stem meet the edges run straight through
     const fillP = (P, KH, fill) => { pathP(P, KH); c.fillStyle = fill; c.fill(); };
     const upTo = (KH, y) => { c.beginPath(); c.rect(-KH, -KH * 2, KH * 4, (y + 2) * KH); c.clip(); };
     // light-stripe sprites: one per colour, a vertical alpha profile (soft top, bright lower third, soft foot)
@@ -3822,18 +3830,22 @@ I am looking for AI engineering and software roles in Dubai.`;
       // the letter itself, until the camera reaches its plane
       if (sc > 0 && reveal < 1) {
         c.save(); c.translate(W / 2, H / 2); c.scale(sc, sc); c.translate(-camX, -camY); c.translate(kx, ky);
-        const ps = quint(ph(250, 900, t)), paR = ph(1000, 1420, t), pa = paR * paR * paR, TI = 1420, pl = quint(ph(TI, 1900, t)), solid = 1 - reveal;
+        // the feet sit on one shallow arch, like the classic streaming N: outer edges lowest, rising toward the middle
+        { const BW = .7741, d = .03; c.beginPath(); c.moveTo(-KH, -2 * KH); c.lineTo(2 * KH, -2 * KH); c.lineTo(2 * KH, 1.05 * KH); c.lineTo(BW * KH, 1.05 * KH); c.lineTo(BW * KH, KH);
+          c.quadraticCurveTo(BW / 2 * KH, (1 - 2 * d) * KH, 0, KH); c.lineTo(0, 1.05 * KH); c.lineTo(-KH, 1.05 * KH); c.closePath(); c.clip(); }
+        // entry: the stem and the ribbon are drawn together, both top to bottom, like one pen stroke each (arm into leg)
+        const pen = eIO(ph(400, 1700, t)), ps = pen, pa = clamp01(pen / .5), pl = clamp01((pen - .5) / .5), solid = 1 - reveal;
         c.globalAlpha = solid;
-        const gs = c.createLinearGradient(0, 0, SW * KH, KH); gs.addColorStop(0, "#5A45D6"); gs.addColorStop(1, "#231C7A");
-        c.fillStyle = gs; if (ps > 0) { rr(c, 0, KH * (1 - ps), SW * KH, KH * ps, Math.min(KH * .035, KH * ps / 2)); c.fill(); }
-        if (ps > 0 && ps < 1) { const ty = KH * (1 - ps), tg = c.createLinearGradient(0, ty, 0, ty + KH * .09); tg.addColorStop(0, `rgba(236,232,255,${.6 * (1 - ps)})`); tg.addColorStop(1, "rgba(236,232,255,0)"); c.fillStyle = tg; c.fillRect(0, ty, SW * KH, KH * .09); }
+        const gs = c.createLinearGradient(0, 0, 0, KH); gs.addColorStop(0, "#2A4BC8"); gs.addColorStop(1, "#2A1880"); // the three profiles mixed: blue stem, purple-to-blue arm, purple-to-magenta leg
+        c.fillStyle = gs; if (ps > 0) { rr(c, 0, 0, SW * KH, KH * ps, Math.min(KH * .035, KH * ps / 2)); c.fill(); }
+        if (ps > 0 && ps < 1) { const ty = KH * ps, tg = c.createLinearGradient(0, ty, 0, ty - KH * .09); tg.addColorStop(0, `rgba(236,232,255,${.6 * (1 - ps)})`); tg.addColorStop(1, "rgba(236,232,255,0)"); c.fillStyle = tg; c.fillRect(0, Math.max(0, ty - KH * .09), SW * KH, Math.min(ty, KH * .09)); }
         // fine striations: the stem was always lines, you only notice as you get close
         if (ps >= 1) { const sv = sm(1.5, 6, sc) * solid; if (sv > 0) { c.globalAlpha = sv * .55; for (let i = 0; i < 26; i++) { const x = (i + .5) / 26 * SW * KH; c.fillStyle = i % 3 ? "rgba(10,6,40,.55)" : "rgba(220,212,255,.35)"; c.fillRect(x, 0, SW * KH / 120, KH); } c.globalAlpha = solid; } }
         const fold = 0; if (fold > 0) { // a soft oval of shade where the ribbon meets the stem: no hard edges, it fades out in every direction
           c.save(); rr(c, 0, 0, SW * KH, KH, KH * .035); c.clip(); c.translate(SW * KH, .5 * KH); c.scale(1, 2.4); const R = SW * KH * .8, sg = c.createRadialGradient(0, 0, 0, 0, 0, R);
           sg.addColorStop(0, `rgba(10,8,40,${.34 * fold})`); sg.addColorStop(.55, `rgba(10,8,40,${.14 * fold})`); sg.addColorStop(1, "rgba(10,8,40,0)"); c.fillStyle = sg; c.fillRect(-R, -R, R * 2, R * 2); c.restore(); }
-        const legG = c.createLinearGradient(0, .4 * KH, .7 * KH, KH); legG.addColorStop(0, "#3F2BB4"); legG.addColorStop(1, "#6A52EA");
-        const armG = c.createLinearGradient(0, .6 * KH, .6 * KH, 0); armG.addColorStop(0, "#7B5CFF"); armG.addColorStop(1, "#D2C4FF");
+        const legG = c.createLinearGradient(.267 * KH, .542 * KH, .725 * KH, KH); legG.addColorStop(0, "#4527B8"); legG.addColorStop(1, "#A43BD8");
+        const armG = c.createLinearGradient(.183 * KH, .625 * KH, .767 * KH, 0); armG.addColorStop(0, "#6447EE"); armG.addColorStop(1, "#38A6EE"); // purple into electric blue
         // arm and leg fade out first, leaving only the stem; drawn as one layer so their overlap never shows through
         const rq = ph(2330, 3600, t), legEnd = pl, yArm = lerp(-.03, .76, pa), yLeg = lerp(.55, 1.03, pl), ribShred = Math.max(sm(1.1, 2.6, sc), sm(2250, 2800, t)) * solid;
         const ribA = solid * (rq < 1 ? 1 : 0);
@@ -3842,7 +3854,7 @@ I am looking for AI engineering and software roles in Dubai.`;
           if (tgt !== c) { tgt.setTransform(1, 0, 0, 1, 0, 0); tgt.clearRect(0, 0, cv.width, cv.height); tgt.setTransform(c.getTransform()); }
           const C0 = c; c = tgt; c.globalAlpha = 1;
           // the ribbon starts at the stem's edge: nothing of it shows over the stem, so the arm reads as folding down into the leg
-          c.save(); c.beginPath(); c.rect(SW * KH, -KH, KH * 2, KH * 3); c.clip();
+          c.save(); c.beginPath(); c.rect(SW * KH - 1.5, -KH, KH * 2, KH * 3); c.clip(); // tucks 1.5px under the stem so no hairline seam shows
           // each ribbon gets its own layer, so brushing one away can never leave a ghost edge or touch the other
           const own = (k, draw) => { const L2 = RL[k]; if (L2.canvas.width !== cv.width || L2.canvas.height !== cv.height) { L2.canvas.width = cv.width; L2.canvas.height = cv.height; }
             L2.setTransform(1, 0, 0, 1, 0, 0); L2.clearRect(0, 0, cv.width, cv.height); L2.setTransform(c.getTransform()); const C1 = c; c = L2; draw(); c = C1;
