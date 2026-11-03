@@ -145,11 +145,11 @@ liquid-glass:not(:defined){background:rgba(255,255,255,.08);-webkit-backdrop-fil
 .brand:active .bm{transform:scale(.94)}
 .brand .bm *{transform-box:fill-box}
 @media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
-.brand:hover .bm-s{transform-box:fill-box;transform-origin:50% 0;animation:bmStem .6s cubic-bezier(.65,0,.35,1) both}
-.brand:hover .bm-a{animation:bmArm .3s cubic-bezier(.65,0,.9,.6) both}
-.brand:hover .bm-l{animation:bmLeg .3s cubic-bezier(.1,.4,.35,1) .3s both}
-.brand:hover .bm-f{animation:bmFade .25s ease .3s both}}
-/* same as the intro: the stem and the arm-into-leg stroke draw together, top to bottom */
+.brand:hover .bm-s{transform-box:fill-box;transform-origin:50% 0;animation:bmStem .45s cubic-bezier(.65,0,.35,1) both}
+.brand:hover .bm-a{animation:bmArm .26s cubic-bezier(.65,0,.9,.6) .16s both}
+.brand:hover .bm-l{animation:bmLeg .26s cubic-bezier(.1,.4,.35,1) .42s both}
+.brand:hover .bm-f{animation:bmFade .22s ease .42s both}}
+/* same as the intro: the stem draws first, the arm-into-leg stroke follows a beat behind, both top to bottom */
 @keyframes bmStem{from{transform:scaleY(0)}}
 @keyframes bmArm{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
 @keyframes bmLeg{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
@@ -413,10 +413,10 @@ html .tbtn.lbtn .ic{display:flex;align-items:center;gap:7px;margin:0;font-size:.
 .tile .tt{position:absolute;left:12px;right:12px;bottom:10px;display:grid;gap:2px}
 .tile .tt b{font-family:var(--f-display);font-weight:700;font-size:clamp(1rem,1.25vw,1.2rem);letter-spacing:-.02em;line-height:1.1;overflow-wrap:anywhere}
 .tile .tt>span{font-size:.78rem;color:rgba(244,242,255,.72);line-height:1.3}
-.tile .orig{position:absolute;top:8px;left:10px;font-family:var(--f-display);font-weight:800;color:#B9A8FF;font-size:1rem;letter-spacing:-.04em}
-.tile .flag{position:absolute;top:8px;right:8px;background:#B9A8FF;color:#140F33;font-size:.68rem;font-weight:800;padding:2px 6px;border-radius:3px}
+.tile .orig{position:absolute;top:8px;left:10px;font-family:var(--f-display);font-weight:800;color:var(--acc);font-size:1rem;letter-spacing:-.04em}
+.tile .flag{position:absolute;top:8px;right:8px;background:var(--acc);color:#140F33;font-size:.68rem;font-weight:800;padding:2px 6px;border-radius:3px}
 .tile .prog{position:absolute;left:12px;right:12px;bottom:6px;height:3px;background:rgba(255,255,255,.25);border-radius:2px}
-.tile .prog i{display:block;height:100%;background:#B9A8FF;border-radius:2px}
+.tile .prog i{display:block;height:100%;background:var(--acc);border-radius:2px}
 .tile .prog i.live{width:62%;animation:live 2.4s ease-in-out infinite alternate}
 @keyframes live{to{width:74%}}
 .tile.has-prog .tt{bottom:16px}
@@ -713,7 +713,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   .nav a:hover .rl .ch,.b:hover .rl .ch,.prof:hover .rl .ch,.skip:hover .rl .ch,.mini:hover .rl .ch,.nav a:focus-visible .rl .ch{transform:translateY(calc(var(--roll) * -1))}
   .tile:hover .tt b .ch,.tile:focus-visible .tt b .ch{animation:wave .7s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--i) * 18ms)}
 }
-@keyframes wave{0%{transform:none}35%{transform:translateY(-.2em);color:#C9BBFF}100%{transform:none}}
+@keyframes wave{0%{transform:none}35%{transform:translateY(-.2em);color:color-mix(in srgb,var(--acc) 55%,#fff)}100%{transform:none}}
 .bill .info{transition:opacity .6s cubic-bezier(.16,1,.3,1),filter .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
 .bill.playing .info{opacity:0;filter:blur(6px);transform:translateY(10px)}
 .b.icon{padding:0;width:46px;height:46px;flex:none;justify-content:center;border-radius:50%;color:var(--ink);margin-left:auto}
@@ -796,7 +796,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
 </section>
 
 <header class="top" id="top"><div class="top-in wrap">
-  <a class="brand" href="#home" aria-label="KMK Originals, home"><svg class="bm" viewBox="0 0 22.4 28" aria-hidden="true"><defs><linearGradient id="bmStemG" gradientUnits="userSpaceOnUse" x1="0" y1="2" x2="0" y2="26"><stop offset="0" stop-color="#2A4BC8"/><stop offset="1" stop-color="#2A1880"/></linearGradient><linearGradient id="bmLegG" gradientUnits="userSpaceOnUse" x1="8" y1="15" x2="19" y2="26"><stop offset="0" stop-color="#4527B8"/><stop offset="1" stop-color="#A43BD8"/></linearGradient><linearGradient id="bmArm" gradientUnits="userSpaceOnUse" x1="6" y1="17" x2="20" y2="2"><stop offset="0" stop-color="#6447EE"/><stop offset="1" stop-color="#38A6EE"/></linearGradient><linearGradient id="bmFold" gradientUnits="userSpaceOnUse" x1="8.07" y1="15.3" x2="10" y2="16.8"><stop offset="0" stop-color="#05040F" stop-opacity=".55"/><stop offset="1" stop-color="#05040F" stop-opacity="0"/></linearGradient><clipPath id="bmBow"><path d="M0 0H22.4V27.2H20.18V26Q10.89 24.56 1.6 26V27.2H0z"/></clipPath></defs><g clip-path="url(#bmBow)"><path class="bm-l" d="M9.38 13.97 19.95 26H14.81L6.78 16.86z"/><rect class="bm-s" x="1.6" y="2" width="4.56" height="24" rx="1.5"/><path class="bm-f" d="M9.38 13.97 6.78 16.86 9.05 18.67 11.65 15.78z"/><path class="bm-a" d="M5.95 12.08 15.04 2H20.18L9.38 13.97 6.78 16.86 5.95 15.92z"/></g></svg><span>originals</span></a>
+  <a class="brand" href="#home" aria-label="KMK Originals, home"><svg class="bm" viewBox="0 0 22.4 28" aria-hidden="true"><defs><linearGradient id="bmStemG" gradientUnits="userSpaceOnUse" x1="0" y1="2" x2="0" y2="26"><stop offset="0" stop-color="#2A4BC8"/><stop offset="1" stop-color="#2A1880"/></linearGradient><linearGradient id="bmLegG" gradientUnits="userSpaceOnUse" x1="8" y1="15" x2="19" y2="26"><stop offset="0" stop-color="#4527B8"/><stop offset="1" stop-color="#A43BD8"/></linearGradient><linearGradient id="bmArm" gradientUnits="userSpaceOnUse" x1="6" y1="17" x2="20" y2="2"><stop offset="0" stop-color="#6447EE"/><stop offset="1" stop-color="#38A6EE"/></linearGradient><linearGradient id="bmFold" gradientUnits="userSpaceOnUse" x1="8.07" y1="15.3" x2="10" y2="16.8"><stop offset="0" stop-color="#05040F" stop-opacity=".55"/><stop offset="1" stop-color="#05040F" stop-opacity="0"/></linearGradient><clipPath id="bmBow"><path d="M0 0H22.4V27.2H20.18V26Q10.89 24.56 1.6 26V27.2H0z"/></clipPath></defs><g clip-path="url(#bmBow)"><path class="bm-l" d="M9.38 13.97 19.95 26H14.81L6.78 16.86z"/><path class="bm-f" d="M9.38 13.97 6.78 16.86 9.05 18.67 11.65 15.78z"/><path class="bm-a" d="M5.95 12.08 15.04 2H20.18L9.38 13.97 6.78 16.86 5.95 15.92z"/><rect class="bm-s" x="1.6" y="2" width="4.56" height="24"/></g></svg><span>originals</span></a>
   <nav class="nav gooey-nav gooey-nav--md gooey-nav--framed" aria-label="Browse">
     <span class="gooey-nav__rim"></span>
     <div class="gooey-nav__stage">
@@ -1284,7 +1284,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
       "<b>وصيف</b>، مسابقة ميك إكس للروبوتات 2023 و2024", "تدرّبت في برودجي إنفوتك (ذكاء اصطناعي توليدي) وكودينج ساموراي (تعلم الآلة)"],
     langs:"الإنجليزية، الهندية، المالايالامية، التيلوغوية، الماراثية", name:"كريتيك ماهيش كومار" };
   function renderCredits() { const set = CREDITS[isAR() ? "ar" : "en"].map(([a, b]) => `<div><dt>${a}</dt><dd>${b}</dd></div>`).join("");
-    $(".roll-in").innerHTML = `<div class="rset">${set}<div class="rsep" aria-hidden="true"><i></i><b><svg viewBox="0 0 22.4 28"><rect x="1.6" y="2" width="4.56" height="24" rx="1.5"/><path d="M5.95 12.08 15.04 2H20.18L9.38 13.97 6.78 16.86 5.95 15.92z"/><path class="lg2" d="M9.38 13.97 19.95 26H14.81L6.78 16.86z"/></svg></b><i></i></div></div><div class="rset" aria-hidden="true">${set}<div class="rsep" aria-hidden="true"><i></i><b><svg viewBox="0 0 22.4 28"><rect x="1.6" y="2" width="4.56" height="24" rx="1.5"/><path d="M5.95 12.08 15.04 2H20.18L9.38 13.97 6.78 16.86 5.95 15.92z"/><path class="lg2" d="M9.38 13.97 19.95 26H14.81L6.78 16.86z"/></svg></b><i></i></div></div>`; if (window.__roll) window.__roll.reset(); }
+    $(".roll-in").innerHTML = `<div class="rset">${set}<div class="rsep" aria-hidden="true"><i></i><b><svg viewBox="0 0 22.4 28"><rect x="1.6" y="2" width="4.56" height="24"/><path d="M5.95 12.08 15.04 2H20.18L9.38 13.97 6.78 16.86 5.95 15.92z"/><path class="lg2" d="M9.38 13.97 19.95 26H14.81L6.78 16.86z"/></svg></b><i></i></div></div><div class="rset" aria-hidden="true">${set}<div class="rsep" aria-hidden="true"><i></i><b><svg viewBox="0 0 22.4 28"><rect x="1.6" y="2" width="4.56" height="24"/><path d="M5.95 12.08 15.04 2H20.18L9.38 13.97 6.78 16.86 5.95 15.92z"/><path class="lg2" d="M9.38 13.97 19.95 26H14.81L6.78 16.86z"/></svg></b><i></i></div></div>`; if (window.__roll) window.__roll.reset(); }
   // static text: [selector, English, split mode or null, attribute]
   const STATIC = [
     ["#sting small", "Click or press any key to skip"], ["#gate-h", "Who's watching?", "w"], ["#gate .lead", "Pick a profile. The whole service rearranges for you."],
@@ -1486,7 +1486,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
       N.forEach(([x, y], i) => { c.fillStyle = i === 3 ? "#f00" : "#fff"; rr(c, x - nw / 2, y - nh / 2, nw, nh, nh * .3); c.fill(); }); },
     // the same K as the logo: stem and arm in white, the folded leg in the accent colour
     kmark:(c, w, h) => { const k = Math.min(w / 22.4, h / 28) * .92; c.save(); c.translate(w / 2 - 22.4 * k / 2, h / 2 - 28 * k / 2); c.scale(k, k);
-      rr(c, 1.6, 2, 4.56, 24, 1.5); c.fill(); c.fill(new Path2D("M5.95 12.08 15.04 2H20.18L9.38 13.97 6.78 16.86 5.95 15.92z")); c.fillStyle = "#f00"; c.fill(new Path2D("M9.38 13.97 19.95 26H14.81L6.78 16.86z")); c.restore(); },
+      c.fillRect(1.6, 2, 4.56, 24); c.fill(new Path2D("M5.95 12.08 15.04 2H20.18L9.38 13.97 6.78 16.86 5.95 15.92z")); c.fillStyle = "#f00"; c.fill(new Path2D("M9.38 13.97 19.95 26H14.81L6.78 16.86z")); c.restore(); },
     script:(c, w, h, it) => { fitText(c, it.script, w * .86, h * .8, 600, it.font); c.fillText(it.script, w / 2, h * .55); },
   };
   function star(c, cx, cy, R, r) { c.beginPath(); for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, d = i % 2 ? r : R; i ? c.lineTo(cx + Math.cos(a) * d, cy + Math.sin(a) * d) : c.moveTo(cx + Math.cos(a) * d, cy + Math.sin(a) * d); } c.closePath(); c.fill(); }
@@ -1521,6 +1521,13 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   }
   // posters: every title gets its own art, palette and rendering technique, so no two tiles in a row read alike
   const MONO = '"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace';
+  // every poster and preview takes the hue of the profile you picked; each keeps its own light and depth, so rows still vary
+  const PROF_HUE = { recruiter:224, engineer:252, curious:278 };
+  function profPal(pal) { const H = PROF_HUE[prof || "recruiter"] ?? 224;
+    return pal.map((hex, i) => { const n = parseInt(hex.slice(1), 16), r = (n >> 16) / 255, g = (n >> 8 & 255) / 255, b = (n & 255) / 255, mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, d = mx - mn;
+      const sat = d ? d / (1 - Math.abs(2 * l - 1)) : 0, S = i === 2 ? Math.max(.75, sat) : sat, h = (H + (i === 2 ? 0 : (i ? -6 : 6))) / 60, C = (1 - Math.abs(2 * l - 1)) * S, X = C * (1 - Math.abs(h % 2 - 1)), m = l - C / 2;
+      const [R, G, B] = h < 1 ? [C, X, 0] : h < 2 ? [X, C, 0] : h < 3 ? [0, C, X] : h < 4 ? [0, X, C] : h < 5 ? [X, 0, C] : [C, 0, X];
+      return "#" + [R, G, B].map(v => Math.round((v + m) * 255).toString(16).padStart(2, "0")).join(""); }); }
   const POSTER = {
     neuro:{ style:"contour", pal:["#06123A", "#1B0F4A", "#6C9CFF"], art:"neuro2" },
     digits:{ style:"mosaic", pal:["#0E0B2E", "#2A1170", "#B06CFF"], art:"mnist" },
@@ -1614,7 +1621,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   function backdrop(c, P, w, h) { const B = artBox(w, h); c.fillStyle = P[0]; c.fillRect(0, 0, w, h);
     c.fillStyle = P[1]; c.beginPath(); c.arc(B.x + B.w / 2, B.y + B.h / 2, Math.max(B.w, B.h) * .58, 0, 6.283); c.fill(); return B; }
   function poster(it, w, h) {
-    const cfg = POSTER[it.id] || POSTER.series, P = cfg.pal, art = cfg.art || it.art, style = cfg.style;
+    const cfg = POSTER[it.id] || POSTER.series, P = profPal(cfg.pal), art = cfg.art || it.art, style = cfg.style;
     const cv = document.createElement("canvas"); cv.width = w; cv.height = h; const c = cv.getContext("2d"), s = Math.max(.7, Math.min(w, h) / 338), r = rng((it.title || "x").length * 97 + w);
     const land = w > h, B = backdrop(c, P, w, h);
     if (SCENES.has(art)) { CLIPS[art]({ c, w, h, P, B, it, art, s:Math.max(.7, Math.min(w, h) / 338) })(settleOf(art)); return cv.toDataURL("image/jpeg", .9); }
@@ -2538,7 +2545,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
     if (tile._pv) return; const id = tile.dataset.id, it = Object.assign({ id }, I[id]), cfg = POSTER[id] || POSTER.series, art = cfg.art || it.art; if (!ART[art]) return;
     const dpr = Math.min(2, devicePixelRatio || 1), w = tile.clientWidth, h = tile.clientHeight, cv = document.createElement("canvas"); cv.className = "pv"; cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); cv.setAttribute("aria-hidden", "true");
     const c = cv.getContext("2d"); c.scale(dpr, dpr); const bgc = document.createElement("canvas"); bgc.width = cv.width; bgc.height = cv.height; const bx = bgc.getContext("2d"); bx.scale(dpr, dpr);
-    const P = cfg.pal, B = backdrop(bx, P, w, h), po = tile.querySelector("img"), k = { c, w, h, P, B, it, art, poster:po, s:Math.max(.7, Math.min(w, h) / 338) }, frame = (CLIPS[art] || CLIPS.base)(k), off = startOf(art);
+    const P = profPal(cfg.pal), B = backdrop(bx, P, w, h), po = tile.querySelector("img"), k = { c, w, h, P, B, it, art, poster:po, s:Math.max(.7, Math.min(w, h) / 338) }, frame = (CLIPS[art] || CLIPS.base)(k), off = startOf(art);
     tile.insertBefore(cv, tile.querySelector(".shade")); const t0 = performance.now(); let raf = 0;
     const tick = now => { const el = Math.max(0, Math.min(PV_MS, now - t0)) / 1000, t = el + off, z = off ? 1 : 1.06 - .06 * spr(el, 1.6);
       c.setTransform(dpr, 0, 0, dpr, 0, 0); c.drawImage(bgc, 0, 0, w, h); c.translate(w / 2, h / 2); c.scale(z, z); c.translate(-w / 2, -h / 2); frame(t);
@@ -2687,7 +2694,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
       const dpr = Math.min(2, devicePixelRatio || 1); cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
       const cfg = POSTER[it.id] || POSTER.series, art = cfg.art || it.art; if (!ART[art]) return null;
       const bgc = document.createElement("canvas"); bgc.width = cv.width; bgc.height = cv.height; const bx = bgc.getContext("2d"); bx.scale(dpr, dpr);
-      const P = cfg.pal, B = backdrop(bx, P, w, h), k = { c, w, h, P, B, it, art, poster:$("#epImg"), s:Math.max(.7, Math.min(w, h) / 338) };
+      const P = profPal(cfg.pal), B = backdrop(bx, P, w, h), k = { c, w, h, P, B, it, art, poster:$("#epImg"), s:Math.max(.7, Math.min(w, h) / 338) };
       return { w, h, dpr, bgc, off:startOf(art), frame:(CLIPS[art] || CLIPS.base)(k) }; }
     let S = null, t0 = 0;
     function tick(now) { raf = requestAnimationFrame(tick); const raw = Math.max(0, now - t0) / 1000 + S.off, t = S.frame.cont ? raw : raw % LOOP, z = S.off ? 1 : 1.06 - .06 * spr(t, 1.6);
@@ -2899,7 +2906,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   let prof = store.get("kmk-profile");
   if (!PROFILES[prof]) prof = null;
   function applyProfile(p) {
-    prof = p; store.set("kmk-profile", p); const P_ = LP(p);
+    if (prof !== p) posters = {}; prof = p; store.set("kmk-profile", p); const P_ = LP(p);
     document.documentElement.setAttribute("data-prof", p); readTheme();
     $("#bbKick").textContent = P_.bb.kick; split($("#bb-title"), "w", P_.bb.title); $("#bbFacts").innerHTML = P_.bb.facts.map(f => `<span>${f}</span>`).join(""); split($("#bbSyn"), "w", P_.bb.syn);
     $("#meAv").className = "av " + P_.av; $("#meAv").innerHTML = AV_SVG[P_.av]; $("#meName").textContent = P_.name;
@@ -3767,7 +3774,7 @@ I am looking for AI engineering and software roles in Dubai.`;
     // the arm and leg as one folded ribbon: VI is where their inner edges meet, FL is where the arm's lower edge reaches the leg's outer edge
     const VI = [0.3242, 0.4988], FL = [0.2158, 0.619], PA = [[SW - .006, 0.417], [0.5601, 0], [0.7741, 0], VI, FL, [SW - .006, 0.5828]], PL = [VI, [0.7644, 1], [0.5504, 1], FL]; // the slanted ends are cut a touch wider than the stem so all three read as the same width // stem, arm and leg all exactly SW thick
     // soft corners drawn inside the shape itself, so the same path can be used to clip (nothing pokes outside it)
-    const pathP = (P, KH) => { const n = P.length, r = KH * .022, X = i => P[(i + n) % n][0] * KH, Y = i => P[(i + n) % n][1] * KH; c.beginPath(); c.moveTo((X(-1) + X(0)) / 2, (Y(-1) + Y(0)) / 2);
+    const pathP = (P, KH) => { const n = P.length, r = 0, X = i => P[(i + n) % n][0] * KH, Y = i => P[(i + n) % n][1] * KH; c.beginPath(); c.moveTo((X(-1) + X(0)) / 2, (Y(-1) + Y(0)) / 2);
       for (let i = 0; i < n; i++) { const q = P[i], sharp = q === VI || q === FL || q[0] <= SW; c.arcTo(X(i), Y(i), X(i + 1), Y(i + 1), sharp ? 0 : r); } c.closePath(); }; // only the free ends are rounded: where arm, leg and stem meet the edges run straight through
     const fillP = (P, KH, fill) => { pathP(P, KH); c.fillStyle = fill; c.fill(); };
     const upTo = (KH, y) => { c.beginPath(); c.rect(-KH, -KH * 2, KH * 4, (y + 2) * KH); c.clip(); };
@@ -3833,11 +3840,11 @@ I am looking for AI engineering and software roles in Dubai.`;
         // the feet sit on one shallow arch, like the classic streaming N: outer edges lowest, rising toward the middle
         { const BW = .7741, d = .03; c.beginPath(); c.moveTo(-KH, -2 * KH); c.lineTo(2 * KH, -2 * KH); c.lineTo(2 * KH, 1.05 * KH); c.lineTo(BW * KH, 1.05 * KH); c.lineTo(BW * KH, KH);
           c.quadraticCurveTo(BW / 2 * KH, (1 - 2 * d) * KH, 0, KH); c.lineTo(0, 1.05 * KH); c.lineTo(-KH, 1.05 * KH); c.closePath(); c.clip(); }
-        // entry: the stem and the ribbon are drawn together, both top to bottom, like one pen stroke each (arm into leg)
-        const pen = eIO(ph(400, 1700, t)), ps = pen, pa = clamp01(pen / .5), pl = clamp01((pen - .5) / .5), solid = 1 - reveal;
+        // entry: both strokes draw top to bottom, the stem leads and the ribbon (arm into leg) follows a beat behind
+        const ps = eIO(ph(400, 1350, t)), pen = eIO(ph(650, 1700, t)), pa = clamp01(pen / .5), pl = clamp01((pen - .5) / .5), solid = 1 - reveal; // stem first, the arm-into-leg stroke follows 250ms later
         c.globalAlpha = solid;
         const gs = c.createLinearGradient(0, 0, 0, KH); gs.addColorStop(0, "#2A4BC8"); gs.addColorStop(1, "#2A1880"); // the three profiles mixed: blue stem, purple-to-blue arm, purple-to-magenta leg
-        c.fillStyle = gs; if (ps > 0) { rr(c, 0, 0, SW * KH, KH * ps, Math.min(KH * .035, KH * ps / 2)); c.fill(); }
+        const stem = () => { if (ps > 0) { c.fillStyle = gs; c.fillRect(0, 0, SW * KH, KH * ps); } }; stem();
         if (ps > 0 && ps < 1) { const ty = KH * ps, tg = c.createLinearGradient(0, ty, 0, ty - KH * .09); tg.addColorStop(0, `rgba(236,232,255,${.6 * (1 - ps)})`); tg.addColorStop(1, "rgba(236,232,255,0)"); c.fillStyle = tg; c.fillRect(0, Math.max(0, ty - KH * .09), SW * KH, Math.min(ty, KH * .09)); }
         // fine striations: the stem was always lines, you only notice as you get close
         if (ps >= 1) { const sv = sm(1.5, 6, sc) * solid; if (sv > 0) { c.globalAlpha = sv * .55; for (let i = 0; i < 26; i++) { const x = (i + .5) / 26 * SW * KH; c.fillStyle = i % 3 ? "rgba(10,6,40,.55)" : "rgba(220,212,255,.35)"; c.fillRect(x, 0, SW * KH / 120, KH); } c.globalAlpha = solid; } }
@@ -3876,7 +3883,7 @@ I am looking for AI engineering and software roles in Dubai.`;
           c = C0;
           if (tgt !== c) { c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = ribA; c.drawImage(rc.canvas, 0, 0); c.restore(); }
         }
-        c.globalAlpha = solid;
+        c.globalAlpha = solid; stem(); // the stem sits on top, so the arm's tucked-in end never shows as a line
         { const shred = sm(1.1, 2.6, sc) * solid, ribS = 0;
           if (shred > 0) { c.save(); c.beginPath(); c.rect(0, 0, SW * KH, KH); c.clip(); shredIn(KH, 0, SW * KH, shred, t); c.restore(); fray(KH, 0, SW * KH, shred, t); }
  }
@@ -3945,8 +3952,8 @@ I am looking for AI engineering and software roles in Dubai.`;
       const cv = reel.querySelector("canvas"), c = cv.getContext("2d"), segs = [...reel.querySelectorAll(".seg b")]; let idx = -1, frame = null, k = null, t0 = 0, vis = true, W = 0, H = 0, bg = null;
       const load = i => { idx = i; const id = REEL[i], it = Object.assign({ id }, LI(id)), cfg = POSTER[id] || POSTER.series, art = cfg.art || it.art, d = Math.min(2, devicePixelRatio || 1);
         W = reel.clientWidth; H = Math.round(W * 9 / 16); cv.width = Math.round(W * d); cv.height = Math.round(H * d); c.setTransform(d, 0, 0, d, 0, 0);
-        bg = document.createElement("canvas"); bg.width = cv.width; bg.height = cv.height; const bx2 = bg.getContext("2d"); bx2.scale(d, d); const B = backdrop(bx2, cfg.pal, W, H);
-        k = { c, w:W, h:H, P:cfg.pal, B, it, art, s:Math.max(.7, Math.min(W, H) / 338) }; frame = (CLIPS[art] || CLIPS.base)(k); t0 = performance.now();
+        bg = document.createElement("canvas"); bg.width = cv.width; bg.height = cv.height; const bx2 = bg.getContext("2d"); bx2.scale(d, d); const B = backdrop(bx2, profPal(cfg.pal), W, H);
+        k = { c, w:W, h:H, P:profPal(cfg.pal), B, it, art, s:Math.max(.7, Math.min(W, H) / 338) }; frame = (CLIPS[art] || CLIPS.base)(k); t0 = performance.now();
         reel.querySelector(".rl em").textContent = tr("Now playing"); reel.querySelector(".rl span").textContent = it.title; reel.setAttribute("aria-label", `${tr("Now playing")}: ${it.title}`);
         segs.forEach((b, j) => { b.style.width = j < i ? "100%" : "0"; }); };
       const tick = now => { requestAnimationFrame(tick); if (!vis || document.hidden || !frame || bill.classList.contains("playing")) { t0 += 16; return; } const el = now - t0;
