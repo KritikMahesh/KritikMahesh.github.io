@@ -759,7 +759,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   .nav{display:none}
   .me span{display:none}
   .bill{min-height:88svh}
-  .bill::after{background:linear-gradient(0deg,var(--bg) 6%,rgba(var(--bg-rgb),.82) 42%,rgba(var(--bg-rgb),0) 72%)}
+  .bill::after,html[dir="rtl"] .bill::after{background:linear-gradient(0deg,var(--bg) 6%,rgba(var(--bg-rgb),.82) 34%,rgba(var(--bg-rgb),0) 54%)}
   .bill-in{padding-bottom:64px}
   main{margin-top:-22px}
   .tile{aspect-ratio:2/3}
@@ -2935,7 +2935,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   let BW = 0, BH = 0, DPR = 1, shapeNow = "", eegMode = false, load = .1;
   const Qb = new Float32Array(NB); // where each dot sits across the thickness of the brainwave band
   const r0 = rng(3); for (let i = 0; i < NB; i++) { K[i] = .03 + r0() * .04; U[i] = r0(); Z[i] = .4 + r0() * .6; Qb[i] = r0() * 2 - 1; }
-  function bbSize() { const r = bill.getBoundingClientRect(); BW = r.width; BH = r.height; DPR = Math.min(devicePixelRatio || 1, COARSE ? 1.5 : 2); bb.width = Math.round(BW * DPR); bb.height = Math.round(BH * DPR); bx.setTransform(DPR, 0, 0, DPR, 0, 0); for (let i = 0; i < NB; i++) if (!P[i * 2]) { P[i * 2] = r0() * BW; P[i * 2 + 1] = r0() * BH; } }
+  function bbSize() { const r = bill.getBoundingClientRect(); BW = r.width; BH = r.height; DPR = Math.min(devicePixelRatio || 1, BW < 760 ? 3 : 2); bb.width = Math.round(BW * DPR); bb.height = Math.round(BH * DPR); bx.setTransform(DPR, 0, 0, DPR, 0, 0); for (let i = 0; i < NB; i++) if (!P[i * 2]) { P[i * 2] = r0() * BW; P[i * 2 + 1] = r0() * BH; } }
   function bbRegion() { return BW < 760 ? { x:BW * .06, y:BH * .1, w:BW * .88, h:BH * .34 } : { x:document.documentElement.dir === "rtl" ? BW * .06 : BW * .46, y:BH * .14, w:BW * .48, h:BH * .6 }; }
   function bbShape(name, kick = 2, sweep = 0) {
     shapeNow = name; eegMode = name === "eeg"; const R = bbRegion(), now = performance.now(), rtl = document.documentElement.dir === "rtl";
@@ -2967,7 +2967,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
     if (!bbVisible || document.hidden || (identRun && !sting.classList.contains("gone"))) { lastT = now; return; }
     const dt = Math.min(2.5, (now - lastT) / 16.67); lastT = now; t += dt / 60; load = Math.max(.08, load - .004 * dt);
     const R = bbRegion();
-    bx.clearRect(0, 0, BW, BH);
+    bx.clearRect(0, 0, BW, BH); const DS = Math.max(1, Math.round(1.8 * DPR)) / DPR;
     // atmosphere: two slow royal glows drift behind the dots, so the stage is never a flat colour
     { const dk = isDark(), M = Math.max(BW, BH);
       const g1x = BW * (.7 + .08 * Math.sin(t * .13)), g1y = BH * (.36 + .1 * Math.cos(t * .11)), g1 = bx.createRadialGradient(g1x, g1y, 0, g1x, g1y, M * .55);
@@ -2985,7 +2985,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
       const dx = P[ix] - mx, dy = P[iy] - my, d2 = dx * dx + dy * dy; if (d2 < 8100 && d2 > 1) { const d = Math.sqrt(d2), f = (1 - d / 90) * 2.4 * dt; vx += dx / d * f; vy += dy / d * f; }
       if (eegMode && d2 >= 8100 && Math.abs(tx - P[ix]) + Math.abs(ty - P[iy]) < 36) { const q = Math.min(1, .32 * dt); vx *= .5; vy *= .5; P[ix] += (tx - P[ix]) * q; P[iy] += (ty - P[iy]) * q; }
       V[ix] = vx; V[iy] = vy; P[ix] += vx * dt; P[iy] += vy * dt;
-      bx.globalAlpha = Z[i]; bx.fillStyle = (D[i] > now ? A0[i] : A[i]) ? DOT_A : DOT; bx.fillRect(P[ix], P[iy], 1.8, 1.8);
+      bx.globalAlpha = Z[i]; bx.fillStyle = (D[i] > now ? A0[i] : A[i]) ? DOT_A : DOT; bx.fillRect(Math.round(P[ix] * DPR) / DPR, Math.round(P[iy] * DPR) / DPR, DS, DS);
     }
     bx.globalAlpha = 1;
   }
