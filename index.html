@@ -96,7 +96,7 @@ button{font:inherit;color:inherit}
 .gate[hidden]{display:none!important}
 .gate.leaving{opacity:0;transform:scale(1.06)}
 .aurora{position:absolute;inset:-10%;z-index:0;pointer-events:none}
-.aurora i{position:absolute;width:44vmax;height:44vmax;border-radius:50%;filter:blur(70px);opacity:var(--orb,.7);animation:drift 40s ease-in-out infinite alternate}
+.aurora i{position:absolute;width:44vmax;height:44vmax;border-radius:50%;filter:blur(70px);opacity:var(--orb,.7);animation:drift 40s ease-in-out infinite alternate;will-change:transform,opacity} /* own GPU layer: a theme switch only changes its opacity, never re-blurs it */
 .aurora .o1{background:#2F5BEA;left:4%;top:22%}
 .aurora .o2{background:#6A4BE0;left:34%;top:40%;animation-duration:48s;animation-delay:-14s}
 .aurora .o3{background:#A046D2;left:60%;top:12%;animation-duration:56s;animation-delay:-26s}
@@ -645,7 +645,9 @@ html.vt-theme::view-transition-old(root),html.vt-theme::view-transition-new(root
 /* soft reveal: the new theme spreads as a circle with a wide feathered edge (no hard line sweeping the screen) */
 @property --vr{syntax:"<length>";inherits:true;initial-value:0px}
 html.vt-soft::view-transition-new(root){-webkit-mask-image:radial-gradient(circle at var(--vx) var(--vy),#000 calc(var(--vr) - var(--vf)),transparent var(--vr));mask-image:radial-gradient(circle at var(--vx) var(--vy),#000 calc(var(--vr) - var(--vf)),transparent var(--vr))}
-html.vt-theme *,html.vt-theme *::before,html.vt-theme *::after{transition:none!important} /* colours land at once inside the circle, not fading in behind it */
+html.vt-theme *,html.vt-theme *::before,html.vt-theme *::after{transition:none!important}
+html.gate-open #rows,html.gate-open #credits,html.gate-open footer,html.gate-open .bill-in{content-visibility:hidden}html.gate-open .nav{visibility:hidden}
+html.theme-fade .gate{transition:background-color .4s ease,opacity .45s ease,transform .6s cubic-bezier(.16,1,.3,1)!important}html.theme-fade .gate h1,html.theme-fade .gate .lead,html.theme-fade .gate .tbtn{transition:color .4s ease,background-color .4s ease!important} /* light fade on the few big surfaces only: fading every element made each frame heavy and the ripple crawl */ /* colours land at once inside the circle, not fading in behind it */
 /* QA fixes: no sideways wobble from decorative glows; finger-sized hit areas on touch without changing the look */
 html{overflow-x:clip}
 @media (pointer:coarse){
@@ -765,7 +767,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   .me span{display:none}
   .bill{min-height:88svh}
   .bill::after,html[dir="rtl"] .bill::after{background:linear-gradient(0deg,var(--bg) 6%,rgba(var(--bg-rgb),.82) 34%,rgba(var(--bg-rgb),0) 54%)}
-  .bill-in{padding-bottom:64px}
+  .bill-in{padding-bottom:64px;padding-top:76px} /* the text block never slides under the top buttons */
   main{margin-top:-22px}
   .tile{aspect-ratio:2/3}
   .profiles{flex-direction:column;align-items:stretch;width:min(100%,380px);gap:12px}
@@ -852,7 +854,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   </nav>
   <button type="button" class="tbtn lbtn gl" id="langBtn" aria-label="التبديل إلى العربية" lang="ar"><liquid-glass class="lg" aria-hidden="true" renderer="svg" radius="21" frost="0.06" saturation="160" lens="convex" lens-strength="0.8" scale="90" border-color="rgba(255,255,255,0.32)"></liquid-glass><span class="ic"><span class="lsw" aria-hidden="true"><i class="cd ca"><b lang="ar">ع</b></i><i class="cd ce"><b lang="en">A</b></i></span></span></button>
   <button type="button" class="tbtn gl" id="themeBtn" aria-label="Switch to light theme"><liquid-glass class="lg" aria-hidden="true" renderer="svg" radius="21" frost="0.06" saturation="160" lens="convex" lens-strength="0.8" scale="90" border-color="rgba(255,255,255,0.32)"></liquid-glass><span class="ic"></span></button>
-  <button type="button" class="me gl" id="meBtn" aria-label="Switch profile"><liquid-glass class="lg" aria-hidden="true" renderer="svg" radius="21" frost="0.06" saturation="160" lens="convex" lens-strength="0.8" scale="90" border-color="rgba(255,255,255,0.32)"></liquid-glass><span id="meName">Switch profile</span><i class="av r" id="meAv"></i></button>
+  <button type="button" class="me gl" id="meBtn" aria-label="Change Viewer" title="Change Viewer"><liquid-glass class="lg" aria-hidden="true" renderer="svg" radius="21" frost="0.06" saturation="160" lens="convex" lens-strength="0.8" scale="90" border-color="rgba(255,255,255,0.32)"></liquid-glass><span id="meName">Switch profile</span><i class="av r" id="meAv"></i></button>
 </div></header>
 
 <section class="bill" id="home" aria-labelledby="bb-title">
@@ -1191,7 +1193,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
     "Skip, show me everything":"تخطَّ، أرني كل شيء",
     "originals":"أعمال أصلية", "KMK Originals, home":"KMK Originals، الصفحة الرئيسية",
     "Home":"الرئيسية", "Projects":"المشاريع", "Awards":"الجوائز", "Journey":"المسيرة", "Contact":"تواصل",
-    "Browse":"تصفّح", "Switch profile":"تبديل الملف الشخصي",
+    "Browse":"تصفّح", "Switch profile":"تبديل الملف الشخصي", "Change Viewer":"تغيير المشاهد",
     "Play trailer":"شاهد الإعلان", "Stop trailer":"إيقاف الإعلان", "More info":"التفاصيل",
     "Mute narration":"كتم التعليق الصوتي", "Narration on":"التعليق الصوتي مفعّل", "Narration off":"التعليق الصوتي متوقف",
     "Switch to light theme":"التبديل إلى الوضع الفاتح", "Switch to dark theme":"التبديل إلى الوضع الداكن",
@@ -1375,7 +1377,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
     [".brand span", "originals"], [".brand", "KMK Originals, home", null, "aria-label"],
     ['.nav a[href="#home"]', "Home", "r"], ['.nav a[href="#r-projects"]', "Projects", "r"], ['.nav a[href="#r-top"]', "Awards", "r"],
     ['.nav a[href="#r-journey"]', "Journey", "r"], ['.nav a[href="#credits"]', "Contact", "r"], [".nav", "Browse", null, "aria-label"],
-    ["#meBtn", "Switch profile", null, "aria-label"], ["#infoBtn .lbl", "More info", "r"],
+    ["#meBtn", "Change Viewer", null, "aria-label"], ["#meBtn", "Change Viewer", null, "title"], ["#infoBtn .lbl", "More info", "r"],
     ["#cta-h", "Cast me in your next season.", "w"], [".cta > p", "I’m open to AI engineering and software roles, in Dubai or remote. I reply fast."],
     [".clinks", "Contact links", null, "aria-label"],
     ['.ci[data-kind="mail"]', "Email", null, "data-label"], ['.ci[data-kind="mail"]', "Email kritikmahesh@gmail.com (copies the address and opens a new email)", null, "aria-label"],
@@ -2950,7 +2952,12 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   const Qb = new Float32Array(NB); // where each dot sits across the thickness of the brainwave band
   const r0 = rng(3); for (let i = 0; i < NB; i++) { K[i] = .03 + r0() * .04; U[i] = r0(); Z[i] = .4 + r0() * .6; Qb[i] = r0() * 2 - 1; }
   function bbSize() { const r = bill.getBoundingClientRect(); BW = r.width; BH = r.height; DPR = Math.min(devicePixelRatio || 1, BW < 760 ? 3 : 2); bb.width = Math.round(BW * DPR); bb.height = Math.round(BH * DPR); bx.setTransform(DPR, 0, 0, DPR, 0, 0); for (let i = 0; i < NB; i++) if (!P[i * 2]) { P[i * 2] = r0() * BW; P[i * 2 + 1] = r0() * BH; } }
-  function bbRegion() { return BW < 760 ? { x:BW * .06, y:BH * .1, w:BW * .88, h:BH * .34 } : { x:document.documentElement.dir === "rtl" ? BW * .06 : BW * .46, y:BH * .14, w:BW * .48, h:BH * .6 }; }
+  // phones: the picture sits in the free space between the top bar and the text block (never behind the title or subtitles)
+  const billIn = bill.querySelector(".bill-in");
+  function phoneRegion() { const top = Math.max(BH * .1, 64), r0 = bill.getBoundingClientRect(), r1 = billIn.firstElementChild ? billIn.firstElementChild.getBoundingClientRect() : billIn.getBoundingClientRect(),
+      free = r1.top - r0.top - 14, bottom = Math.min(BH * .44, free), h = bottom - top; roomOK = h >= 56; return { x:BW * .06, y:top, w:BW * .88, h:Math.max(40, h) }; }
+  let roomOK = true; // false on very short screens: no free space above the text, so the picture steps aside instead of covering it
+  function bbRegion() { return BW < 760 ? phoneRegion() : { x:document.documentElement.dir === "rtl" ? BW * .06 : BW * .46, y:BH * .14, w:BW * .48, h:BH * .6 }; }
   function bbShape(name, kick = 2, sweep = 0) {
     shapeNow = name; eegMode = name === "eeg"; const R = bbRegion(), now = performance.now(), rtl = document.documentElement.dir === "rtl";
     T0.set(T); A0.set(A); for (let i = 0; i < NB; i++) D[i] = 0;
@@ -2978,7 +2985,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   function readTheme() { const cs = getComputedStyle(document.documentElement); DOT = cs.getPropertyValue("--dot").trim() || DOT; DOT_A = cs.getPropertyValue("--dot-acc").trim() || DOT_A; ACC_RGB = cs.getPropertyValue("--acc-rgb").trim() || ACC_RGB; }
   function bbFrame(now) {
     requestAnimationFrame(bbFrame);
-    if (!bbVisible || document.hidden || (identRun && !sting.classList.contains("gone"))) { lastT = now; return; }
+    if (!bbVisible || document.hidden || !gate.hidden || (identRun && !sting.classList.contains("gone"))) { lastT = now; return; }
     const dt = Math.min(2.5, (now - lastT) / 16.67); lastT = now; t += dt / 60; load = Math.max(.08, load - .004 * dt);
     const R = bbRegion();
     bx.clearRect(0, 0, BW, BH); const DS = Math.max(1, Math.round(1.8 * DPR)) / DPR;
@@ -2999,11 +3006,14 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
       const dx = P[ix] - mx, dy = P[iy] - my, d2 = dx * dx + dy * dy; if (d2 < 8100 && d2 > 1) { const d = Math.sqrt(d2), f = (1 - d / 90) * 2.4 * dt; vx += dx / d * f; vy += dy / d * f; }
       if (eegMode && d2 >= 8100 && Math.abs(tx - P[ix]) + Math.abs(ty - P[iy]) < 36) { const q = Math.min(1, .32 * dt); vx *= .5; vy *= .5; P[ix] += (tx - P[ix]) * q; P[iy] += (ty - P[iy]) * q; }
       V[ix] = vx; V[iy] = vy; P[ix] += vx * dt; P[iy] += vy * dt;
+      if (!roomOK && BW < 760) continue;
       bx.globalAlpha = A[i] === 2 && D[i] <= now ? 1 : Z[i]; bx.fillStyle = (D[i] > now ? A0[i] : A[i]) === 1 ? DOT_A : DOT; bx.fillRect(Math.round(P[ix] * DPR) / DPR, Math.round(P[iy] * DPR) / DPR, DS, DS);
     }
     bx.globalAlpha = 1;
   }
   new IntersectionObserver(es => { bbVisible = es[0].isIntersecting; }).observe(bill);
+  // when the text block grows (subtitles, longer lines in Arabic), the picture re-fits above it
+  if (window.ResizeObserver) { let lastH = 0, rq = 0; new ResizeObserver(() => { if (BW >= 760 || !shapeNow || eegMode) return; const h = Math.round(bbRegion().h); if (Math.abs(h - lastH) < 6) return; lastH = h; cancelAnimationFrame(rq); rq = requestAnimationFrame(() => bbShape(shapeNow, .4)); }).observe(billIn); }
 
   // trailer: a narrator, subtitles that land on each spoken word, and a dot picture for every beat of the story
   const SHOTS_EN = [{"line": "Dubai, where the desert meets the sea,", "at": 0, "out": 3700, "w": [450, 2130, 2190, 2310, 2570, 2850, 3110]}, {"line": "I spend my days teaching machines to think.", "at": 3950, "out": 7300, "w": [4030, 4190, 4470, 4730, 5010, 5490, 6150, 6590]}, {"line": "I studied AI and machine learning at Manipal,", "at": 7500, "out": 10700, "w": [7570, 7730, 8090, 8590, 9030, 9350, 9750, 9990]}, {"line": "here in Dubai, and graduated with a CGPA of 8.9.", "at": 10870, "out": 15700, "w": [10950, 11210, 11370, 12170, 12330, 12770, 13130, 13270, 14150, 14470]}, {"line": "Along the way, I led workshops and hackathons", "at": 15950, "out": 18650, "w": [16030, 16310, 16510, 17050, 17330, 17510, 18030, 18370]}, {"line": "on the core teams of IEEE and Google Developer Student Clubs.", "at": 18830, "out": 23250, "w": [18850, 19210, 19350, 19630, 19990, 20250, 20870, 21230, 21630, 22050, 22490]}, {"line": "My research, NeuroSense,", "at": 23630, "out": 25500, "w": [23710, 23870, 24790]}, {"line": "reads facial expressions and simulated EEG", "at": 25700, "out": 29300, "w": [25750, 26130, 26650, 27230, 27890, 28510]}, {"line": "to detect mental load in real time.", "at": 29500, "out": 32400, "w": [29570, 30390, 30690, 31070, 31430, 31610, 31790]}, {"line": "And it won Best Paper at AEIT.", "at": 32870, "out": 36350, "w": [32950, 33090, 33190, 33490, 33830, 34350, 34870]}, {"line": "Competition sharpens me: eighth in the nation at IEEEXtreme,", "at": 36750, "out": 41450, "w": [36850, 37170, 37870, 38650, 38970, 39090, 39170, 39470, 39910]}, {"line": "and the top 8% of 6,000 teams in a global capture-the-flag.", "at": 41750, "out": 46550, "w": [41830, 41990, 42130, 42350, 43130, 43490, 44050, 44510, 44990, 45090, 45410]}, {"line": "Today, I build the workflows,", "at": 46930, "out": 49200, "w": [47010, 47730, 47950, 48230, 48430]}, {"line": "prompts and chatbots behind real conversations.", "at": 49430, "out": 52550, "w": [49510, 49650, 50130, 50670, 51050, 51390]}, {"line": "My name is Kritik Mahesh Kumar,", "at": 52850, "out": 54900, "w": [52930, 53090, 53290, 53490, 53970, 54350]}, {"line": "and my story is only just beginning.", "at": 55250, "out": 57850, "w": [55330, 55470, 55630, 55910, 56190, 56410, 56730]}];
@@ -3081,27 +3091,29 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   const gate = $("#gate");
   /* ================= gate dot field: dots bloom away from the pointer and fall back into the grid ================= */
   const gdots = (() => {
-    const cv = $(".gdots"), c = cv.getContext("2d"), GAP = 22, R = 150; let W = 0, H = 0, D = 1, cols = 0, rows = 0, O, VV, B, raf = 0, mx = -1e4, my = -1e4, ink = "244,242,255", acc = "160,139,255", waves = [], idle = 0;
+    const cv = $(".gdots"), c = cv.getContext("2d"), GAP = 22, R = 150; let W = 0, H = 0, D = 1, cols = 0, rows = 0, O, VV, B, raf = 0, mx = -1e4, my = -1e4, ink = "244,242,255", acc = "160,139,255", waves = [], idle = 0, lastF = 0;
     function size() { W = gate.clientWidth; H = gate.clientHeight; D = Math.min(devicePixelRatio || 1, 2); cv.width = Math.round(W * D); cv.height = Math.round(H * D);
       cols = Math.ceil(W / GAP) + 1; rows = Math.ceil(H / GAP) + 1; const n = cols * rows; O = new Float32Array(n * 2); VV = new Float32Array(n * 2); B = new Float32Array(n);
-      const cs = getComputedStyle(document.documentElement); ink = cs.getPropertyValue("--ink-rgb").trim() || ink; acc = isDark() ? "214,206,255" : (cs.getPropertyValue("--acc-rgb").trim() || acc); }
+      recolor(); }
+    function recolor() { const cs = getComputedStyle(document.documentElement); ink = cs.getPropertyValue("--ink-rgb").trim() || ink; acc = isDark() ? "214,206,255" : (cs.getPropertyValue("--acc-rgb").trim() || acc); }
     function frame(now) {
       raf = 0; c.setTransform(D, 0, 0, D, 0, 0); c.clearRect(0, 0, W, H); let energy = 0;
-      waves = waves.filter(w => (w.r += 9) < Math.hypot(W, H));
+      const dt = lastF ? Math.min(3, Math.max(.5, (now - lastF) / 16.67)) : 1; lastF = now; const damp = Math.pow(.8, dt), up = 1 - Math.pow(.65, dt), down = 1 - Math.pow(.94, dt);
+      waves = waves.filter(w => (w.r += 9 * dt) < Math.hypot(W, H));
       for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
         const n = j * cols + i, ix = n * 2, iy = ix + 1, hx = i * GAP + GAP / 2, hy = j * GAP + GAP / 2;
         let x = hx + O[ix], y = hy + O[iy], ax = -O[ix] * .07, ay = -O[iy] * .07, bloom = 0;
         const dx = x - mx, dy = y - my, d = Math.hypot(dx, dy);
         if (d < R && d > .1) { const f = (1 - d / R); ax += dx / d * f * f * 6; ay += dy / d * f * f * 6; bloom = f; }
         for (const w of waves) { const dd = Math.hypot(hx - w.x, hy - w.y), band = 1 - Math.abs(dd - w.r) / 40; if (band > 0) { const k = band * w.k * (1 - w.r / 1400); ax += (hx - w.x) / (dd || 1) * k * 5; ay += (hy - w.y) / (dd || 1) * k * 5; bloom = Math.max(bloom, band * .8); } }
-        VV[ix] = (VV[ix] + ax) * .8; VV[iy] = (VV[iy] + ay) * .8; O[ix] += VV[ix]; O[iy] += VV[iy];
-        B[n] += (bloom - B[n]) * (bloom > B[n] ? .35 : .06); // bloom fast, fade slow
+        VV[ix] = (VV[ix] + ax * dt) * damp; VV[iy] = (VV[iy] + ay * dt) * damp; O[ix] += VV[ix] * dt; O[iy] += VV[iy] * dt;
+        B[n] += (bloom - B[n]) * (bloom > B[n] ? up : down); // bloom fast, fade slow
         energy += Math.abs(VV[ix]) + Math.abs(VV[iy]) + B[n];
         const b = B[n], sz = 1.7 + b * 3.2;
         c.fillStyle = b > .05 ? `rgba(${acc},${(.2 + b * .75).toFixed(3)})` : `rgba(${ink},.32)`;
         c.fillRect(hx + O[ix] - sz / 2, hy + O[iy] - sz / 2, sz, sz);
       }
-      if (!gate.hidden && (energy > 2 || mx > -1e3 || waves.length)) raf = requestAnimationFrame(frame);
+      if (!gate.hidden && (energy > 2 || mx > -1e3 || waves.length)) raf = requestAnimationFrame(frame); else lastF = 0;
     }
     const kick = () => { if (!raf && !gate.hidden) raf = requestAnimationFrame(frame); };
     gate.addEventListener("pointermove", e => { if (reduce) return; mx = e.clientX; my = e.clientY; kick(); }, { passive:true });
@@ -3112,8 +3124,9 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
     gate.addEventListener("touchend", () => { mx = my = -1e4; kick(); }, { passive:true }); gate.addEventListener("touchcancel", () => { mx = my = -1e4; kick(); }, { passive:true });
     gate.addEventListener("pointerdown", e => { if (reduce) return; waves.push({ x:e.clientX, y:e.clientY, r:0, k:1 }); kick(); });
     addEventListener("resize", () => { if (!gate.hidden) { size(); kick(); } });
-    return { show() { size(); mx = my = -1e4; raf && cancelAnimationFrame(raf); raf = requestAnimationFrame(frame); } };
+    return { show() { size(); mx = my = -1e4; raf && cancelAnimationFrame(raf); raf = requestAnimationFrame(frame); }, recolor() { recolor(); kick(); } };
   })();
+  new MutationObserver(() => document.documentElement.classList.toggle("gate-open", !gate.hidden)).observe(gate, { attributes:true, attributeFilter:["hidden"] });
   function openGate() { gate.hidden = false; gate.classList.remove("leaving"); document.body.style.overflow = "hidden"; gdots.show(); if (bill.classList.contains("playing")) stopTrailer(); textIn(gate.querySelector("h1"), { stagger:70 }); rise(gate.querySelector(".lead"), 200, 8); $$(".prof").forEach(b => b.classList.toggle("cur", b.dataset.prof === prof));
     if (!reduce) { const sp = springEase(.55, .82); $$(".prof").forEach((b, i) => { b.animate([{ transform:"translateY(40px) scale(.86)" }, { transform:"none" }], { duration:sp.duration, delay:240 + i * 80, easing:sp.easing, fill:"backwards" }); [...b.children].filter(c => !c.classList.contains("lg")).forEach(c => { const ws = c.tagName === "B" && isAR() ? [...c.querySelectorAll(".ch")].filter(x => x.textContent.trim()) : []; if (ws.length > 1) { rise(c, 300 + i * 80, 0); ws.forEach((wd, k) => rise(wd, 300 + i * 80 + k * 110, 6)); } else rise(c, 300 + i * 80, 6); }); }); /* two-word names arrive word by word */ }  (gate.querySelector(`[data-prof="${prof}"]`) || gate.querySelector(".prof")).focus(); }
   function closeGate(p) {
@@ -3219,7 +3232,9 @@ I am looking for AI engineering and software roles in Dubai.`;
   function setTheme(t, from = themeBtn) {
     const flip = () => { document.documentElement.setAttribute("data-theme", t); store.set("kmk-theme", t); };
     if (themeVT) { try { themeVT.skipTransition(); } catch (e) {} }
-    if (reduce || !document.startViewTransition) { flip(); syncTheme(); return; }
+    if (reduce || !document.startViewTransition) { flip(); syncTheme(); if (!gate.hidden) gdots.recolor(); return; }
+    if (!gate.hidden) { const h = document.documentElement; clearTimeout(setTheme.ft); h.classList.add("theme-fade"); flip(); syncTheme(); gdots.recolor();
+      setTheme.ft = setTimeout(() => h.classList.remove("theme-fade"), 450); return; }
     const r = from.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2, R = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
     document.documentElement.classList.add("vt-theme");
     const vt = themeVT = document.startViewTransition(flip);
@@ -3235,7 +3250,7 @@ I am looking for AI engineering and software roles in Dubai.`;
   }
   { let q = 0; new MutationObserver(() => { if (!q) q = requestAnimationFrame(() => { q = 0; syncTheme(); }); }).observe(document.documentElement, { attributes:true, attributeFilter:["data-theme"] }); }
   themeBtn.addEventListener("click", () => setTheme(isDark() ? "light" : "dark"));
-  $("#gThemeBtn").addEventListener("click", e => { setTheme(isDark() ? "light" : "dark", e.currentTarget); setTimeout(() => { if (!gate.hidden) gdots.show(); }, 60); });
+  $("#gThemeBtn").addEventListener("click", e => { setTheme(isDark() ? "light" : "dark", e.currentTarget); });
   sysDark.addEventListener && sysDark.addEventListener("change", syncTheme);
   syncTheme();
 
