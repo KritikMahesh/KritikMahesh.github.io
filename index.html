@@ -662,6 +662,8 @@ html[dir="rtl"] .b .ico.bk{transform:scaleX(-1)}
   .ep .acts .b{width:48px;height:48px;min-height:0;padding:0;border-radius:50%;gap:0}
   .ep .acts .b .lbl,.ep .acts .b .ext{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   .ep .acts .b .ico{width:21px;height:21px;translate:none!important}
+  .ep .acts .b:not(:has(.ico)){width:auto;padding:0 18px;border-radius:999px}
+  .ep .acts .b:not(:has(.ico)) .lbl{position:static;width:auto;height:auto;overflow:visible;clip:auto}
   .lb .row2{gap:12px;flex-wrap:nowrap}
   .lb .row2 .b{width:48px;height:48px;min-height:0;padding:0;border-radius:50%;gap:0}
   .lb .row2 .b .lbl,.lb .row2 .b .ext{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -2820,7 +2822,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
       <div><p class="syn">${ar ? AR_SERIES.syn : "I&rsquo;m an AI engineer and software developer in Dubai, building a conversational AI chatbot at Amira AI. B.Tech CSE (AI &amp; ML), Manipal Academy of Higher Education, Dubai, CGPA 8.9."}</p>
         <ul class="res" style="margin-top:14px">${res.map(x => `<li>${x}</li>`).join("")}</ul></div>
       <dl><div><dt>${tr("Cast")}</dt>${ar ? `<dd>${CAST.map(castLabel).join("، ")}</dd>` : `<dd>${CAST.join(", ")}</dd>`}</div><div><dt>${tr("Languages")}</dt><dd>${ar ? AR_SERIES.langs : "English, Hindi, Malayalam, Telugu, Marathi"}</dd></div></dl>
-      <div class="acts"><a class="b play" href="assets/Kritik-Mahesh-Resume.pdf" target="_blank" rel="noopener">${tr("Résumé")}</a><a class="b ghost" href="#credits" data-close>${tr("Contact")}</a></div>`;
+      <div class="acts"><a class="b play" href="assets/Kritik-Mahesh-Resume.pdf" target="_blank" rel="noopener" aria-label="${tr("Résumé")}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5M9.5 13h6M9.5 17h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>${tr("Résumé")}</a><a class="b ghost" href="#credits" data-close aria-label="${tr("Contact")}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>${tr("Contact")}</a></div>`;
     showEp();
   }
   let seriesImg = null;
