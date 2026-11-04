@@ -3960,22 +3960,22 @@ I am looking for AI engineering and software roles in Dubai.`;
       if (last < 0) last = now; clock += Math.min(now - last, 50); last = now; // cap each step at ~2 frames: in-app browsers stall on load
       const t = clock, KH = Math.min(H * .42, W * .62);
       // world: letter plane, centred on the K; 1 unit = 1 px when the camera sits at its start
-      const kx = -KH * 0.3871, ky = -KH * .5, stemX = kx + SW * KH / 2;
+      const kx = -KH * 0.3871, ky = -KH * .5, stemX = kx + SW * KH / 2, AX = W / 2 + stemX * DIST / (DIST - 70 * ph(300, 2300, t)), FW = 2 * Math.max(AX, W - AX); // the K is centred on screen; the camera aims straight at the stem from where it sits (shifted lens), so nothing ever slides sideways
       // camera: a gentle push while the K forms, then a dolly that speeds up, flies through the stem and eases out
       // approach: distance to the letter shrinks exponentially (a steady, accelerating zoom) until the stem is wider than the screen;
       // then the camera keeps its exact speed and flies on through the lines, still accelerating
-      const zPush = DIST - 70 * ph(300, 2300, t), zFill = DIST * SW * KH / (1.35 * W), T1 = 1800, ta = t - 2300;
+      const zPush = DIST - 70 * ph(300, 2300, t), zFill = DIST * SW * KH / (1.35 * FW), T1 = 1800, ta = t - 2300;
       let camZ;
       if (ta <= 0) camZ = DIST - zPush;
       else if (ta <= T1) { const q = ta / T1; camZ = DIST - (DIST - 70) * Math.pow(zFill / (DIST - 70), q * q); }
       else { const v = -2 * zFill * Math.log(zFill / (DIST - 70)) / T1, tb = ta - T1; camZ = DIST - zFill + v * tb + .0011 * tb * tb; }
-      const p = ph(2300, 2300 + T1, t), camX = stemX * eIO(ph(2300, 2300 + T1 * .7, t)), camY = 0; // the whole K is centred while it forms, then the camera glides onto the stem as it dollies in
+      const p = ph(2300, 2300 + T1, t), camX = stemX, camY = 0; // straight in: the stem stays put on screen and grows until it fills it
       c.setTransform(dpr, 0, 0, dpr, 0, 0); c.globalCompositeOperation = "source-over"; c.globalAlpha = 1; c.fillStyle = "#000"; c.fillRect(0, 0, W, H);
       const zL = Z0 - camZ, sc = zL > 1 ? DIST / zL : 0, stemPx = SW * KH * sc; // how wide the stem is on screen right now
-      revealMax = Math.max(revealMax, zL > 1 ? sm(.22 * W, 1.25 * W, stemPx) : 1); const reveal = revealMax; // 0 = solid letter, 1 = it is made of light
+      revealMax = Math.max(revealMax, zL > 1 ? sm(.22 * FW, 1.25 * FW, stemPx) : 1); const reveal = revealMax; // 0 = solid letter, 1 = it is made of light
       // the letter itself, until the camera reaches its plane
       if (sc > 0 && reveal < 1) {
-        c.save(); c.translate(W / 2, H / 2); c.scale(sc, sc); c.translate(-camX, -camY); c.translate(kx, ky);
+        c.save(); c.translate(AX, H / 2); c.scale(sc, sc); c.translate(-camX, -camY); c.translate(kx, ky);
         // the feet sit on one shallow arch, like the classic streaming N: outer edges lowest, rising toward the middle
         { const BW = .7741, d = .03; c.beginPath(); c.moveTo(-KH, -2 * KH); c.lineTo(2 * KH, -2 * KH); c.lineTo(2 * KH, 1.05 * KH); c.lineTo(BW * KH, 1.05 * KH); c.lineTo(BW * KH, KH);
           c.quadraticCurveTo(BW / 2 * KH, (1 - 2 * d) * KH, 0, KH); c.lineTo(0, 1.05 * KH); c.lineTo(-KH, 1.05 * KH); c.closePath(); c.clip(); }
@@ -4038,7 +4038,7 @@ I am looking for AI engineering and software roles in Dubai.`;
         bg.addColorStop(0, `rgba(120,96,255,${.35 * bl})`); bg.addColorStop(1, "rgba(0,0,0,0)"); c.globalAlpha = 1; c.fillStyle = bg; c.fillRect(0, 0, W, H);
         for (const q of STR) {
           const z = Z0 + q.dz - camZ; if (z < 6) { q.px = null; continue; }
-          const k = DIST / z, wx = stemX + (q.u - .5) * SW * KH * q.spread, x = W / 2 + (wx - camX) * k, w = Math.max(.7, q.w * SW * KH * k * (q.dz < 40 ? 1.1 : 1));
+          const k = DIST / z, wx = stemX + (q.u - .5) * SW * KH * q.spread, x = AX + (wx - camX) * k, w = Math.max(.7, q.w * SW * KH * k * (q.dz < 40 ? 1.1 : 1));
           const hh = KH * q.h * k, y = H / 2 - hh * .55;
           const near = sm(6, 140, z), alpha = reveal * near * q.a * (.82 + .18 * Math.sin(t / 140 + q.f)) * Math.min(1, W * .05 / w) * .62;
           if (alpha < .01 || x + w < -40 || x - w > W + 40) { q.px = x; continue; }
