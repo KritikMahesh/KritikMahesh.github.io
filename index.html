@@ -504,7 +504,7 @@ html .tbtn.lbtn .ic{display:flex;align-items:center;gap:7px;margin:0;font-size:.
 .lb .b.play{background:#F4F2FF;color:#120D33}
 .lb .b.ghost{background:rgba(255,255,255,.14);color:#F4F2FF;box-shadow:inset 0 1px 0 rgba(255,255,255,.22)}
 
-/* ---------- résumé viewer: the PDF's pages shown right in the page, works on every phone ---------- */
+/* ---------- resume viewer: the PDF's pages shown right in the page, works on every phone ---------- */
 .rv{border:0;padding:0;margin:auto;width:min(880px,calc(100vw - 24px));height:calc(100dvh - 32px);max-height:none;border-radius:22px;overflow:hidden;color:var(--ink);
   background:rgba(var(--sheet-rgb),.92);-webkit-backdrop-filter:blur(40px) saturate(170%);backdrop-filter:blur(40px) saturate(170%);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 0 0 1px rgba(var(--ink-rgb),.06),0 50px 120px -30px rgba(0,0,0,.85)}
@@ -540,6 +540,7 @@ html[lang="ar"] .rsep span{letter-spacing:0;font-size:.8rem}
 .cta .links{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:16px}
 .cta{position:relative}
 .clinks{list-style:none;margin:26px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:14px}
+@media (max-width:760px){.clinks{flex-wrap:nowrap;gap:clamp(8px,3vw,14px)}.clinks .ci{width:clamp(40px,13vw,56px);height:clamp(40px,13vw,56px)}.clinks .ci svg{width:clamp(18px,5.6vw,24px);height:clamp(18px,5.6vw,24px)}}
 .cpop{position:absolute;z-index:5;left:0;top:0;display:grid;gap:4px;min-width:min(300px,calc(100vw - 32px));max-width:calc(100vw - 32px);padding:14px 16px;border-radius:18px;
   background:rgba(var(--sheet-rgb),.82);-webkit-backdrop-filter:blur(24px) saturate(170%);backdrop-filter:blur(24px) saturate(170%);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 0 0 1px rgba(var(--ink-rgb),.1),0 24px 50px -20px rgba(0,0,0,.6);transform-origin:var(--ox,30px) 100%}
@@ -572,6 +573,8 @@ footer{color:var(--dim);font-size:.85rem;padding-block:26px 34px;display:flex;ju
 html,body{cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2222%22%20height%3D%2222%22%20viewBox%3D%220%200%2022%2022%22%3E%3Cdefs%3E%3Cfilter%20id%3D%22s%22%20x%3D%22-30%25%22%20y%3D%22-30%25%22%20width%3D%22160%25%22%20height%3D%22160%25%22%3E%3CfeDropShadow%20dx%3D%220%22%20dy%3D%221%22%20stdDeviation%3D%221.1%22%20flood-color%3D%22%23000%22%20flood-opacity%3D%22.25%22/%3E%3C/filter%3E%3C/defs%3E%3Cpath%20filter%3D%22url%28%23s%29%22%20d%3D%22M3.2%202.4%20L17.6%2010.6%20L10.9%2012.3%20L7.9%2018.9%20Z%22%20fill%3D%22%231B1A22%22%20stroke%3D%22%23fff%22%20stroke-opacity%3D%22.8%22%20stroke-width%3D%220.8%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E") 3 2,auto}
 a,button,.tile,[role=button],summary,label,select,.reel{cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2222%22%20height%3D%2222%22%20viewBox%3D%220%200%2022%2022%22%3E%3Cdefs%3E%3Cfilter%20id%3D%22s%22%20x%3D%22-30%25%22%20y%3D%22-30%25%22%20width%3D%22160%25%22%20height%3D%22160%25%22%3E%3CfeDropShadow%20dx%3D%220%22%20dy%3D%221%22%20stdDeviation%3D%221.1%22%20flood-color%3D%22%23000%22%20flood-opacity%3D%22.25%22/%3E%3C/filter%3E%3C/defs%3E%3Cpath%20filter%3D%22url%28%23s%29%22%20d%3D%22M3.2%202.4%20L17.6%2010.6%20L10.9%2012.3%20L7.9%2018.9%20Z%22%20fill%3D%22%239A84F5%22%20stroke%3D%22%23fff%22%20stroke-opacity%3D%22.8%22%20stroke-width%3D%220.8%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E") 3 2,pointer !important}
 input,textarea{cursor:text}
+/* dark theme: a light arrow with a dark rim, so it stands out on the dark background */
+html[data-theme="dark"],html[data-theme="dark"] body{cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http://www.w3.org/2000/svg%22%20width%3D%2222%22%20height%3D%2222%22%20viewBox%3D%220%200%2022%2022%22%3E%3Cdefs%3E%3Cfilter%20id%3D%22s%22%20x%3D%22-30%25%22%20y%3D%22-30%25%22%20width%3D%22160%25%22%20height%3D%22160%25%22%3E%3CfeDropShadow%20dx%3D%220%22%20dy%3D%221%22%20stdDeviation%3D%221.1%22%20flood-color%3D%22%23000%22%20flood-opacity%3D%22.45%22/%3E%3C/filter%3E%3C/defs%3E%3Cpath%20filter%3D%22url%28%23s%29%22%20d%3D%22M3.2%202.4%20L17.6%2010.6%20L10.9%2012.3%20L7.9%2018.9%20Z%22%20fill%3D%22%23F4F2FF%22%20stroke%3D%22%230E0B26%22%20stroke-opacity%3D%22.9%22%20stroke-width%3D%220.9%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E") 3 2,auto}html[data-theme="dark"] :is(a,button,.tile,[role=button],summary,label,select,.reel){cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http://www.w3.org/2000/svg%22%20width%3D%2222%22%20height%3D%2222%22%20viewBox%3D%220%200%2022%2022%22%3E%3Cdefs%3E%3Cfilter%20id%3D%22s%22%20x%3D%22-30%25%22%20y%3D%22-30%25%22%20width%3D%22160%25%22%20height%3D%22160%25%22%3E%3CfeDropShadow%20dx%3D%220%22%20dy%3D%221%22%20stdDeviation%3D%221.1%22%20flood-color%3D%22%23000%22%20flood-opacity%3D%22.45%22/%3E%3C/filter%3E%3C/defs%3E%3Cpath%20filter%3D%22url%28%23s%29%22%20d%3D%22M3.2%202.4%20L17.6%2010.6%20L10.9%2012.3%20L7.9%2018.9%20Z%22%20fill%3D%22%23B9A8FF%22%20stroke%3D%22%230E0B26%22%20stroke-opacity%3D%22.9%22%20stroke-width%3D%220.9%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E") 3 2,pointer !important}@media (prefers-color-scheme:dark){html:not([data-theme="light"]),html:not([data-theme="light"]) body{cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http://www.w3.org/2000/svg%22%20width%3D%2222%22%20height%3D%2222%22%20viewBox%3D%220%200%2022%2022%22%3E%3Cdefs%3E%3Cfilter%20id%3D%22s%22%20x%3D%22-30%25%22%20y%3D%22-30%25%22%20width%3D%22160%25%22%20height%3D%22160%25%22%3E%3CfeDropShadow%20dx%3D%220%22%20dy%3D%221%22%20stdDeviation%3D%221.1%22%20flood-color%3D%22%23000%22%20flood-opacity%3D%22.45%22/%3E%3C/filter%3E%3C/defs%3E%3Cpath%20filter%3D%22url%28%23s%29%22%20d%3D%22M3.2%202.4%20L17.6%2010.6%20L10.9%2012.3%20L7.9%2018.9%20Z%22%20fill%3D%22%23F4F2FF%22%20stroke%3D%22%230E0B26%22%20stroke-opacity%3D%22.9%22%20stroke-width%3D%220.9%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E") 3 2,auto}html:not([data-theme="light"]) :is(a,button,.tile,[role=button],summary,label,select,.reel){cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http://www.w3.org/2000/svg%22%20width%3D%2222%22%20height%3D%2222%22%20viewBox%3D%220%200%2022%2022%22%3E%3Cdefs%3E%3Cfilter%20id%3D%22s%22%20x%3D%22-30%25%22%20y%3D%22-30%25%22%20width%3D%22160%25%22%20height%3D%22160%25%22%3E%3CfeDropShadow%20dx%3D%220%22%20dy%3D%221%22%20stdDeviation%3D%221.1%22%20flood-color%3D%22%23000%22%20flood-opacity%3D%22.45%22/%3E%3C/filter%3E%3C/defs%3E%3Cpath%20filter%3D%22url%28%23s%29%22%20d%3D%22M3.2%202.4%20L17.6%2010.6%20L10.9%2012.3%20L7.9%2018.9%20Z%22%20fill%3D%22%23B9A8FF%22%20stroke%3D%22%230E0B26%22%20stroke-opacity%3D%22.9%22%20stroke-width%3D%220.9%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E") 3 2,pointer !important}}
 }
 /* ---------- case study: problem, build, result ---------- */
 .case{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0 4px}
@@ -774,6 +777,13 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   .bill .b{padding:11px 15px;font-size:.95rem}
   .bill .b.icon{width:44px;height:44px;padding:0}
   .tile .tt b{font-size:.98rem}
+  /* small posters: title never climbs over the artwork (max 2 lines, 1-line subtitle) and a deeper shade keeps it readable */
+  .tile .tt b{font-size:.9rem;line-height:1.15;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;padding-top:6px;margin-top:-6px}
+  html[lang="ar"] .tile .tt b{font-size:.84rem;line-height:1.3}
+  .tile .tt b.long{font-size:.72rem;letter-spacing:-.025em;-webkit-line-clamp:3}html[lang="ar"] .tile .tt b.long{font-size:.68rem;letter-spacing:0}
+  .tile .tt>span{font-size:.7rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tile .tt{left:8px;right:8px;bottom:8px}
+  .tile .shade{background:linear-gradient(0deg,rgba(0,0,0,.88) 0%,rgba(0,0,0,.62) 30%,rgba(0,0,0,0) 62%)}
   .rail.top5{grid-auto-columns:calc(var(--tile) * 1.3)}
   .t5 .num{font-size:6.2rem;-webkit-text-stroke:2px rgba(var(--acc-rgb),.7)}
   .arrow{display:none}
@@ -821,7 +831,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
     <h1 id="gate-h">Who's watching?</h1>
     <p class="lead">Pick a profile. The whole service rearranges for you.</p>
     <div class="profiles">
-      <button type="button" class="prof" data-prof="recruiter"><liquid-glass class="lg" aria-hidden="true" renderer="svg" radius="28" frost="0.06" saturation="160" lens="convex" lens-strength="1.1" scale="150" border-color="rgba(255,255,255,0.32)"></liquid-glass><span class="av r"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="16" y="32" width="68" height="48" rx="8"/><path d="M38 32v-8a6 6 0 0 1 6-6h12a6 6 0 0 1 6 6v8M16 52h68"/></svg></span><b>Recruiter</b><small>Proof and résumé first</small></button>
+      <button type="button" class="prof" data-prof="recruiter"><liquid-glass class="lg" aria-hidden="true" renderer="svg" radius="28" frost="0.06" saturation="160" lens="convex" lens-strength="1.1" scale="150" border-color="rgba(255,255,255,0.32)"></liquid-glass><span class="av r"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="16" y="32" width="68" height="48" rx="8"/><path d="M38 32v-8a6 6 0 0 1 6-6h12a6 6 0 0 1 6 6v8M16 52h68"/></svg></span><b>Recruiter</b><small>Proof and resume first</small></button>
       <button type="button" class="prof" data-prof="engineer"><liquid-glass class="lg" aria-hidden="true" renderer="svg" radius="28" frost="0.06" saturation="160" lens="convex" lens-strength="1.1" scale="150" border-color="rgba(255,255,255,0.32)"></liquid-glass><span class="av e"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M36 30 16 50l20 20M64 30l20 20-20 20M56 22 44 78"/></svg></span><b>Engineer</b><small>Projects and code first</small></button>
       <button type="button" class="prof" data-prof="curious"><liquid-glass class="lg" aria-hidden="true" renderer="svg" radius="28" frost="0.06" saturation="160" lens="convex" lens-strength="1.1" scale="150" border-color="rgba(255,255,255,0.32)"></liquid-glass><span class="av c"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 14v16M50 70v16M14 50h16M70 50h16M25 25l11 11M64 64l11 11M75 25 64 36M36 64 25 75"/><circle cx="50" cy="50" r="8"/></svg></span><b>Just curious</b><small>The fun stuff first</small></button>
     </div>
@@ -873,7 +883,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
       <li><a class="ci" href="tel:+971503911365" data-label="Call" data-kind="tel" data-copy="+971 50 391 1365" aria-label="Call +971 50 391 1365 (copies the number)"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 3.5h2.6l1.4 4.2-2 1.4a12 12 0 0 0 6.3 6.3l1.4-2 4.2 1.4v2.6a2 2 0 0 1-2.2 2A16.9 16.9 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z"/></svg></a></li>
       <li><a class="ci" href="https://www.linkedin.com/in/kritikmahesh" target="_blank" rel="noopener" data-label="LinkedIn" aria-label="LinkedIn profile (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a></li>
       <li><a class="ci" href="https://github.com/kritikmahesh" target="_blank" rel="noopener" data-label="GitHub" aria-label="GitHub profile (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a></li>
-      <li><a class="ci" href="assets/Kritik-Mahesh-Resume.pdf" target="_blank" rel="noopener" data-label="Résumé" aria-label="Résumé"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></a></li>
+      <li><a class="ci" href="assets/Kritik-Mahesh-Resume.pdf" target="_blank" rel="noopener" data-label="Resume" aria-label="Resume"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></a></li>
     </ul>
     <div class="cpop" id="cpop" role="status" aria-live="polite" hidden>
       <span class="cpk" id="cpopK"></span><b class="cpv" id="cpopV"></b>
@@ -909,13 +919,13 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
 
 <dialog class="rv" id="rv" aria-labelledby="rvT">
   <div class="rvbar">
-    <b id="rvT">Résumé</b>
+    <b id="rvT">Resume</b>
     <span class="rvacts"><a class="b play" id="rvDl" href="assets/Kritik-Mahesh-Resume.pdf" download="Kritik-Mahesh-Kumar-Resume.pdf"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl" id="rvDlL">Download PDF</span></a>
-    <button type="button" class="rvx" id="rvX" aria-label="Close résumé"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></span>
+    <button type="button" class="rvx" id="rvX" aria-label="Close resume"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></span>
   </div>
   <div class="rvsc" id="rvSc">
-    <img src="assets/resume-p-1.jpg" width="1275" height="1804" alt="Résumé of Kritik Mahesh Kumar, page 1 of 2" loading="lazy">
-    <img src="assets/resume-p-2.jpg" width="1275" height="1804" alt="Résumé of Kritik Mahesh Kumar, page 2 of 2" loading="lazy">
+    <img src="assets/resume-p-1.jpg" width="1275" height="1804" alt="Resume of Kritik Mahesh Kumar, page 1 of 2" loading="lazy">
+    <img src="assets/resume-p-2.jpg" width="1275" height="1804" alt="Resume of Kritik Mahesh Kumar, page 2 of 2" loading="lazy">
   </div>
 </dialog>
 
@@ -1175,7 +1185,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
     "Click or press any key to skip":"انقر أو اضغط أي مفتاح للتخطي",
     "Who's watching?":"من يشاهد الآن؟",
     "Pick a profile. The whole service rearranges for you.":"اختر ملفًا شخصيًا، وستُعاد ترتيب الخدمة كلها لك.",
-    "Recruiter":"مسؤول توظيف", "Proof and résumé first":"الإنجازات والسيرة الذاتية أولًا",
+    "Recruiter":"مسؤول توظيف", "Proof and resume first":"الإنجازات والسيرة الذاتية أولًا",
     "Engineer":"مهندس", "Projects and code first":"المشاريع والكود أولًا",
     "Just curious":"فضولي فقط", "The fun stuff first":"الأشياء الممتعة أولًا",
     "Skip, show me everything":"تخطَّ، أرني كل شيء",
@@ -1189,12 +1199,12 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
     "Cast me in your next season.":"اخترني لموسمك القادم.",
     "I’m open to AI engineering and software roles, in Dubai or remote. I reply fast.":"أنا متاح لأدوار هندسة الذكاء الاصطناعي والبرمجيات، في دبي أو عن بُعد. وأردّ بسرعة.",
     "Contact links":"روابط التواصل",
-    "Email":"البريد الإلكتروني", "Call":"اتصال", "Résumé PDF":"السيرة الذاتية", "Résumé":"السيرة الذاتية", "Download PDF":"تنزيل PDF", "Close résumé":"إغلاق السيرة الذاتية", "LinkedIn":"لينكد إن", "GitHub":"جيت هب",
+    "Email":"البريد الإلكتروني", "Call":"اتصال", "Resume PDF":"السيرة الذاتية", "Resume":"السيرة الذاتية", "Download PDF":"تنزيل PDF", "Close resume":"إغلاق السيرة الذاتية", "LinkedIn":"لينكد إن", "GitHub":"جيت هب",
     "Email kritikmahesh@gmail.com (copies the address and opens a new email)":"راسلني على kritikmahesh@gmail.com (يُنسخ العنوان وتُفتح رسالة جديدة)",
     "Call +971 50 391 1365 (copies the number)":"اتصل على +971 50 391 1365 (يُنسخ الرقم)",
     "LinkedIn profile (opens in a new tab)":"ملفي على لينكد إن (يُفتح في علامة تبويب جديدة)",
     "GitHub profile (opens in a new tab)":"ملفي على جيت هب (يُفتح في علامة تبويب جديدة)",
-    "Résumé PDF (opens in a new tab)":"السيرة الذاتية (تُفتح في علامة تبويب جديدة)",
+    "Resume PDF (opens in a new tab)":"السيرة الذاتية (تُفتح في علامة تبويب جديدة)",
     "Email copied":"تم نسخ البريد الإلكتروني", "Number copied":"تم نسخ الرقم", "Phone":"الهاتف",
     "Write in Gmail ↗":"اكتب عبر جيميل ↖", "Call now":"اتصل الآن", "Call (opens your phone app)":"اتصال (يفتح تطبيق الهاتف)",
     "Close":"إغلاق", "End credits":"شارة النهاية",
@@ -1359,7 +1369,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   // static text: [selector, English, split mode or null, attribute]
   const STATIC = [
     ["#sting small", "Click or press any key to skip"], ["#gate-h", "Who's watching?", "w"], ["#gate .lead", "Pick a profile. The whole service rearranges for you."],
-    ['.prof[data-prof="recruiter"] b', "Recruiter", "r"], ['.prof[data-prof="recruiter"] small', "Proof and résumé first"],
+    ['.prof[data-prof="recruiter"] b', "Recruiter", "r"], ['.prof[data-prof="recruiter"] small', "Proof and resume first"],
     ['.prof[data-prof="engineer"] b', "Engineer", "r"], ['.prof[data-prof="engineer"] small', "Projects and code first"],
     ['.prof[data-prof="curious"] b', "Just curious", "r"], ['.prof[data-prof="curious"] small', "The fun stuff first"],
     [".brand span", "originals"], [".brand", "KMK Originals, home", null, "aria-label"],
@@ -1371,7 +1381,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
     ['.ci[data-kind="mail"]', "Email", null, "data-label"], ['.ci[data-kind="mail"]', "Email kritikmahesh@gmail.com (copies the address and opens a new email)", null, "aria-label"],
     ['.ci[data-kind="tel"]', "Call", null, "data-label"], ['.ci[data-kind="tel"]', "Call +971 50 391 1365 (copies the number)", null, "aria-label"],
     ['.ci[href*="linkedin"]', "LinkedIn", null, "data-label"], ['.ci[href*="github"]', "GitHub", null, "data-label"], ['.ci[href*="linkedin"]', "LinkedIn profile (opens in a new tab)", null, "aria-label"], ['.ci[href*="github"]', "GitHub profile (opens in a new tab)", null, "aria-label"],
-    ['.ci[href*="Resume"]', "Résumé", null, "data-label"], ['.ci[href*="Resume"]', "Résumé", null, "aria-label"],
+    ['.ci[href*="Resume"]', "Resume", null, "data-label"], ['.ci[href*="Resume"]', "Resume", null, "aria-label"],
     ["#cpopX", "Close", null, "aria-label"], [".roll", "End credits", null, "aria-label"],
     ["footer span", "KMK Originals is a portfolio, not a streaming service. Built by hand in Dubai, 2026."], ["#toTop", "Back to top", null, "aria-label"], ["#toTop", "Back to top", null, "title"],
     ["#epX", "Close", null, "aria-label"], ["#lbClose .lbl", "Back"], ["#lbClose", "Back", null, "aria-label"], ["#lbX", "Close certificate", null, "aria-label"],
@@ -2717,7 +2727,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
     const it = LI(id), b = document.createElement("button"); b.type = "button"; b.className = "tile" + (it.progress != null || it.live ? " has-prog" : ""); b.dataset.id = id;
     b.setAttribute("aria-label", `${it.title}${it.sub ? ", " + it.sub : ""}. ${tr("Open details")}`);
     b.innerHTML = `<img alt="" class="ld"><span class="shade"></span>${it.orig ? '<span class="orig" aria-hidden="true">K</span>' : ""}${it.badge && !opts.top ? `<span class="flag">${it.badge}</span>` : ""}
-      <span class="tt"><b>${it.title}</b>${it.sub ? `<span>${it.sub}</span>` : ""}</span>${it.live ? '<span class="prog"><i class="live"></i></span>' : it.progress != null ? `<span class="prog"><i style="width:${it.progress}%"></i></span>` : ""}`;
+      <span class="tt"><b${String(it.title).replace(/<[^>]*>/g, "").length > (isAR() ? 15 : 19) ? ' class="long"' : ""}>${it.title}</b>${it.sub ? `<span>${it.sub}</span>` : ""}</span>${it.live ? '<span class="prog"><i class="live"></i></span>' : it.progress != null ? `<span class="prog"><i style="width:${it.progress}%"></i></span>` : ""}`;
     split(b.querySelector(".tt b"), "c"); lazyPoster(b.querySelector("img"), id, opts.top);
     b.addEventListener("click", () => openEp(id, b)); armPreview(b);
     return b;
@@ -2822,7 +2832,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
       <div><p class="syn">${ar ? AR_SERIES.syn : "I&rsquo;m an AI engineer and software developer in Dubai, building a conversational AI chatbot at Amira AI. B.Tech CSE (AI &amp; ML), Manipal Academy of Higher Education, Dubai, CGPA 8.9."}</p>
         <ul class="res" style="margin-top:14px">${res.map(x => `<li>${x}</li>`).join("")}</ul></div>
       <dl><div><dt>${tr("Cast")}</dt>${ar ? `<dd>${CAST.map(castLabel).join("، ")}</dd>` : `<dd>${CAST.join(", ")}</dd>`}</div><div><dt>${tr("Languages")}</dt><dd>${ar ? AR_SERIES.langs : "English, Hindi, Malayalam, Telugu, Marathi"}</dd></div></dl>
-      <div class="acts"><a class="b play" href="assets/Kritik-Mahesh-Resume.pdf" target="_blank" rel="noopener" aria-label="${tr("Résumé")}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5M9.5 13h6M9.5 17h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>${tr("Résumé")}</a><a class="b ghost" href="#credits" data-close aria-label="${tr("Contact")}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>${tr("Contact")}</a></div>`;
+      <div class="acts"><a class="b play" href="assets/Kritik-Mahesh-Resume.pdf" target="_blank" rel="noopener" aria-label="${tr("Resume")}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5M9.5 13h6M9.5 17h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>${tr("Resume")}</a><a class="b ghost" href="#credits" data-close aria-label="${tr("Contact")}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>${tr("Contact")}</a></div>`;
     showEp();
   }
   let seriesImg = null;
@@ -2907,12 +2917,12 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   lb.addEventListener("cancel", e => { e.preventDefault(); closeCert(); });
   lb.addEventListener("click", e => { if (lbSwiped) { lbSwiped = false; return; } if (e.target === lb || e.target.classList.contains("stage")) closeCert(); });
 
-  // résumé viewer: opens over the page instead of leaving the site
+  // resume viewer: opens over the page instead of leaving the site
   const rv = $("#rv"); let rvFocus = null;
   function openResume(from) {
     if (ep.open) ep.close();
-    rvFocus = from || document.activeElement; $("#rvT").textContent = tr("Résumé"); $("#rvDlL").textContent = tr("Download PDF");
-    $("#rvX").setAttribute("aria-label", tr("Close résumé"));
+    rvFocus = from || document.activeElement; $("#rvT").textContent = tr("Resume"); $("#rvDlL").textContent = tr("Download PDF");
+    $("#rvX").setAttribute("aria-label", tr("Close resume"));
     rv.showModal(); $("#rvSc").scrollTop = 0; $("#rvX").focus();
     if (!reduce) { const sp = springEase(.5, 1); rv.animate([{ opacity:0, transform:"translateY(40px) scale(.96)" }, { opacity:1, transform:"none" }], { duration:sp.duration, easing:sp.easing }); }
   }
@@ -3189,7 +3199,7 @@ I am looking for AI engineering and software roles in Dubai.`;
     if (reduce) return go();
     if (!document.startViewTransition) { go(); document.body.animate([{ opacity:0, filter:"blur(6px)" }, { opacity:1, filter:"blur(0)" }], { duration:520, easing:"cubic-bezier(.23,1,.32,1)" }); return; }
     const html = document.documentElement; html.classList.add("vt-lang");
-    const vt = document.startViewTransition(go); vt.finished.finally(() => html.classList.remove("vt-lang"));
+    const vt = document.startViewTransition(go); vt.ready.catch(() => {}); vt.finished.catch(() => {}).finally(() => html.classList.remove("vt-lang"));
   }
   $("#langBtn").addEventListener("click", () => setLang(isAR() ? "en" : "ar"));
   $("#gLangBtn").addEventListener("click", () => { setLang(isAR() ? "en" : "ar"); setTimeout(() => { if (!gate.hidden) { gdots.show(); $$(".prof").forEach(b => b.classList.toggle("cur", b.dataset.prof === prof)); } }, 60); });
@@ -3219,8 +3229,9 @@ I am looking for AI engineering and software roles in Dubai.`;
       if (soft) html.animate({ "--vr":["0px", (R + F) + "px"] }, { duration:dur, easing:ease, pseudoElement:"::view-transition-new(root)", fill:"both" });
       else html.animate({ clipPath:[`circle(0px at ${x}px ${y}px)`, `circle(${R}px at ${x}px ${y}px)`] }, { duration:dur, easing:ease, pseudoElement:"::view-transition-new(root)" });
       html.animate({ opacity:[1, .85] }, { duration:dur, easing:ease, pseudoElement:"::view-transition-old(root)" }); }).catch(() => syncTheme());
-    vt.finished.finally(() => { if (themeVT === vt) themeVT = null; html.classList.remove("vt-theme", "vt-soft"); });
+    vt.finished.catch(() => {}).finally(() => { if (themeVT === vt) { themeVT = null; html.classList.remove("vt-theme", "vt-soft"); } });
   }
+  { let q = 0; new MutationObserver(() => { if (!q) q = requestAnimationFrame(() => { q = 0; syncTheme(); }); }).observe(document.documentElement, { attributes:true, attributeFilter:["data-theme"] }); }
   themeBtn.addEventListener("click", () => setTheme(isDark() ? "light" : "dark"));
   $("#gThemeBtn").addEventListener("click", e => { setTheme(isDark() ? "light" : "dark", e.currentTarget); setTimeout(() => { if (!gate.hidden) gdots.show(); }, 60); });
   sysDark.addEventListener && sysDark.addEventListener("change", syncTheme);
