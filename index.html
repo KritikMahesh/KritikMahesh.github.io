@@ -3969,7 +3969,7 @@ I am looking for AI engineering and software roles in Dubai.`;
       if (ta <= 0) camZ = DIST - zPush;
       else if (ta <= T1) { const q = ta / T1; camZ = DIST - (DIST - 70) * Math.pow(zFill / (DIST - 70), q * q); }
       else { const v = -2 * zFill * Math.log(zFill / (DIST - 70)) / T1, tb = ta - T1; camZ = DIST - zFill + v * tb + .0011 * tb * tb; }
-      const p = ph(2300, 2300 + T1, t), camX = stemX, camY = 0; // the stem sits dead centre from the first frame, so the camera only ever moves straight in
+      const p = ph(2300, 2300 + T1, t), camX = stemX * eIO(ph(2300, 2300 + T1 * .7, t)), camY = 0; // the whole K is centred while it forms, then the camera glides onto the stem as it dollies in
       c.setTransform(dpr, 0, 0, dpr, 0, 0); c.globalCompositeOperation = "source-over"; c.globalAlpha = 1; c.fillStyle = "#000"; c.fillRect(0, 0, W, H);
       const zL = Z0 - camZ, sc = zL > 1 ? DIST / zL : 0, stemPx = SW * KH * sc; // how wide the stem is on screen right now
       revealMax = Math.max(revealMax, zL > 1 ? sm(.22 * W, 1.25 * W, stemPx) : 1); const reveal = revealMax; // 0 = solid letter, 1 = it is made of light
