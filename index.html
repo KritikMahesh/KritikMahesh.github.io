@@ -1500,7 +1500,9 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
     medal:(c, w, h) => { const s = Math.min(w, h), cx = w / 2, cy = h * .4; c.beginPath(); c.moveTo(cx - s * .16, cy); c.lineTo(cx - s * .24, h * .92); c.lineTo(cx - s * .08, h * .82); c.lineTo(cx, cy); c.lineTo(cx + s * .08, h * .82); c.lineTo(cx + s * .24, h * .92); c.lineTo(cx + s * .16, cy); c.fill();
       c.fillStyle = "#f00"; c.beginPath(); c.arc(cx, cy, s * .26, 0, 7); c.fill(); c.globalCompositeOperation = "destination-out"; star(c, cx, cy, s * .13, s * .055); c.globalCompositeOperation = "source-over"; },
     flag:(c, w, h) => { const s = Math.min(w, h), x = w / 2 - s * .36, y = h / 2 - s * .42; c.fillRect(x, y, s * .04, s * .86); c.fillStyle = "#f00"; c.beginPath(); c.moveTo(x + s * .04, y + s * .02); for (let i = 0; i <= 20; i++) { const u = i / 20; c.lineTo(x + s * .04 + u * s * .64, y + s * .02 + Math.sin(u * 5) * s * .04); } for (let i = 20; i >= 0; i--) { const u = i / 20; c.lineTo(x + s * .04 + u * s * .64, y + s * .4 + Math.sin(u * 5) * s * .04); } c.fill();
-      c.globalCompositeOperation = "destination-out"; c.font = `800 ${s * .15}px ${FAM}`; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText("468", x + s * .36, y + s * .23); c.globalCompositeOperation = "source-over"; },
+      c.font = `800 ${s * .2}px ${FAM}`; c.textAlign = "center"; c.textBaseline = "middle"; const nx = x + s * .36, ny = y + s * .225;
+      // the number: a clear gap around it, then filled with light dots (green = "light dots that still wave with the flag")
+      c.globalCompositeOperation = "destination-out"; c.lineWidth = s * .03; c.lineJoin = "round"; c.strokeText("468", nx, ny); c.globalCompositeOperation = "source-over"; c.fillStyle = "#0f0"; c.fillText("468", nx, ny); c.fillStyle = "#fff"; },
     clock:(c, w, h) => { const s = Math.min(w, h), cx = w / 2, cy = h / 2; c.lineWidth = s * .05; c.beginPath(); c.arc(cx, cy, s * .36, 0, 7); c.stroke(); for (let i = 0; i < 12; i++) { const a = i / 12 * 6.283; c.fillRect(cx + Math.cos(a) * s * .29 - 3, cy + Math.sin(a) * s * .29 - 3, 6, 6); }
       c.strokeStyle = "#f00"; c.lineCap = "round"; c.beginPath(); c.moveTo(cx, cy); c.lineTo(cx, cy - s * .24); c.moveTo(cx, cy); c.lineTo(cx + s * .17, cy + s * .05); c.stroke(); },
     robot:(c, w, h) => { const s = Math.min(w, h), cx = w / 2, cy = h * .55; rr(c, cx - s * .3, cy - s * .22, s * .6, s * .44, s * .08); c.fill(); c.fillRect(cx - s * .02, cy - s * .38, s * .04, s * .16);
@@ -1612,7 +1614,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
     off.width = Math.max(8, Math.round(w)); off.height = Math.max(8, Math.round(h)); oc.clearRect(0, 0, off.width, off.height); oc.fillStyle = "#fff"; oc.strokeStyle = "#fff"; oc.lineCap = "butt";
     ART[art](oc, off.width, off.height, it || {});
     const d = oc.getImageData(0, 0, off.width, off.height).data, pts = [], acc = [];
-    for (let y = 0; y < off.height; y += step) for (let x = 0; x < off.width; x += step) { const k = (y * off.width + x) * 4; if (d[k + 3] > 110) { pts.push(x + (Math.random() - .5) * step, y + (Math.random() - .5) * step); acc.push(d[k] > 200 && d[k + 1] < 120 ? 1 : 0); } }
+    for (let y = 0; y < off.height; y += step) for (let x = 0; x < off.width; x += step) { const k = (y * off.width + x) * 4; if (d[k + 3] > 110) { pts.push(x + (Math.random() - .5) * step, y + (Math.random() - .5) * step); acc.push(d[k] > 200 && d[k + 1] < 120 ? 1 : d[k + 1] > 200 && d[k] < 120 ? 2 : 0); } }
     return { pts, acc };
   }
   // posters: every title gets its own art, palette and rendering technique, so no two tiles in a row read alike
@@ -2942,7 +2944,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
 
   /* ================= billboard: live dot cloud + trailer ================= */
   const bb = $("#bb"), bx = bb.getContext("2d"), bill = $(".bill");
-  const COARSE = matchMedia("(pointer:coarse)").matches, NB = innerWidth < 760 ? 1500 : COARSE ? 2200 : 3200; // tablets: fewer dots, same look
+  const COARSE = matchMedia("(pointer:coarse)").matches, NB = innerWidth < 760 ? 2000 : COARSE ? 2800 : 4200; // tablets: fewer dots, same look
   const P = new Float32Array(NB * 2), V = new Float32Array(NB * 2), T = new Float32Array(NB * 2), A = new Uint8Array(NB), T0 = new Float32Array(NB * 2), A0 = new Uint8Array(NB), D = new Float64Array(NB), K = new Float32Array(NB), U = new Float32Array(NB), Z = new Float32Array(NB);
   let BW = 0, BH = 0, DPR = 1, shapeNow = "", eegMode = false, load = .1;
   const Qb = new Float32Array(NB); // where each dot sits across the thickness of the brainwave band
@@ -2997,7 +2999,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
       const dx = P[ix] - mx, dy = P[iy] - my, d2 = dx * dx + dy * dy; if (d2 < 8100 && d2 > 1) { const d = Math.sqrt(d2), f = (1 - d / 90) * 2.4 * dt; vx += dx / d * f; vy += dy / d * f; }
       if (eegMode && d2 >= 8100 && Math.abs(tx - P[ix]) + Math.abs(ty - P[iy]) < 36) { const q = Math.min(1, .32 * dt); vx *= .5; vy *= .5; P[ix] += (tx - P[ix]) * q; P[iy] += (ty - P[iy]) * q; }
       V[ix] = vx; V[iy] = vy; P[ix] += vx * dt; P[iy] += vy * dt;
-      bx.globalAlpha = Z[i]; bx.fillStyle = (D[i] > now ? A0[i] : A[i]) ? DOT_A : DOT; bx.fillRect(Math.round(P[ix] * DPR) / DPR, Math.round(P[iy] * DPR) / DPR, DS, DS);
+      bx.globalAlpha = A[i] === 2 && D[i] <= now ? 1 : Z[i]; bx.fillStyle = (D[i] > now ? A0[i] : A[i]) === 1 ? DOT_A : DOT; bx.fillRect(Math.round(P[ix] * DPR) / DPR, Math.round(P[iy] * DPR) / DPR, DS, DS);
     }
     bx.globalAlpha = 1;
   }
@@ -4002,7 +4004,7 @@ I am looking for AI engineering and software roles in Dubai.`;
         { const BW = .7741, d = .03; c.beginPath(); c.moveTo(-KH, -2 * KH); c.lineTo(2 * KH, -2 * KH); c.lineTo(2 * KH, 1.05 * KH); c.lineTo(BW * KH, 1.05 * KH); c.lineTo(BW * KH, KH);
           c.quadraticCurveTo(BW / 2 * KH, (1 - 2 * d) * KH, 0, KH); c.lineTo(0, 1.05 * KH); c.lineTo(-KH, 1.05 * KH); c.closePath(); c.clip(); }
         // entry: both strokes draw top to bottom, the stem leads and the ribbon (arm into leg) follows a beat behind
-        const ps = eIO(ph(400, 1350, t)), pen = eIO(ph(650, 1700, t)), pa = clamp01(pen / .5), pl = clamp01((pen - .5) / .5), solid = 1 - reveal; // stem first, the arm-into-leg stroke follows 250ms later
+        const ps = eIO(ph(400, 1350, t)), pen = t < 2300 ? eIO(ph(650, 1700, t)) : 1 - eIO(ph(2300, 3770, t)), pa = clamp01(pen / .5), pl = clamp01((pen - .5) / .5), solid = 1 - reveal; // stem first, the arm-into-leg stroke follows 250ms later
         c.globalAlpha = solid;
         const gs = c.createLinearGradient(0, 0, 0, KH); gs.addColorStop(0, "#2A4BC8"); gs.addColorStop(1, "#2A1880"); // the three profiles mixed: blue stem, purple-to-blue arm, purple-to-magenta leg
         const stem = () => { if (ps > 0) { c.fillStyle = gs; c.fillRect(0, 0, SW * KH, KH * ps); } }; stem();
@@ -4015,7 +4017,7 @@ I am looking for AI engineering and software roles in Dubai.`;
         const legG = c.createLinearGradient(.267 * KH, .542 * KH, .725 * KH, KH); legG.addColorStop(0, "#4527B8"); legG.addColorStop(1, "#A43BD8");
         const armG = c.createLinearGradient(.183 * KH, .625 * KH, .767 * KH, 0); armG.addColorStop(0, "#6447EE"); armG.addColorStop(1, "#38A6EE"); // purple into electric blue
         // arm and leg fade out first, leaving only the stem; drawn as one layer so their overlap never shows through
-        const rq = ph(2300, 3770, t), legEnd = pl, yArm = lerp(-.03, .76, pa), yLeg = lerp(.55, 1.03, pl), ribShred = Math.max(sm(1.1, 2.6, sc), sm(2250, 2800, t)) * solid;
+        const rq = ph(2300, 3770, t) * .999, legEnd = pl, yArm = lerp(-.03, .76, pa), yLeg = lerp(.55, 1.03, pl), ribShred = Math.max(sm(1.1, 2.6, sc), sm(2250, 2800, t)) * solid; // the ribbon splits into threads of light as it pulls back
         const ribA = solid * (rq < 1 ? 1 : 0);
         if (ribA > 0) {
           const tgt = ribA < 1 || rq > 0 ? (rc.canvas.width !== cv.width || rc.canvas.height !== cv.height ? (rc.canvas.width = cv.width, rc.canvas.height = cv.height, rc) : rc) : c;
@@ -4027,7 +4029,7 @@ I am looking for AI engineering and software roles in Dubai.`;
           const own = (k, draw) => { const L2 = RL[k]; if (L2.canvas.width !== cv.width || L2.canvas.height !== cv.height) { L2.canvas.width = cv.width; L2.canvas.height = cv.height; }
             L2.setTransform(1, 0, 0, 1, 0, 0); L2.clearRect(0, 0, cv.width, cv.height); L2.setTransform(c.getTransform()); const C1 = c; c = L2; draw(); c = C1;
             c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = 1; c.drawImage(L2.canvas, 0, 0); c.restore(); };
-          const pex = eIO(ph(2300, 3770, t)), qL = clamp01(pex / .5), qA = clamp01((pex - .5) / .5); // mirror of the entry: the ribbon leaves on the same 1050ms curve it came in on, leg first (it came in last), then the arm // the ribbons are gone ~0.4s into the dive, like the reference
+          const qL = 0, qA = 0; // no brush-away: the ribbon retracts along the same path it was drawn on // mirror of the entry: the ribbon leaves on the same 1050ms curve it came in on, leg first (it came in last), then the arm // the ribbons are gone ~0.4s into the dive, like the reference
           // leg first (it lives under the fold): body, the soft shade where it tucks under, its threads, then it brushes back up into the fold
           if (legEnd > 0 && qL < 1) own(0, () => { c.save(); upTo(KH, yLeg); fillP(PL, KH, legG);
             c.save(); pathP(PL, KH); c.clip(); const mx = (VI[0] + FL[0]) / 2 * KH, my = (VI[1] + FL[1]) / 2 * KH, fg = c.createLinearGradient(mx, my, mx + .782 * .13 * KH, my + .623 * .13 * KH);
