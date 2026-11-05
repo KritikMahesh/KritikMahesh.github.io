@@ -350,8 +350,13 @@ html:not([lang="ar"]) .lbtn .ic{font-family:"Alexandria",sans-serif;font-weight:
 .info{display:grid;gap:16px;align-content:start}
 .cap{display:grid;gap:14px;align-content:start;transition:opacity .5s cubic-bezier(.16,1,.3,1)}
 .subs{text-shadow:0 2px 14px rgba(var(--bg-rgb),.85)!important;font-family:var(--f-display);font-size:clamp(1.15rem,1.65vw,1.5rem);font-weight:600;letter-spacing:-.015em;line-height:1.3;max-width:30ch;text-shadow:0 2px 14px rgba(0,0,0,.85);min-height:2.6em}
-.tbar{height:3px;max-width:30ch;border-radius:3px;background:rgba(255,255,255,.14);overflow:hidden}
-.tbar i{display:block;height:100%;width:0;background:var(--acc);border-radius:3px}
+.tbar{position:relative;height:3px;max-width:30ch;border-radius:3px;background:rgba(255,255,255,.14);cursor:pointer;touch-action:none;transition:height .2s cubic-bezier(.16,1,.3,1);outline:none}
+.tbar::before{content:"";position:absolute;inset:-14px 0} /* a finger-sized grab area around the thin line */
+.tbar i{position:relative;display:block;height:100%;width:0;background:var(--acc);border-radius:3px}
+.tbar i::after{content:"";position:absolute;inset-inline-end:-7px;top:50%;width:14px;height:14px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 4px rgba(var(--acc-rgb),.25);transform:translateY(-50%) scale(0);transition:transform .2s cubic-bezier(.16,1,.3,1)}
+.tbar:hover,.tbar.drag,.tbar:focus-visible{height:5px}
+.tbar:hover i::after,.tbar.drag i::after,.tbar:focus-visible i::after{transform:translateY(-50%) scale(1)}
+@media (pointer:coarse){.tbar{height:5px}.tbar i::after{transform:translateY(-50%) scale(.8)}}
 .bill:not(.playing) .cap{opacity:0;visibility:hidden}
 
 /* ---------- rows ---------- */
@@ -528,7 +533,7 @@ html[dir="rtl"] .rvbar{padding:12px 22px 12px 12px}
 /* end credits: a clear break before the loop starts again */
 .rsep{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px;width:min(420px,80%);margin:64px auto;color:var(--dim)}
 .rsep i{height:1px;background:linear-gradient(90deg,transparent,rgba(var(--ink-rgb),.28))}.rsep i:last-of-type{background:linear-gradient(270deg,transparent,rgba(var(--ink-rgb),.28))}
-.rsep b{display:grid;place-items:center}.rsep svg{width:22px;height:28px;fill:var(--acc)}.rsep svg .lg2{fill:color-mix(in srgb,var(--acc) 72%,#05040F)}
+.rsep b{display:grid;place-items:center}.rsep svg{width:22px;height:28px;fill:var(--acc)}.rsep svg .lg2{fill:color-mix(in srgb,var(--acc) 62%,#05040F)}
 .rsep span{grid-column:1/-1;text-align:center;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;margin-top:4px}
 html[lang="ar"] .rsep span{letter-spacing:0;font-size:.8rem}
 
@@ -646,6 +651,7 @@ html.vt-theme::view-transition-old(root),html.vt-theme::view-transition-new(root
 @property --vr{syntax:"<length>";inherits:true;initial-value:0px}
 html.vt-soft::view-transition-new(root){-webkit-mask-image:radial-gradient(circle at var(--vx) var(--vy),#000 calc(var(--vr) - var(--vf)),transparent var(--vr));mask-image:radial-gradient(circle at var(--vx) var(--vy),#000 calc(var(--vr) - var(--vf)),transparent var(--vr))}
 html.vt-theme *,html.vt-theme *::before,html.vt-theme *::after{transition:none!important}
+.tveil{position:fixed;inset:0;z-index:2147482999;pointer-events:none;will-change:opacity}
 html.gate-open #rows,html.gate-open #credits,html.gate-open footer,html.gate-open .bill-in{content-visibility:hidden}html.gate-open .nav{visibility:hidden}
 html.theme-fade .gate{transition:background-color .4s ease,opacity .45s ease,transform .6s cubic-bezier(.16,1,.3,1)!important}html.theme-fade .gate h1,html.theme-fade .gate .lead,html.theme-fade .gate .tbtn{transition:color .4s ease,background-color .4s ease!important} /* light fade on the few big surfaces only: fading every element made each frame heavy and the ripple crawl */ /* colours land at once inside the circle, not fading in behind it */
 /* QA fixes: no sideways wobble from decorative glows; finger-sized hit areas on touch without changing the look */
@@ -842,7 +848,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
 </section>
 
 <header class="top" id="top"><div class="top-in wrap">
-  <a class="brand" href="#home" aria-label="KMK Originals, home"><svg class="bm" viewBox="0 0 22.4 28" aria-hidden="true"><defs><linearGradient id="bmStemG" gradientUnits="userSpaceOnUse" x1="0" y1="2" x2="0" y2="26"><stop offset="0" stop-color="#2A4BC8"/><stop offset="1" stop-color="#2A1880"/></linearGradient><linearGradient id="bmLegG" gradientUnits="userSpaceOnUse" x1="8" y1="15" x2="19" y2="26"><stop offset="0" stop-color="#4527B8"/><stop offset="1" stop-color="#A43BD8"/></linearGradient><linearGradient id="bmArm" gradientUnits="userSpaceOnUse" x1="6" y1="17" x2="20" y2="2"><stop offset="0" stop-color="#6447EE"/><stop offset="1" stop-color="#38A6EE"/></linearGradient><linearGradient id="bmFold" gradientUnits="userSpaceOnUse" x1="8.07" y1="15.3" x2="10" y2="16.8"><stop offset="0" stop-color="#05040F" stop-opacity=".55"/><stop offset="1" stop-color="#05040F" stop-opacity="0"/></linearGradient><clipPath id="bmBow"><path d="M0 0H22.4V27.2H20.18V26Q10.89 24.56 1.6 26V27.2H0z"/></clipPath></defs><g clip-path="url(#bmBow)"><path class="bm-l" d="M9.38 13.97 19.95 26H14.81L6.78 16.86z"/><path class="bm-f" d="M9.38 13.97 6.78 16.86 9.05 18.67 11.65 15.78z"/><path class="bm-a" d="M5.95 12.08 15.04 2H20.18L9.38 13.97 6.78 16.86 5.95 15.92z"/><rect class="bm-s" x="1.6" y="2" width="4.56" height="24"/></g></svg><span>originals</span></a>
+  <a class="brand" href="#home" aria-label="KMK Originals, home"><svg class="bm" viewBox="0 0 22.4 28" aria-hidden="true"><defs><linearGradient id="bmStemG" gradientUnits="userSpaceOnUse" x1="0" y1="2" x2="0" y2="26"><stop offset="0" stop-color="#2A4BC8"/><stop offset="1" stop-color="#2A1880"/></linearGradient><linearGradient id="bmLegG" gradientUnits="userSpaceOnUse" x1="8" y1="15" x2="19" y2="26"><stop offset="0" stop-color="#4527B8"/><stop offset="1" stop-color="#A43BD8"/></linearGradient><linearGradient id="bmArm" gradientUnits="userSpaceOnUse" x1="6" y1="17" x2="20" y2="2"><stop offset="0" stop-color="#6447EE"/><stop offset="1" stop-color="#38A6EE"/></linearGradient><linearGradient id="bmFold" gradientUnits="userSpaceOnUse" x1="8.73" y1="14" x2="12.29" y2="17.22"><stop offset="0" stop-color="#080620" stop-opacity=".62"/><stop offset=".35" stop-color="#080620" stop-opacity=".3"/><stop offset="1" stop-color="#080620" stop-opacity="0"/></linearGradient><clipPath id="bmBow"><path d="M0 0H22.4V27.2H19.55V26Q10.58 24.56 1.6 26V27.2H0z"/></clipPath></defs><g clip-path="url(#bmBow)"><path class="bm-l" d="M8.73 14 19.55 26H14.42L5.95 16.61z"/><path class="bm-f" d="M8.73 14 19.55 26H14.42L5.95 16.61z"/><path class="bm-a" d="M5.95 10.92 14.42 2H19.55L5.95 17.08z"/><rect class="bm-s" x="1.6" y="2" width="4.56" height="24"/></g></svg><span>originals</span></a>
   <nav class="nav gooey-nav gooey-nav--md gooey-nav--framed" aria-label="Browse">
     <span class="gooey-nav__rim"></span>
     <div class="gooey-nav__stage">
@@ -864,7 +870,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
     <h1 id="bb-title">Kritik Mahesh Kumar</h1>
     <div class="desc">
       <div class="info"><p class="facts" id="bbFacts"></p><p class="syn" id="bbSyn"></p></div>
-      <div class="cap"><p class="subs" id="subs" aria-live="polite"></p><div class="tbar" aria-hidden="true"><i id="tbar"></i></div></div>
+      <div class="cap"><p class="subs" id="subs" aria-live="polite"></p><div class="tbar" role="slider" tabindex="0" aria-label="Trailer position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="tbar"></i></div></div>
     </div>
     <div class="acts">
       <button type="button" class="b play" id="playBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></svg><span class="lbl">Play trailer</span></button>
@@ -896,7 +902,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
     <dl class="roll-in">
       <div><dt>STARRING</dt><dd>Kritik Mahesh Kumar</dd></div>
       <div><dt>CURRENTLY APPEARING IN</dt><dd>Amira AI, as AI Engineering Intern</dd></div>
-      <div><dt>BEST PAPER</dt><dd>AEIT 2025 · NeuroSense</dd></div>
+      <div><dt>BEST PAPER</dt><dd>AEIT International Student Research Colloquium 2025 · NeuroSense</dd></div>
       <div><dt>CAPTURE THE FLAG</dt><dd>#468 of 6,000+ teams · Hack The Box</dd></div>
       <div><dt>PROGRAMMING CHALLENGE</dt><dd>8th nationally · IEEEXtreme 18.0, 2024</dd></div>
       <div><dt>ROBOTICS</dt><dd>Runner-up 2023 and 2024 · MakeX</dd></div>
@@ -1030,7 +1036,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   /* ================= catalogue (facts only) ================= */
   const I = {
     neuro:{ post:"https://lnkd.in/p/dSyUFShF", title:"NeuroSense", year:"2025", genres:["Research", "Computer vision", "Signals"], badge:"Best Paper", art:"eeg", bg:"#12204A", orig:true,
-      syn:"I wanted to know if a computer could tell when someone's mind is overloaded, the moment it happens. NeuroSense reads facial expressions and simulated EEG to detect cognitive load in real time, and the paper won the Best Paper Award at AEIT 2025.", feat:["Facial expression analysis", "EEG simulation", "Real-time detection"] },
+      syn:"I wanted to know if a computer could tell when someone's mind is overloaded, the moment it happens. NeuroSense reads facial expressions and simulated EEG to detect cognitive load in real time, and the paper won the Best Paper Award at the AEIT International Student Research Colloquium 2025.", feat:["Facial expression analysis", "EEG simulation", "Real-time detection"] },
     digits:{ link:"https://github.com/KritikMahesh/CODING-SAMURAI-INTERNSHIP-TASK/tree/main/MNIST-Handwritten-Digit-Recognition", title:"Handwritten Digits", year:"2025", genres:["Computer vision", "Deep learning"], art:"digit", bg:"#1C1F55", orig:true,
       syn:"Teaching a machine to see starts with something simple. I designed and trained a neural network that reads handwritten digits from the MNIST dataset, tuning the preprocessing and the model along the way (Aug 2025).", cast:["Python", "TensorFlow", "Keras", "NumPy", "Matplotlib"] },
     senti:{ link:"https://github.com/KritikMahesh/CODING-SAMURAI-INTERNSHIP-TASK/tree/main/Sentiment%20Analysis%20on%20Tweets", title:"Tweet Sentiment", year:"2025", genres:["NLP"], art:"moods", bg:"#2E1A4F", orig:true,
@@ -1043,7 +1049,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
       syn:"I built a text generator that writes brand-new sentences one word at a time, picking each next word from the probabilities of a Markov chain (Aug 2025). Give it a try above.", cast:["Python", "Algorithm design", "Data modeling"], link:"https://github.com/KritikMahesh/Text-Generation-with-Markov-Chains" },
 
     paper:{ post:"https://lnkd.in/p/dSyUFShF", title:"Best Paper", sub:"AEIT 2025 · NeuroSense", year:"2025", genres:["Research", "Award", "Computer vision"], feat:["Facial expression analysis", "EEG simulation", "Real-time detection"], art:"medal", bg:"#2A1650", badge:"Award",
-      syn:"My NeuroSense paper, on detecting cognitive load in real time from facial expressions and simulated EEG, won the Best Paper Award at AEIT 2025.", rel:"neuro" },
+      syn:"My NeuroSense paper, on detecting cognitive load in real time from facial expressions and simulated EEG, won the Best Paper Award at the AEIT International Student Research Colloquium 2025.", rel:"neuro" },
     ctf:{ post:"https://lnkd.in/p/d68TbHQM", title:"Capture the Flag", sub:"#468 of 6,000+", year:"2025", genres:["Security", "Competition"], art:"flag", bg:"#3A1450", badge:"Top 8%",
       syn:"Hack The Box's Cyber Apocalypse CTF 2025 pulled in more than 6,000 teams from around the world. I finished 468th, inside the top 8%." },
     rift:{ post:"https://lnkd.in/p/d6FHurD5", title:"RIFT CTF", sub:"2nd of 22 teams · GDG BITS Dubai", year:"2025", genres:["Security", "Competition"], art:"flag", bg:"#3A1450", badge:"2nd",
@@ -1173,7 +1179,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   const PROFILES = {
     recruiter:{ name:"Recruiter", av:"r", rows:["cont", "top", "projects", "journey", "certs", "bts", "lang", "cast"],
       bb:{ kick:"Limited series", title:"Kritik Mahesh Kumar", facts:["2026", "AI engineering", "Dubai", "<span class=badge>Open to roles</span>"],
-        syn:"I'm an AI engineer in Dubai, building AI that people can talk to. Now at Amira AI. Best Paper at AEIT 2025. #468 of 6,000+ in a global CTF.", shape:"name", info:"series" } },
+        syn:"I'm an AI engineer in Dubai, building AI that people can talk to. Now at Amira AI. Best Paper at the AEIT International Student Research Colloquium 2025. #468 of 6,000+ in a global CTF.", shape:"name", info:"series" } },
     engineer:{ name:"Engineer", av:"e", rows:["projects", "cast", "cont", "top", "journey", "bts", "lang", "certs"],
       bb:{ kick:"Original research", title:"NeuroSense", facts:["2025", "Computer vision", "Signals", "<span class=badge>Best Paper</span>"],
         syn:"My research on real-time cognitive load detection from facial expressions and simulated EEG. The wave behind this text is a live simulation of it.", shape:"eeg", info:"neuro" } },
@@ -1193,7 +1199,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
     "Skip, show me everything":"تخطَّ، أرني كل شيء",
     "originals":"أعمال أصلية", "KMK Originals, home":"KMK Originals، الصفحة الرئيسية",
     "Home":"الرئيسية", "Projects":"المشاريع", "Awards":"الجوائز", "Journey":"المسيرة", "Contact":"تواصل",
-    "Browse":"تصفّح", "Switch profile":"تبديل الملف الشخصي", "Change Viewer":"تغيير المشاهد",
+    "Browse":"تصفّح", "Trailer position":"موضع الإعلان", "Switch profile":"تبديل الملف الشخصي", "Change Viewer":"تغيير المشاهد",
     "Play trailer":"شاهد الإعلان", "Stop trailer":"إيقاف الإعلان", "More info":"التفاصيل",
     "Mute narration":"كتم التعليق الصوتي", "Narration on":"التعليق الصوتي مفعّل", "Narration off":"التعليق الصوتي متوقف",
     "Switch to light theme":"التبديل إلى الوضع الفاتح", "Switch to dark theme":"التبديل إلى الوضع الداكن",
@@ -1232,7 +1238,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   const castLabel = n => isAR() && AR_CAST[n] ? AR_CAST[n] : n;
   const AR_PROF = {
     recruiter:{ name:"مسؤول توظيف", bb:{ kick:"مسلسل محدود", title:"كريتيك ماهيش كومار", facts:["2026", "هندسة الذكاء الاصطناعي", "دبي", "<span class=badge>متاح للعمل</span>"],
-      syn:"أنا مهندس ذكاء اصطناعي في دبي، أبني ذكاءً اصطناعيًا يمكن للناس التحدث إليه. أعمل الآن في أميرة للذكاء الاصطناعي. جائزة أفضل ورقة بحثية في مؤتمر إيه إي آي تي 2025. المركز 468 من بين أكثر من 6,000 فريق في مسابقة عالمية لالتقاط العلم." } },
+      syn:"أنا مهندس ذكاء اصطناعي في دبي، أبني ذكاءً اصطناعيًا يمكن للناس التحدث إليه. أعمل الآن في أميرة للذكاء الاصطناعي. جائزة أفضل ورقة بحثية في ندوة إيه إي آي تي الدولية لأبحاث الطلاب 2025. المركز 468 من بين أكثر من 6,000 فريق في مسابقة عالمية لالتقاط العلم." } },
     engineer:{ name:"مهندس", bb:{ kick:"بحث أصلي", title:"نيوروسينس", facts:["2025", "الرؤية الحاسوبية", "الإشارات", "<span class=badge>أفضل ورقة بحثية</span>"],
       syn:"بحثي في الكشف الفوري عن العبء المعرفي من تعابير الوجه ومحاكاة تخطيط كهربية الدماغ. الموجة خلف هذا النص محاكاة حيّة له." } },
     curious:{ name:"فضولي فقط", bb:{ kick:"إثارة", title:"التقاط العلم", facts:["2025", "الأمن السيبراني", "مسابقة", "<span class=badge>468 من 6,000+</span>"],
@@ -1241,7 +1247,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   const SEC = ["الأمن السيبراني", "مسابقة"], CERT_G = ["شهادة"];
   const AR_I = {
     neuro:{ title:"نيوروسينس", genres:["بحث", "الرؤية الحاسوبية", "الإشارات"], badge:"أفضل ورقة بحثية", feat:["تحليل تعابير الوجه", "محاكاة تخطيط كهربية الدماغ", "الكشف الفوري"],
-      syn:"أردت أن أعرف إن كان بإمكان الحاسوب أن يلاحظ لحظة إرهاق العقل وهي تحدث. نيوروسينس يقرأ تعابير الوجه وإشارات الدماغ المحاكاة ليرصد العبء المعرفي لحظة بلحظة، وفازت الورقة بجائزة أفضل ورقة بحثية في مؤتمر إيه إي آي تي 2025." },
+      syn:"أردت أن أعرف إن كان بإمكان الحاسوب أن يلاحظ لحظة إرهاق العقل وهي تحدث. نيوروسينس يقرأ تعابير الوجه وإشارات الدماغ المحاكاة ليرصد العبء المعرفي لحظة بلحظة، وفازت الورقة بجائزة أفضل ورقة بحثية في ندوة إيه إي آي تي الدولية لأبحاث الطلاب 2025." },
     digits:{ title:"الأرقام المكتوبة بخط اليد", genres:["الرؤية الحاسوبية", "التعلم العميق"],
       syn:"تعليم الآلة أن ترى يبدأ بشيء بسيط. صمّمت ودرّبت شبكة عصبية تقرأ الأرقام المكتوبة بخط اليد من مجموعة بيانات إم نيست، وضبطت المعالجة المسبقة والنموذج على طول الطريق (أغسطس 2025)." },
     senti:{ title:"تحليل مشاعر التغريدات", genres:["معالجة اللغة الطبيعية"],
@@ -1252,8 +1258,8 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
       syn:"علّمت شبكة توليدية أن تعيد الألوان إلى الصور بالأبيض والأسود. مولّد U-Net يرسم الألوان، ومميّز PatchGAN يحكم إن كانت تبدو حقيقية، وبعد تدريبها على بيانات TensorFlow Flowers صارت تلوّن صور الزهور الرمادية وحدها (أغسطس ٢٠٢٥)." },
     markov:{ title:"نصوص ماركوف", genres:["توليد النصوص", "الخوارزميات"], cast:["بايثون", "تصميم الخوارزميات", "نمذجة البيانات"],
       syn:"بنيت مولّد نصوص يكتب جملًا جديدة كلمةً بعد كلمة، ويختار كل كلمة تالية من احتمالات سلسلة ماركوف (أغسطس 2025). جرّبه في الأعلى، والجمل التي يولّدها بالإنجليزية." },
-    paper:{ title:"أفضل ورقة بحثية", sub:"مؤتمر إيه إي آي تي 2025 · نيوروسينس", genres:["بحث", "جائزة", "الرؤية الحاسوبية"], feat:["تحليل تعابير الوجه", "محاكاة تخطيط كهربية الدماغ", "الكشف الفوري"], badge:"جائزة",
-      syn:"فازت ورقتي البحثية عن نيوروسينس، حول رصد العبء المعرفي لحظة بلحظة من تعابير الوجه وإشارات الدماغ المحاكاة، بجائزة أفضل ورقة بحثية في مؤتمر إيه إي آي تي 2025." },
+    paper:{ title:"أفضل ورقة بحثية", sub:"ندوة إيه إي آي تي 2025 · نيوروسينس", genres:["بحث", "جائزة", "الرؤية الحاسوبية"], feat:["تحليل تعابير الوجه", "محاكاة تخطيط كهربية الدماغ", "الكشف الفوري"], badge:"جائزة",
+      syn:"فازت ورقتي البحثية عن نيوروسينس، حول رصد العبء المعرفي لحظة بلحظة من تعابير الوجه وإشارات الدماغ المحاكاة، بجائزة أفضل ورقة بحثية في ندوة إيه إي آي تي الدولية لأبحاث الطلاب 2025." },
     ctf:{ title:"التقاط العلم", sub:"المركز 468 من 6,000+", genres:SEC, badge:"أفضل 8%",
       syn:"جذبت مسابقة سايبر أبوكاليبس لالتقاط العلم 2025 من هاك ذا بوكس أكثر من 6,000 فريق من حول العالم. أنهيت في المركز 468، ضمن أفضل 8%." },
     rift:{ title:"ريفت لالتقاط العلم", sub:"المركز الثاني من 22 فريقًا · بيتس بيلاني دبي", genres:SEC, badge:"الثاني",
@@ -1350,12 +1356,12 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   const LR = key => isAR() && AR_ROWS[key] ? Object.assign({}, ROWS[key], AR_ROWS[key]) : ROWS[key];
   const LP = p => { const b = PROFILES[p], a = AR_PROF[p]; if (!isAR() || !a) return b; return Object.assign({}, b, { name:a.name, bb:Object.assign({}, b.bb, a.bb) }); };
   const CREDITS = {
-    en:[["STARRING", "Kritik Mahesh Kumar"], ["CURRENTLY APPEARING IN", "Amira AI, as AI Engineering Intern"], ["BEST PAPER", "AEIT 2025 · NeuroSense"],
+    en:[["STARRING", "Kritik Mahesh Kumar"], ["CURRENTLY APPEARING IN", "Amira AI, as AI Engineering Intern"], ["BEST PAPER", "AEIT International Student Research Colloquium 2025 · NeuroSense"],
       ["CAPTURE THE FLAG", "#468 of 6,000+ teams · Hack The Box"], ["PROGRAMMING CHALLENGE", "8th nationally · IEEEXtreme 18.0, 2024"], ["ROBOTICS", "Runner-up 2023 and 2024 · MakeX"],
       ["TRAINED AT", "Manipal Academy of Higher Education, Dubai"], ["ENSEMBLE", "IEEE MAHE Dubai · Google Developer Student Clubs"],
       ["DIALOGUE IN", "English · Hindi · Malayalam · Telugu · Marathi"], ["VISUAL EFFECTS", "TensorFlow · Keras · scikit-learn · OpenCV"],
       ["NARRATION VOICE", "ElevenLabs · elevenlabs.io"], ["FILMED ON LOCATION IN", "Dubai, United Arab Emirates"], ["NO MODELS WERE OVERFITTED IN THE MAKING OF THIS SERIES", "Thanks for watching"]],
-    ar:[["بطولة", "كريتيك ماهيش كومار"], ["يظهر حاليًا في", "أميرة للذكاء الاصطناعي، متدرب هندسة ذكاء اصطناعي"], ["أفضل ورقة بحثية", "مؤتمر إيه إي آي تي 2025 · نيوروسينس"],
+    ar:[["بطولة", "كريتيك ماهيش كومار"], ["يظهر حاليًا في", "أميرة للذكاء الاصطناعي، متدرب هندسة ذكاء اصطناعي"], ["أفضل ورقة بحثية", "ندوة إيه إي آي تي الدولية لأبحاث الطلاب 2025 · نيوروسينس"],
       ["التقاط العلم", "المركز 468 من 6,000+ فريق · هاك ذا بوكس"], ["تحدي البرمجة", "المركز الثامن وطنيًا · آي تريبل إي إكستريم 18.0، 2024"], ["الروبوتات", "وصيف 2023 و2024 · ميك إكس"],
       ["تدرّب في", "أكاديمية مانيبال للتعليم العالي، دبي"], ["فريق العمل", "آي تريبل إي – مانيبال دبي · نوادي مطوري جوجل الطلابية"],
       ["الحوار باللغات", "الإنجليزية · الهندية · المالايالامية · التيلوغوية · الماراثية"], ["المؤثرات البصرية", "تنسرفلو · كيراس · سايكيت ليرن · أوبن سي في"],
@@ -1363,11 +1369,11 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   };
   const AR_SERIES = { meta:["2026", "هندسة الذكاء الاصطناعي", "دبي", "متاح للعمل"],
     syn:"أنا مهندس ذكاء اصطناعي ومطوّر برمجيات في دبي، أعمل على بناء روبوت محادثة بالذكاء الاصطناعي في أميرة للذكاء الاصطناعي. بكالوريوس هندسة علوم الحاسوب (الذكاء الاصطناعي وتعلم الآلة)، أكاديمية مانيبال للتعليم العالي في دبي، بمعدل تراكمي 8.9.",
-    res:["<b>أفضل ورقة بحثية</b>، مؤتمر إيه إي آي تي 2025 (نيوروسينس)", "<b>المركز 468 من 6,000+ فريق</b>، مسابقة سايبر أبوكاليبس من هاك ذا بوكس 2025", "<b>المركز الثامن وطنيًا</b>، آي تريبل إي إكستريم 18.0 (2024)",
+    res:["<b>أفضل ورقة بحثية</b>، ندوة إيه إي آي تي الدولية لأبحاث الطلاب 2025 (نيوروسينس)", "<b>المركز 468 من 6,000+ فريق</b>، مسابقة سايبر أبوكاليبس من هاك ذا بوكس 2025", "<b>المركز الثامن وطنيًا</b>، آي تريبل إي إكستريم 18.0 (2024)",
       "<b>وصيف</b>، مسابقة ميك إكس للروبوتات 2023 و2024", "تدرّبت في برودجي إنفوتك (ذكاء اصطناعي توليدي) وكودينج ساموراي (تعلم الآلة)"],
     langs:"الإنجليزية، الهندية، المالايالامية، التيلوغوية، الماراثية", name:"كريتيك ماهيش كومار" };
   function renderCredits() { const set = CREDITS[isAR() ? "ar" : "en"].map(([a, b]) => `<div><dt>${a}</dt><dd>${b}</dd></div>`).join("");
-    $(".roll-in").innerHTML = `<div class="rset">${set}<div class="rsep" aria-hidden="true"><i></i><b><svg viewBox="0 0 22.4 28"><rect x="1.6" y="2" width="4.56" height="24"/><path d="M5.95 12.08 15.04 2H20.18L9.38 13.97 6.78 16.86 5.95 15.92z"/><path class="lg2" d="M9.38 13.97 19.95 26H14.81L6.78 16.86z"/></svg></b><i></i></div></div><div class="rset" aria-hidden="true">${set}<div class="rsep" aria-hidden="true"><i></i><b><svg viewBox="0 0 22.4 28"><rect x="1.6" y="2" width="4.56" height="24"/><path d="M5.95 12.08 15.04 2H20.18L9.38 13.97 6.78 16.86 5.95 15.92z"/><path class="lg2" d="M9.38 13.97 19.95 26H14.81L6.78 16.86z"/></svg></b><i></i></div></div>`; if (window.__roll) window.__roll.reset(); }
+    $(".roll-in").innerHTML = `<div class="rset">${set}<div class="rsep" aria-hidden="true"><i></i><b><svg viewBox="0 0 22.4 28"><rect x="1.6" y="2" width="4.56" height="24"/><path d="M5.95 10.92 14.42 2H19.55L5.95 17.08z"/><path class="lg2" d="M8.73 14 19.55 26H14.42L5.95 16.61z"/></svg></b><i></i></div></div><div class="rset" aria-hidden="true">${set}<div class="rsep" aria-hidden="true"><i></i><b><svg viewBox="0 0 22.4 28"><rect x="1.6" y="2" width="4.56" height="24"/><path d="M5.95 10.92 14.42 2H19.55L5.95 17.08z"/><path class="lg2" d="M8.73 14 19.55 26H14.42L5.95 16.61z"/></svg></b><i></i></div></div>`; if (window.__roll) window.__roll.reset(); }
   // static text: [selector, English, split mode or null, attribute]
   const STATIC = [
     ["#sting small", "Click or press any key to skip"], ["#gate-h", "Who's watching?", "w"], ["#gate .lead", "Pick a profile. The whole service rearranges for you."],
@@ -1377,7 +1383,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
     [".brand span", "originals"], [".brand", "KMK Originals, home", null, "aria-label"],
     ['.nav a[href="#home"]', "Home", "r"], ['.nav a[href="#r-projects"]', "Projects", "r"], ['.nav a[href="#r-top"]', "Awards", "r"],
     ['.nav a[href="#r-journey"]', "Journey", "r"], ['.nav a[href="#credits"]', "Contact", "r"], [".nav", "Browse", null, "aria-label"],
-    ["#meBtn", "Change Viewer", null, "aria-label"], ["#meBtn", "Change Viewer", null, "title"], ["#infoBtn .lbl", "More info", "r"],
+    [".tbar", "Trailer position", null, "aria-label"], ["#meBtn", "Change Viewer", null, "aria-label"], ["#meBtn", "Change Viewer", null, "title"], ["#infoBtn .lbl", "More info", "r"],
     ["#cta-h", "Cast me in your next season.", "w"], [".cta > p", "I’m open to AI engineering and software roles, in Dubai or remote."],
     [".clinks", "Contact links", null, "aria-label"],
     ['.ci[data-kind="mail"]', "Email", null, "data-label"], ['.ci[data-kind="mail"]', "Email kritikmahesh@gmail.com (copies the address and opens a new email)", null, "aria-label"],
@@ -1586,7 +1592,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
       N.forEach(([x, y], i) => { c.fillStyle = i === 3 ? "#f00" : "#fff"; rr(c, x - nw / 2, y - nh / 2, nw, nh, nh * .3); c.fill(); }); },
     // the same K as the logo: stem and arm in white, the folded leg in the accent colour
     kmark:(c, w, h) => { const k = Math.min(w / 22.4, h / 28) * .92; c.save(); c.translate(w / 2 - 22.4 * k / 2, h / 2 - 28 * k / 2); c.scale(k, k);
-      c.fillRect(1.6, 2, 4.56, 24); c.fill(new Path2D("M5.95 12.08 15.04 2H20.18L9.38 13.97 6.78 16.86 5.95 15.92z")); c.fillStyle = "#f00"; c.fill(new Path2D("M9.38 13.97 19.95 26H14.81L6.78 16.86z")); c.restore(); },
+      c.fillRect(1.6, 2, 4.56, 24); c.fill(new Path2D("M5.95 10.92 14.42 2H19.55L5.95 17.08z")); c.fillStyle = "#f00"; c.fill(new Path2D("M8.73 14 19.55 26H14.42L5.95 16.61z")); c.restore(); },
     script:(c, w, h, it) => { fitText(c, it.script, w * .86, h * .8, 600, it.font); c.fillText(it.script, w / 2, h * .55); },
   };
   function star(c, cx, cy, R, r) { c.beginPath(); for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, d = i % 2 ? r : R; i ? c.lineTo(cx + Math.cos(a) * d, cy + Math.sin(a) * d) : c.moveTo(cx + Math.cos(a) * d, cy + Math.sin(a) * d); } c.closePath(); c.fill(); }
@@ -2787,8 +2793,8 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   /* ================= episode page ================= */
   const ep = $("#ep"), epBody = $("#epBody"); let epFrom = null, heroItem = null;
   const CASE = {
-    neuro:{ en:["Spotting cognitive overload in real time, as it happens.", "A system that reads facial expressions and simulated EEG signals together to estimate cognitive load live.", "Won the Best Paper Award at AEIT 2025."],
-      ar:["رصد الحمل المعرفي الزائد لحظة حدوثه.", "نظام يقرأ تعابير الوجه وإشارات تخطيط الدماغ المحاكاة معًا لتقدير الحمل المعرفي مباشرة.", "فاز بجائزة أفضل ورقة بحثية في مؤتمر إيه إي آي تي 2025."] },
+    neuro:{ en:["Spotting cognitive overload in real time, as it happens.", "A system that reads facial expressions and simulated EEG signals together to estimate cognitive load live.", "Won the Best Paper Award at the AEIT International Student Research Colloquium 2025."],
+      ar:["رصد الحمل المعرفي الزائد لحظة حدوثه.", "نظام يقرأ تعابير الوجه وإشارات تخطيط الدماغ المحاكاة معًا لتقدير الحمل المعرفي مباشرة.", "فاز بجائزة أفضل ورقة بحثية في ندوة إيه إي آي تي الدولية لأبحاث الطلاب 2025."] },
     digits:{ en:["Teaching a computer to read handwritten digits.", "A neural network I designed and trained on MNIST, with preprocessing and model tuning, in TensorFlow and Keras.", "It classifies handwritten digits from 0 to 9."],
       ar:["تعليم الحاسوب قراءة الأرقام المكتوبة بخط اليد.", "شبكة عصبية صممتها ودربتها على بيانات MNIST، مع المعالجة المسبقة وضبط النموذج، باستخدام TensorFlow وKeras.", "تصنّف الأرقام المكتوبة بخط اليد من 0 إلى 9."] },
     senti:{ en:["Understanding how people feel from what they tweet.", "An NLP pipeline with tokenization, stop-word removal and vectorization, feeding a classifier in scikit-learn.", "Each tweet is labelled positive, negative or neutral."],
@@ -2830,7 +2836,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
     const ar = isAR();
     $("#epImg").src = bigSeries(); $("#epTitle").textContent = ar ? AR_SERIES.name : "Kritik Mahesh Kumar"; heroItem = { id:"series", title:"series", art:"name", bg:"#1A1A2E" };
     const meta = ar ? AR_SERIES.meta : ["2026", "AI engineering", "Dubai", "Open to roles"];
-    const res = ar ? AR_SERIES.res : ["<b>Best Paper</b>, AEIT 2025 (NeuroSense)", "<b>#468 of 6,000+ teams</b>, Hack The Box Cyber Apocalypse CTF 2025", "<b>8th nationally</b>, IEEEXtreme 18.0 (2024)", "<b>Runner-up</b>, MakeX Robotics 2023 and 2024", "I interned at Prodigy InfoTech (GenAI) and Coding Samurai (ML)"];
+    const res = ar ? AR_SERIES.res : ["<b>Best Paper</b>, AEIT International Student Research Colloquium 2025 (NeuroSense)", "<b>#468 of 6,000+ teams</b>, Hack The Box Cyber Apocalypse CTF 2025", "<b>8th nationally</b>, IEEEXtreme 18.0 (2024)", "<b>Runner-up</b>, MakeX Robotics 2023 and 2024", "I interned at Prodigy InfoTech (GenAI) and Coding Samurai (ML)"];
     epBody.innerHTML = `
       <p class="meta"><span>${meta[0]}</span><span>${meta[1]}</span><span>${meta[2]}</span><span class="badge">${meta[3]}</span></p>
       <div><p class="syn">${ar ? AR_SERIES.syn : "I&rsquo;m an AI engineer and software developer in Dubai, building a conversational AI chatbot at Amira AI. B.Tech CSE (AI &amp; ML), Manipal Academy of Higher Education, Dubai, CGPA 8.9."}</p>
@@ -2948,7 +2954,7 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   const bb = $("#bb"), bx = bb.getContext("2d"), bill = $(".bill");
   const COARSE = matchMedia("(pointer:coarse)").matches, NB = innerWidth < 760 ? 2000 : COARSE ? 2800 : 4200; // tablets: fewer dots, same look
   const P = new Float32Array(NB * 2), V = new Float32Array(NB * 2), T = new Float32Array(NB * 2), A = new Uint8Array(NB), T0 = new Float32Array(NB * 2), A0 = new Uint8Array(NB), D = new Float64Array(NB), K = new Float32Array(NB), U = new Float32Array(NB), Z = new Float32Array(NB);
-  let BW = 0, BH = 0, DPR = 1, shapeNow = "", eegMode = false, load = .1;
+  let BW = 0, BH = 0, DPR = 1, shapeNow = "", eegMode = false, neuroMode = false, NSv = 0, load = .1;
   const Qb = new Float32Array(NB); // where each dot sits across the thickness of the brainwave band
   const r0 = rng(3); for (let i = 0; i < NB; i++) { K[i] = .03 + r0() * .04; U[i] = r0(); Z[i] = .4 + r0() * .6; Qb[i] = r0() * 2 - 1; }
   function bbSize() { const r = bill.getBoundingClientRect(); BW = r.width; BH = r.height; DPR = Math.min(devicePixelRatio || 1, BW < 760 ? 3 : 2); bb.width = Math.round(BW * DPR); bb.height = Math.round(BH * DPR); bx.setTransform(DPR, 0, 0, DPR, 0, 0); for (let i = 0; i < NB; i++) if (!P[i * 2]) { P[i * 2] = r0() * BW; P[i * 2 + 1] = r0() * BH; } }
@@ -2959,9 +2965,10 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   let roomOK = true; // false on very short screens: no free space above the text, so the picture steps aside instead of covering it
   function bbRegion() { return BW < 760 ? phoneRegion() : { x:document.documentElement.dir === "rtl" ? BW * .06 : BW * .46, y:BH * .14, w:BW * .48, h:BH * .6 }; }
   function bbShape(name, kick = 2, sweep = 0) {
-    shapeNow = name; eegMode = name === "eeg"; const R = bbRegion(), now = performance.now(), rtl = document.documentElement.dir === "rtl";
+    if (eegMode || neuroMode) T.set(P); // leaving a live picture: dots start from where they are now
+    shapeNow = name; eegMode = name === "eeg"; neuroMode = name === "neuro"; if (neuroMode) NSv = 0; const R = bbRegion(), now = performance.now(), rtl = document.documentElement.dir === "rtl";
     T0.set(T); A0.set(A); for (let i = 0; i < NB; i++) D[i] = 0;
-    if (!eegMode) { const s = sample(name, R.w, R.h, Math.max(2, Math.round(Math.sqrt(R.w * R.h / (NB * 2.6))))); const M = s.pts.length / 2;
+    if (!eegMode && !neuroMode) { const s = sample(name, R.w, R.h, Math.max(2, Math.round(Math.sqrt(R.w * R.h / (NB * 2.6))))); const M = s.pts.length / 2;
       if (!M) return;
       // spread NB targets evenly over the whole shape (never cut off its lower part)
       const tg = Array.from({ length:NB }, (_, j) => { const m = M >= NB ? Math.floor(j * M / NB) : j % M; return [R.x + s.pts[m * 2] + (j >= M ? (Math.random() - .5) * 3 : 0), R.y + s.pts[m * 2 + 1], s.acc[m] || 0]; });
@@ -2970,9 +2977,9 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
       const cols = Math.max(1, Math.round(Math.sqrt(NB * R.w / Math.max(1, R.h)))), per = Math.ceil(NB / cols);
       for (let c0 = 0; c0 < NB; c0 += per) { const dc = dots.slice(c0, c0 + per).sort((a, b) => P[a * 2 + 1] - P[b * 2 + 1]), tc = tg.slice(c0, c0 + per).sort((a, b) => a[1] - b[1]);
         dc.forEach((i, k) => { const q = tc[k]; T[i * 2] = q[0]; T[i * 2 + 1] = q[1]; A[i] = q[2]; if (sweep) D[i] = now + sweep * clamp01((rtl ? R.x + R.w - q[0] : q[0] - R.x) / R.w); }); } }
-    else for (let i = 0; i < NB; i++) A[i] = Math.random() < .62 ? 1 : 0; // mostly accent dots, like the flag
+    else if (eegMode) for (let i = 0; i < NB; i++) A[i] = Math.random() < .62 ? 1 : 0; // mostly accent dots, like the flag
     if (!reduce) for (let i = 0; i < NB; i++) { V[i * 2] += (Math.random() - .5) * kick * 6; V[i * 2 + 1] += (Math.random() - .5) * kick * 6; }
-    else for (let i = 0; i < NB; i++) if (!eegMode) { P[i * 2] = T[i * 2]; P[i * 2 + 1] = T[i * 2 + 1]; }
+    else for (let i = 0; i < NB; i++) if (!eegMode && !neuroMode) { P[i * 2] = T[i * 2]; P[i * 2 + 1] = T[i * 2 + 1]; }
   }
   let mx = -1e4, my = -1e4, lastMv = 0, t = 0, lastT = performance.now(), bbVisible = true;
   bill.addEventListener("pointermove", e => { const r = bb.getBoundingClientRect(), nx = e.clientX - r.left, ny = e.clientY - r.top, now = performance.now(); if (mx > -1e3) load = clamp(load + Math.hypot(nx - mx, ny - my) / Math.max(8, now - lastMv) * .015, 0, 1); mx = nx; my = ny; lastMv = now; }, {passive:true});
@@ -2998,13 +3005,37 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
       g2.addColorStop(0, dk ? "rgba(47,91,234,.24)" : "rgba(90,140,255,.2)"); g2.addColorStop(1, "rgba(0,0,0,0)"); bx.fillStyle = g2; bx.fillRect(0, 0, BW, BH);
       const g3x = BW * (.95 + .04 * Math.sin(t * .17)), g3y = BH * (.05 + .06 * Math.cos(t * .15)), g3 = bx.createRadialGradient(g3x, g3y, 0, g3x, g3y, M * .35);
       g3.addColorStop(0, dk ? "rgba(160,70,210,.22)" : "rgba(190,120,240,.2)"); g3.addColorStop(1, "rgba(0,0,0,0)"); bx.fillStyle = g3; bx.fillRect(0, 0, BW, BH); }
-    for (let i = 0; i < NB; i++) {
+    // NeuroSense: a face and three brainwaves side by side, plus a load meter. As stress rises the brows drop, the eyes narrow,
+    // the smile turns into a frown and the waves go from calm to jagged
+    let nS = 0, nRtl = false, fbH = 0, faceW = 0, graphX = 0, graphW = 0, cx = 0, cy = 0, S = 0, barY = 0, barH = 0, segW = 0, segG = 0, shk = 0, LM = null;
+    if (neuroMode) { const tgt = clamp01((load - .1) / .7); NSv += (tgt * tgt * (3 - 2 * tgt) - NSv) * Math.min(1, .045 * dt); nS = NSv; nRtl = document.documentElement.dir === "rtl";
+      fbH = R.h * .8; faceW = R.w * .36; const gap = R.w * .06; graphW = R.w - faceW - gap; const faceX = nRtl ? R.x + R.w - faceW : R.x; graphX = nRtl ? R.x : R.x + faceW + gap;
+      S = Math.min(faceW * 1.4, fbH * 1.1); shk = nS > .6 ? (nS - .6) * S * .02 * Math.sin(t * 40) : 0; cx = faceX + faceW / 2 + shk; cy = R.y + fbH / 2;
+      barH = Math.max(6, R.h * .06); barY = R.y + fbH + R.h * .1; segG = R.w * .02; segW = (R.w - 4 * segG) / 5;
+      const mw = S * .18 * (1 - .12 * nS);
+      LM = [[cx - S * .2, cy + S * .08], [cx, cy + S * .11], [cx + S * .2, cy + S * .08], [cx - mw, cy + S * .22], [cx + mw, cy + S * .22], [cx, cy + S * .36],
+        [cx - S * .1, cy - S * .19 + nS * S * .085], [cx + S * .1, cy - S * .19 + nS * S * .085]]; }
+        for (let i = 0; i < NB; i++) {
       const ix = i * 2, iy = ix + 1; let tx, ty;
-      if (eegMode) { const u = U[i], env = Math.pow(Math.sin(Math.PI * u), .7); tx = R.x + u * R.w; ty = R.y + R.h * .5 + eegL(u, t, load, 0) * R.h * .22 + Qb[i] * R.h * (.018 + .05 * env) * (1 + .4 * load); }
+      if (neuroMode) { const f = i / NB, q = Qb[i];
+        if (f < .5) { const fu = f / .5; A[i] = 0;
+          if (fu < .4) { const a = fu / .4 * 6.283; tx = cx + S * .34 * Math.cos(a) + q * S * .008; ty = cy + S * .43 * Math.sin(a); }
+          else if (fu < .54) { const sd = fu < .47 ? -1 : 1, u = ((fu - .4) % .07) / .07; tx = cx + sd * S * (.27 - .17 * u); ty = cy - S * .19 - (1 - nS) * S * .035 * Math.sin(Math.PI * u) + nS * S * (.12 * u - .035) + q * S * .012; }
+          else if (fu < .72) { const sd = fu < .63 ? -1 : 1, u = ((fu - .54) % .09) / .09, ex = cx + sd * S * .14, ey = cy - S * .07 + nS * S * .012;
+            if (U[i] < .28) { const r = S * .022 * (1 - .4 * nS) * Math.sqrt(U[i] / .28), a = u * 6.283; tx = ex + r * Math.cos(a); ty = ey + r * Math.sin(a); A[i] = 1; }
+            else { const a = u * 6.283; tx = ex + S * .075 * Math.cos(a); ty = ey + (S * .042 * (1 - .62 * nS) + S * .004) * Math.sin(a); } }
+          else if (fu < .88) { const u = (fu - .72) / .16, k = 1 - 2.3 * nS; tx = cx + (u - .5) * S * .36 * (1 - .12 * nS); ty = cy + S * .22 + k * S * .065 * (1 - (2 * u - 1) ** 2) + nS * S * .006 * Math.sin(u * 30 + t * 14) + q * S * .006; }
+          else if (fu < .92) { const u = (fu - .88) / .04; tx = cx + S * .015 * Math.sin(u * 3); ty = cy - S * .03 + u * S * .13; }
+          else { const g = (fu - .92) / .08 * 5, n = LM[Math.min(4, g | 0)], r = S * .022 * Math.sqrt(U[i]), a = (g % 1) * 6.283; tx = n[0] + r * Math.cos(a); ty = n[1] + r * Math.sin(a); A[i] = 1; } } // tracking points on the cheeks, nose tip and mouth corners
+        else if (f < .88) { const gu = (f - .5) / .38 * 3, j = Math.min(2, gu | 0), u = gu - j; A[i] = 1;
+          tx = graphX + u * graphW; ty = R.y + fbH * (.18 + .32 * j) + fbH * .1 * eegY(u, t + j * 1.3, nS) / 1.15 + q * fbH * .006; }
+        else { const bu = (f - .88) / .12 * 5, k = Math.min(4, bu | 0), v = bu - k, on = k < Math.round(1 + 4 * nS), kk = nRtl ? 4 - k : k;
+          tx = R.x + kk * (segW + segG) + v * segW; ty = barY + (U[i] - .5) * barH * (on ? 1 : .15); A[i] = on ? 1 : 0; } }
+      else if (eegMode) { const u = U[i], env = Math.pow(Math.sin(Math.PI * u), .7); tx = R.x + u * R.w; ty = R.y + R.h * .5 + eegL(u, t, load, 0) * R.h * .22 + Qb[i] * R.h * (.018 + .05 * env) * (1 + .4 * load); }
       else { const old = D[i] > now && T0[ix]; tx = (old ? T0[ix] : T[ix]) + Math.sin(t + i) * 1.2; ty = (old ? T0[iy] : T[iy]) + Math.cos(t * .8 + i) * 1.2; if (shapeNow === "flag" && A[i] && !old) ty += Math.sin((tx - R.x) / R.w * 9 - t * 3) * 8 * ((tx - R.x) / R.w); }
       let vx = V[ix] * .86 + (tx - P[ix]) * K[i] * dt * (reduce ? 8 : 1), vy = V[iy] * .86 + (ty - P[iy]) * K[i] * dt * (reduce ? 8 : 1);
       const dx = P[ix] - mx, dy = P[iy] - my, d2 = dx * dx + dy * dy; if (d2 < 8100 && d2 > 1) { const d = Math.sqrt(d2), f = (1 - d / 90) * 2.4 * dt; vx += dx / d * f; vy += dy / d * f; }
-      if (eegMode && d2 >= 8100 && Math.abs(tx - P[ix]) + Math.abs(ty - P[iy]) < 36) { const q = Math.min(1, .32 * dt); vx *= .5; vy *= .5; P[ix] += (tx - P[ix]) * q; P[iy] += (ty - P[iy]) * q; }
+      if ((eegMode || neuroMode) && d2 >= 8100 && Math.abs(tx - P[ix]) + Math.abs(ty - P[iy]) < 36) { const q = Math.min(1, .32 * dt); vx *= .5; vy *= .5; P[ix] += (tx - P[ix]) * q; P[iy] += (ty - P[iy]) * q; }
       V[ix] = vx; V[iy] = vy; P[ix] += vx * dt; P[iy] += vy * dt;
       if (!roomOK && BW < 760) continue;
       bx.globalAlpha = A[i] === 2 && D[i] <= now ? 1 : Z[i]; bx.fillStyle = (D[i] > now ? A0[i] : A[i]) === 1 ? DOT_A : DOT; bx.fillRect(Math.round(P[ix] * DPR) / DPR, Math.round(P[iy] * DPR) / DPR, DS, DS);
@@ -3013,20 +3044,20 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   }
   new IntersectionObserver(es => { bbVisible = es[0].isIntersecting; }).observe(bill);
   // when the text block grows (subtitles, longer lines in Arabic), the picture re-fits above it
-  if (window.ResizeObserver) { let lastH = 0, rq = 0; new ResizeObserver(() => { if (BW >= 760 || !shapeNow || eegMode) return; const h = Math.round(bbRegion().h); if (Math.abs(h - lastH) < 6) return; lastH = h; cancelAnimationFrame(rq); rq = requestAnimationFrame(() => bbShape(shapeNow, .4)); }).observe(billIn); }
+  if (window.ResizeObserver) { let lastH = 0, rq = 0; new ResizeObserver(() => { if (BW >= 760 || !shapeNow || eegMode || neuroMode) return; const h = Math.round(bbRegion().h); if (Math.abs(h - lastH) < 6) return; lastH = h; cancelAnimationFrame(rq); rq = requestAnimationFrame(() => bbShape(shapeNow, .4)); }).observe(billIn); }
 
   // trailer: a narrator, subtitles that land on each spoken word, and a dot picture for every beat of the story
   const SHOTS_EN = [{"line": "Dubai, where the desert meets the sea,", "at": 0, "out": 3700, "w": [450, 2130, 2190, 2310, 2570, 2850, 3110]}, {"line": "I spend my days teaching machines to think.", "at": 3950, "out": 7300, "w": [4030, 4190, 4470, 4730, 5010, 5490, 6150, 6590]}, {"line": "I studied AI and machine learning at Manipal,", "at": 7500, "out": 10700, "w": [7570, 7730, 8090, 8590, 9030, 9350, 9750, 9990]}, {"line": "here in Dubai, and graduated with a CGPA of 8.9.", "at": 10870, "out": 15700, "w": [10950, 11210, 11370, 12170, 12330, 12770, 13130, 13270, 14150, 14470]}, {"line": "Along the way, I led workshops and hackathons", "at": 15950, "out": 18650, "w": [16030, 16310, 16510, 17050, 17330, 17510, 18030, 18370]}, {"line": "on the core teams of IEEE and Google Developer Student Clubs.", "at": 18830, "out": 23250, "w": [18850, 19210, 19350, 19630, 19990, 20250, 20870, 21230, 21630, 22050, 22490]}, {"line": "My research, NeuroSense,", "at": 23630, "out": 25500, "w": [23710, 23870, 24790]}, {"line": "reads facial expressions and simulated EEG", "at": 25700, "out": 29300, "w": [25750, 26130, 26650, 27230, 27890, 28510]}, {"line": "to detect mental load in real time.", "at": 29500, "out": 32400, "w": [29570, 30390, 30690, 31070, 31430, 31610, 31790]}, {"line": "And it won Best Paper at AEIT.", "at": 32870, "out": 36350, "w": [32950, 33090, 33190, 33490, 33830, 34350, 34870]}, {"line": "Competition sharpens me: eighth in the nation at IEEEXtreme,", "at": 36750, "out": 41450, "w": [36850, 37170, 37870, 38650, 38970, 39090, 39170, 39470, 39910]}, {"line": "and the top 8% of 6,000 teams in a global capture-the-flag.", "at": 41750, "out": 46550, "w": [41830, 41990, 42130, 42350, 43130, 43490, 44050, 44510, 44990, 45090, 45410]}, {"line": "Today, I build the workflows,", "at": 46930, "out": 49200, "w": [47010, 47730, 47950, 48230, 48430]}, {"line": "prompts and chatbots behind real conversations.", "at": 49430, "out": 52550, "w": [49510, 49650, 50130, 50670, 51050, 51390]}, {"line": "My name is Kritik Mahesh Kumar,", "at": 52850, "out": 54900, "w": [52930, 53090, 53290, 53490, 53970, 54350]}, {"line": "and my story is only just beginning.", "at": 55250, "out": 57850, "w": [55330, 55470, 55630, 55910, 56190, 56410, 56730]}];
-  const VIS_EN = [[0, "coast"], [4650, "mind"], [7650, "cap"], [13750, "gpa"], [16950, "audience"], [23750, "face"], [27750, "eeg"], [30550, "eeg+"], [32750, "trophy"], [38150, "rank"], [41650, "pct"], [44650, "flag"], [47350, "wflow"], [49350, "chat"], [53150, "name"], [55150, "kmark"]];
+  const VIS_EN = [[0, "coast"], [4650, "mind"], [7650, "cap"], [13750, "gpa"], [16950, "audience"], [23750, "neuro"], [28500, "neuro+"], [32750, "trophy"], [38150, "rank"], [41650, "pct"], [44650, "flag"], [47350, "wflow"], [49350, "chat"], [53150, "name"], [55150, "kmark"]];
   const T_END_EN = 57800;
   const SHOTS_AR = [{"line": "دبي، حيث تلتقي الصحراء بالبحر،", "at": 0, "out": 2850, "w": [450, 910, 1290, 1770, 2490]}, {"line": "أقضي أيامي في تعليم الآلات كيف تفكّر.", "at": 3000, "out": 6400, "w": [3050, 3430, 4090, 4230, 4850, 5530, 5970]}, {"line": "درستُ الذكاء الاصطناعي وتعلّم الآلة في جامعة مانيبال،", "at": 6570, "out": 11650, "w": [6650, 7190, 7730, 8890, 9630, 10150, 10390, 10870]}, {"line": "هنا في دبي، وتخرّجت بمعدّل تراكمي قدره ٨٫٩", "at": 11780, "out": 17700, "w": [11830, 12090, 12290, 12650, 13490, 14350, 15210, 15810]}, {"line": "وعلى الطريق، قُدت ورش العمل والهاكاثونات", "at": 17900, "out": 20830, "w": [17990, 18430, 18990, 19250, 19610, 20090]}, {"line": "ضمن الفرق الأساسية في آي تريبل إي ونوادي مطوّري جوجل الطلابية.", "at": 20970, "out": 25750, "w": [21050, 21310, 21690, 22290, 22450, 22850, 23250, 23570, 24170, 24670, 25090]}, {"line": "بحثي، نيوروسينس، يقرأ تعابير الوجه وإشارات الدماغ المحاكاة،", "at": 26170, "out": 31200, "w": [26220, 26870, 27690, 28090, 28730, 29330, 30050, 30550]}, {"line": "ليرصد الحِمل الذهني لحظة بلحظة.", "at": 31300, "out": 33950, "w": [31370, 31870, 32370, 32830, 33430]}, {"line": "وقد فاز بجائزة أفضل ورقة بحثية في مؤتمر إيه إي آي تي.", "at": 34070, "out": 39450, "w": [34170, 34550, 34830, 35490, 35930, 36370, 37070, 37270, 37850, 38550, 38650, 39130]}, {"line": "المنافسة تصقلني: المركز الثامن على مستوى الدولة", "at": 39600, "out": 42900, "w": [39650, 40430, 41130, 41630, 42030, 42250, 42610]}, {"line": "في آي تريبل إي إكستريم،", "at": 42980, "out": 44730, "w": [43030, 43210, 43550, 43900, 44290]}, {"line": "وضمن أفضل ٨٪ من بين ٦٬٠٠٠ فريق في مسابقة عالمية لالتقاط العَلَم.", "at": 44810, "out": 51000, "w": [44870, 45270, 45650, 46710, 46990, 47490, 48230, 48550, 48710, 49330, 50010, 50570]}, {"line": "واليوم، أبني سير العمل، والأوامر، وروبوتات المحادثة،", "at": 51170, "out": 54830, "w": [51320, 51910, 52290, 52570, 52990, 53590, 54230]}, {"line": "خلف محادثات حقيقية.", "at": 54920, "out": 57000, "w": [54970, 55330, 56210]}, {"line": "اسمي كريتيك ماهيش كومار... وقصّتي بدأت للتو.", "at": 57300, "out": 60250, "w": [57380, 57690, 57990, 58330, 58730, 59190, 59570]}];
-  const VIS_AR = [[0, "coast"], [3950, "mind"], [6650, "cap"], [15150, "gpa"], [18650, "audience"], [26050, "face"], [29150, "eeg"], [31750, "eeg+"], [34250, "trophy"], [41050, "rank"], [45050, "pct"], [49450, "flag"], [51750, "wflow"], [52850, "chat"], [57400, "name"], [58550, "kmark"]];
+  const VIS_AR = [[0, "coast"], [3950, "mind"], [6650, "cap"], [15150, "gpa"], [18650, "audience"], [26050, "neuro"], [30300, "neuro+"], [34250, "trophy"], [41050, "rank"], [45050, "pct"], [49450, "flag"], [51750, "wflow"], [52850, "chat"], [57400, "name"], [58550, "kmark"]];
   const T_END_AR = 60400;
   let SHOTS = SHOTS_EN, VIS = VIS_EN, T_END = T_END_EN, vis = -1, surge = false;
   const VO_SRC = "assets/voice-en.mp3";
   const VO_SRC_AR = "assets/voice-ar.mp3"; // Arabic narration (ElevenLabs)
   const playBtn = $("#playBtn"), subs = $("#subs"), tbar = $("#tbar"), muteBtn = $("#muteBtn");
-  let shot = -1, trailerStart = 0, raf = 0, subOut = false, vo = null, muted = store.get("kmk-mute") === "1";
+  let shot = -1, trailerStart = 0, raf = 0, subOut = false, vo = null, muted = store.get("kmk-mute") === "1", scrub = null;
   const SPK = '<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/>';
   function setMute(m) { muted = m; store.set("kmk-mute", m ? "1" : "0"); if (vo) vo.muted = m; muteBtn.setAttribute("aria-pressed", String(m)); muteBtn.title = tr(m ? "Narration off" : "Narration on"); muteBtn.setAttribute("aria-label", tr("Mute narration"));
     muteBtn.querySelector(".ic").innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${SPK}${m ? '<path d="m16 9.5 5 5m0-5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' : '<path class="wv" d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.5a7.6 7.6 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'}</svg>`; }
@@ -3042,16 +3073,16 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   function trailerTick(now) {
     if (!bill.classList.contains("playing")) return;
     // the voice is the clock: picture and words follow the audio itself, so they never drift
-    const el = vo && !vo.paused && vo.readyState > 2 && vo.currentTime > 0 ? vo.currentTime * 1000 : now - trailerStart;
+    const el = scrub != null ? scrub : vo && !vo.paused && vo.readyState > 2 && vo.currentTime > 0 ? vo.currentTime * 1000 : now - trailerStart;
     let v = 0; while (v + 1 < VIS.length && el >= VIS[v + 1][0]) v++;
     if (v !== vis) { vis = v; const n = VIS[v][1]; surge = n.endsWith("+"); if (!surge && n !== shapeNow) bbShape(n, 1, reduce ? 0 : 380); }
-    if (surge) load = Math.min(.85, load + .02); // "mental load": the brainwave gets busier as it is said
+    if (surge) load = Math.min(.85, load + (neuroMode ? .012 : .02)); // "mental load": the brainwave gets busier as it is said (the face takes ~2s to tense up)
     let i = 0; while (i + 1 < SHOTS.length && el >= SHOTS[i + 1].at) i++;
     if (i !== shot) { shot = i; showSub(i, el); }
     const next = i + 1 < SHOTS.length ? SHOTS[i + 1].at : T_END, out = SHOTS[i].out || next - 320;
     if (!subOut && el > out) { subOut = true; textOut(subs, { dur:200 }); }
-    tbar.style.width = (clamp(el / T_END, 0, 1) * 100).toFixed(2) + "%";
-    if (el >= T_END) return stopTrailer();
+    const pc = clamp(el / T_END, 0, 1) * 100; tbar.style.width = pc.toFixed(2) + "%"; tbarBox.setAttribute("aria-valuenow", Math.round(pc));
+    if (el >= T_END && scrub == null) return stopTrailer();
     raf = requestAnimationFrame(trailerTick);
   }
   function playTrailer() {
@@ -3066,6 +3097,19 @@ html[lang="ar"] .tile:hover .tt b .ch,html[lang="ar"] .tile:focus-visible .tt b 
   }
   function stopTrailer() { cancelAnimationFrame(raf); if (vo) vo.pause(); const was = bill.classList.contains("playing"); bill.classList.remove("playing"); setPlayLabel(false); subs.textContent = ""; tbar.style.width = "0"; if (was) bbShape(PROFILES[prof].bb.shape, 1.5); }
   document.addEventListener("visibilitychange", () => { if (document.hidden && bill.classList.contains("playing")) stopTrailer(); });
+  // scrub the trailer: drag (or tap) the progress line to jump back and forth; picture, subtitles and voice all follow
+  const tbarBox = tbar.parentElement;
+  { const frac = e => { const r = tbarBox.getBoundingClientRect(); let f = (e.clientX - r.left) / Math.max(1, r.width); if (document.documentElement.dir === "rtl") f = 1 - f; return clamp(f, 0, 1); };
+    const jump = ms => { ms = clamp(ms, 0, T_END - 250); trailerStart = performance.now() - ms; shot = -1; vis = -1; surge = false; load = .1; if (vo) { try { vo.currentTime = ms / 1000; } catch (_) {} } return ms; };
+    const resume = () => { if (vo && bill.classList.contains("playing")) { const pr = vo.play(); if (pr && pr.catch) pr.catch(() => {}); } };
+    tbarBox.addEventListener("pointerdown", e => { if (!bill.classList.contains("playing") || e.button > 0) return; e.preventDefault(); try { tbarBox.setPointerCapture(e.pointerId); } catch (_) {}
+      if (vo) vo.pause(); tbarBox.classList.add("drag"); scrub = jump(frac(e) * T_END); });
+    tbarBox.addEventListener("pointermove", e => { if (scrub == null) return; const ms = clamp(frac(e) * T_END, 0, T_END - 250); trailerStart = performance.now() - ms; scrub = ms; });
+    const end = () => { if (scrub == null) return; const ms = scrub; scrub = null; tbarBox.classList.remove("drag"); jump(ms); resume(); };
+    tbarBox.addEventListener("pointerup", end); tbarBox.addEventListener("pointercancel", end); tbarBox.addEventListener("lostpointercapture", end);
+    tbarBox.addEventListener("keydown", e => { if (!bill.classList.contains("playing")) return; const rtl = document.documentElement.dir === "rtl", cur = vo && vo.readyState > 0 ? vo.currentTime * 1000 : performance.now() - trailerStart;
+      let to = null; if (e.key === "ArrowRight") to = cur + (rtl ? -5000 : 5000); else if (e.key === "ArrowLeft") to = cur + (rtl ? 5000 : -5000); else if (e.key === "Home") to = 0; else if (e.key === "End") to = T_END - 1500;
+      if (to == null) return; e.preventDefault(); jump(to); resume(); }); }
   playBtn.addEventListener("click", () => bill.classList.contains("playing") ? stopTrailer() : playTrailer());
   $("#infoBtn").addEventListener("click", e => openEp(PROFILES[prof].bb.info, e.currentTarget));
 
@@ -3186,7 +3230,7 @@ I built a neural network that reads handwritten digits from the MNIST dataset.
 I built a sentiment analysis system that labels tweets as positive, negative or neutral.
 I built a fraud detection system that flags fraudulent transactions in imbalanced data.
 I ranked 468 out of more than 6000 teams in the Cyber Apocalypse CTF.
-I won the best paper award at AEIT 2025 for detecting cognitive load from facial expressions and EEG.
+I won the best paper award at the AEIT International Student Research Colloquium 2025 for detecting cognitive load from facial expressions and EEG.
 I led technical workshops for Google Developer Student Clubs in Dubai.
 I speak English, Hindi, Malayalam, Telugu and Marathi.
 I am looking for AI engineering and software roles in Dubai.`;
@@ -3232,21 +3276,14 @@ I am looking for AI engineering and software roles in Dubai.`;
   function setTheme(t, from = themeBtn) {
     const flip = () => { document.documentElement.setAttribute("data-theme", t); store.set("kmk-theme", t); };
     if (themeVT) { try { themeVT.skipTransition(); } catch (e) {} }
-    if (reduce || !document.startViewTransition) { flip(); syncTheme(); if (!gate.hidden) gdots.recolor(); return; }
+    if (reduce) { flip(); syncTheme(); if (!gate.hidden) gdots.recolor(); return; }
     if (!gate.hidden) { const h = document.documentElement; clearTimeout(setTheme.ft); h.classList.add("theme-fade"); flip(); syncTheme(); gdots.recolor();
       setTheme.ft = setTimeout(() => h.classList.remove("theme-fade"), 450); return; }
-    const r = from.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2, R = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-    document.documentElement.classList.add("vt-theme");
-    const vt = themeVT = document.startViewTransition(flip);
-    const soft = !!(window.CSS && CSS.supports && CSS.supports("mask-image", "radial-gradient(#000,transparent)")) && SOFT_VR, html = document.documentElement, F = Math.max(140, Math.min(innerWidth, innerHeight) * .35);
-    if (soft) { html.classList.add("vt-soft"); html.style.setProperty("--vx", x + "px"); html.style.setProperty("--vy", y + "px"); html.style.setProperty("--vf", F + "px"); }
-    // a calm, even ease (slow start, slow finish), long enough that it reads as a fade sweeping across rather than a flash
-    const dur = innerWidth < 760 ? 850 : 1000, ease = "cubic-bezier(.45,0,.25,1)";
-    vt.ready.then(() => { requestAnimationFrame(syncTheme);
-      if (soft) html.animate({ "--vr":["0px", (R + F) + "px"] }, { duration:dur, easing:ease, pseudoElement:"::view-transition-new(root)", fill:"both" });
-      else html.animate({ clipPath:[`circle(0px at ${x}px ${y}px)`, `circle(${R}px at ${x}px ${y}px)`] }, { duration:dur, easing:ease, pseudoElement:"::view-transition-new(root)" });
-      html.animate({ opacity:[1, .85] }, { duration:dur, easing:ease, pseudoElement:"::view-transition-old(root)" }); }).catch(() => syncTheme());
-    vt.finished.catch(() => {}).finally(() => { if (themeVT === vt) { themeVT = null; html.classList.remove("vt-theme", "vt-soft"); } });
+    // main site: no frozen snapshot. The new theme lands live underneath a veil of the old background that dissolves away,
+    // so the dots, the trailer and everything else keep moving the whole time (one cheap fading layer, nothing else animates)
+    const h = document.documentElement, old = getComputedStyle(h).getPropertyValue("--bg").trim() || (isDark() ? "#090A16" : "#F5F4FC"), v = document.createElement("div");
+    v.className = "tveil"; v.style.background = old; document.body.appendChild(v); flip(); syncTheme();
+    const a = v.animate([{ opacity:.92 }, { opacity:0 }], { duration:innerWidth < 760 ? 480 : 560, easing:"cubic-bezier(.33,0,.2,1)" }); a.finished.then(() => v.remove(), () => v.remove());
   }
   { let q = 0; new MutationObserver(() => { if (!q) q = requestAnimationFrame(() => { q = 0; syncTheme(); }); }).observe(document.documentElement, { attributes:true, attributeFilter:["data-theme"] }); }
   themeBtn.addEventListener("click", () => setTheme(isDark() ? "light" : "dark"));
@@ -3948,9 +3985,9 @@ I am looking for AI engineering and software roles in Dubai.`;
     fit(); addEventListener("resize", fit);
     const ph = (a, b, x) => clamp((x - a) / (b - a), 0, 1), sm = (a, b, x) => { const t = ph(a, b, x); return t * t * (3 - 2 * t); };
     const quint = x => 1 - Math.pow(1 - x, 5), lerp = (a, b, k) => a + (b - a) * k;
-    const SW = 0.19, LEG = { p0:[0.214, 0.56], p1:[0.6594, 1], th:0.21 }, ARM = { p0:[0.2234, 0.56], p1:[0.6691, 0], th:0.21 }; // same K as the logo mark, slim strokes
+    const SW = 0.19, LEG = { p0:[0.19, 0.5], p1:[0.641, 1], th:0.21 }, ARM = { p0:[0.19, 0.5], p1:[0.641, 0], th:0.21 }; // same K as the logo mark, slim strokes
     // the arm and leg as one folded ribbon: VI is where their inner edges meet, FL is where the arm's lower edge reaches the leg's outer edge
-    const VI = [0.3242, 0.4988], FL = [0.2158, 0.619], PA = [[SW - .006, 0.417], [0.5601, 0], [0.7741, 0], VI, FL, [SW - .006, 0.5828]], PL = [VI, [0.7644, 1], [0.5504, 1], FL]; // the slanted ends are cut a touch wider than the stem so all three read as the same width // stem, arm and leg all exactly SW thick
+    const VI = [0.297, 0.5], FL = [SW - .006, 0.6253], FLL = [SW - .006, 0.6119], PA = [[SW - .006, 0.3747], [0.534, 0], [0.748, 0], FL], PL = [VI, [0.748, 1], [0.534, 1], FLL]; // the slanted ends are cut a touch wider than the stem so all three read as the same width // stem, arm and leg all exactly SW thick
     // soft corners drawn inside the shape itself, so the same path can be used to clip (nothing pokes outside it)
     const pathP = (P, KH) => { const n = P.length, r = 0, X = i => P[(i + n) % n][0] * KH, Y = i => P[(i + n) % n][1] * KH; c.beginPath(); c.moveTo((X(-1) + X(0)) / 2, (Y(-1) + Y(0)) / 2);
       for (let i = 0; i < n; i++) { const q = P[i], sharp = q === VI || q === FL || q[0] <= SW; c.arcTo(X(i), Y(i), X(i + 1), Y(i + 1), sharp ? 0 : r); } c.closePath(); }; // only the free ends are rounded: where arm, leg and stem meet the edges run straight through
@@ -3999,15 +4036,19 @@ I am looking for AI engineering and software roles in Dubai.`;
       if (last < 0) last = now; clock += Math.min(now - last, 50); last = now; // cap each step at ~2 frames: in-app browsers stall on load
       const t = clock, KH = Math.min(H * .42, W * .62);
       // world: letter plane, centred on the K; 1 unit = 1 px when the camera sits at its start
-      const kx = -KH * 0.3871, ky = -KH * .5, stemX = kx + SW * KH / 2, AX = W / 2 + stemX * DIST / (DIST - 70 * ph(300, 2300, t)) * (1 - .25 * eIO(ph(2300, 4100, t))), FW = 2 * Math.max(AX, W - AX); // the K is centred on screen; the camera aims straight at the stem from where it sits (shifted lens), so nothing ever slides sideways
-      // camera: a gentle push while the K forms, then a dolly that speeds up, flies through the stem and eases out
-      // approach: distance to the letter shrinks exponentially (a steady, accelerating zoom) until the stem is wider than the screen;
-      // then the camera keeps its exact speed and flies on through the lines, still accelerating
-      const zPush = DIST - 70 * ph(300, 2300, t), zFill = DIST * SW * KH / (1.35 * FW), T1 = 1800, ta = t - 2300; // Netflix pace: the stem fills the screen ~0.9s into the dive
+      const kx = -KH * 0.374, ky = -KH * .5, stemX = kx + SW * KH / 2;
+      // camera: ONE continuous move, no seams. Its zoom speed (in log-distance, so every step looks the same size) eases in from rest,
+      // cruises gently while the K forms, then ramps up smoothly into the dive; it never stops, jumps or changes speed abruptly.
+      // After the stem fills the screen it carries on at that exact speed and keeps accelerating through the lines.
+      const r0 = 4.4e-5, tf = 4100, sq = (x, a, d) => { if (x <= a) return 0; if (x >= a + d) return d / 2 + (x - a - d); const u = (x - a) / d; return d * (u * u * u - u * u * u * u / 2); };
+      const G0 = x => sq(x, 300, 600), G1 = x => sq(x, 2100, 1500); // integrals of the two smooth speed ramps (cruise, then dive)
+      const scRef = Math.exp(r0 * G0(2300)), drift = 1 - .25 * eIO(ph(2300, 4100, t)), AXf = W / 2 + stemX * scRef * .75, FW = 2 * Math.max(AXf, W - AXf);
+      // aim: centred on the whole K while it forms, then the aim settles on the stem (blended, so the picture never slides with a jolt)
+      const aimB = sm(1900, 2700, t), AX = W / 2 + stemX * lerp(Math.exp(r0 * G0(t)), scRef, aimB) * drift; // the K is centred on screen; the camera aims straight at the stem from where it sits (shifted lens)
+      const zFill = DIST * SW * KH / (1.35 * FW), T1 = tf - 2300, r1 = (Math.log(DIST / zFill) - r0 * G0(tf) + r0 * G1(tf)) / G1(tf);
       let camZ;
-      if (ta <= 0) camZ = DIST - zPush;
-      else if (ta <= T1) { const q = ta / T1; camZ = DIST - (DIST - 70) * Math.pow(zFill / (DIST - 70), q * q); }
-      else { const v = -2 * zFill * Math.log(zFill / (DIST - 70)) / T1, tb = ta - T1; camZ = DIST - zFill + v * tb + .0011 * tb * tb; }
+      if (t <= tf) camZ = DIST - DIST * Math.exp(-(r0 * G0(t) + (r1 - r0) * G1(t)));
+      else { const v = r1 * zFill, tb = t - tf; camZ = DIST - zFill + v * tb + .0011 * tb * tb; }
       const p = ph(2300, 2300 + T1, t), camX = stemX, camY = 0; // straight in: the stem stays put on screen and grows until it fills it
       c.setTransform(dpr, 0, 0, dpr, 0, 0); c.globalCompositeOperation = "source-over"; c.globalAlpha = 1; c.fillStyle = "#000"; c.fillRect(0, 0, W, H);
       const zL = Z0 - camZ, sc = zL > 1 ? DIST / zL : 0, stemPx = SW * KH * sc; // how wide the stem is on screen right now
@@ -4016,7 +4057,7 @@ I am looking for AI engineering and software roles in Dubai.`;
       if (sc > 0 && reveal < 1) {
         c.save(); c.translate(AX, H / 2); c.scale(sc, sc); c.translate(-camX, -camY); c.translate(kx, ky);
         // the feet sit on one shallow arch, like the classic streaming N: outer edges lowest, rising toward the middle
-        { const BW = .7741, d = .03; c.beginPath(); c.moveTo(-KH, -2 * KH); c.lineTo(2 * KH, -2 * KH); c.lineTo(2 * KH, 1.05 * KH); c.lineTo(BW * KH, 1.05 * KH); c.lineTo(BW * KH, KH);
+        { const BW = .748, d = .03; c.beginPath(); c.moveTo(-KH, -2 * KH); c.lineTo(2 * KH, -2 * KH); c.lineTo(2 * KH, 1.05 * KH); c.lineTo(BW * KH, 1.05 * KH); c.lineTo(BW * KH, KH);
           c.quadraticCurveTo(BW / 2 * KH, (1 - 2 * d) * KH, 0, KH); c.lineTo(0, 1.05 * KH); c.lineTo(-KH, 1.05 * KH); c.closePath(); c.clip(); }
         // entry: both strokes draw top to bottom, the stem leads and the ribbon (arm into leg) follows a beat behind
         const ps = eIO(ph(400, 1350, t)), pen = t < 2300 ? eIO(ph(650, 1700, t)) : 1 - eIO(ph(2300, 3770, t)), pa = clamp01(pen / .5), pl = clamp01((pen - .5) / .5), solid = 1 - reveal; // stem first, the arm-into-leg stroke follows 250ms later
@@ -4032,7 +4073,7 @@ I am looking for AI engineering and software roles in Dubai.`;
         const legG = c.createLinearGradient(.267 * KH, .542 * KH, .725 * KH, KH); legG.addColorStop(0, "#4527B8"); legG.addColorStop(1, "#A43BD8");
         const armG = c.createLinearGradient(.183 * KH, .625 * KH, .767 * KH, 0); armG.addColorStop(0, "#6447EE"); armG.addColorStop(1, "#38A6EE"); // purple into electric blue
         // arm and leg fade out first, leaving only the stem; drawn as one layer so their overlap never shows through
-        const rq = ph(2300, 3770, t) * .999, legEnd = pl, yArm = lerp(-.03, .76, pa), yLeg = lerp(.55, 1.03, pl), ribShred = Math.max(sm(1.1, 2.6, sc), sm(2250, 2800, t)) * solid; // the ribbon splits into threads of light as it pulls back
+        const rq = ph(2300, 3770, t) * .999, legEnd = pl, yArm = lerp(-.03, .76, pa), yLeg = lerp(.49, 1.03, pl), ribShred = Math.max(sm(1.1, 2.6, sc), sm(2250, 2800, t)) * solid; // the ribbon splits into threads of light as it pulls back
         const ribA = solid * (rq < 1 ? 1 : 0);
         if (ribA > 0) {
           const tgt = ribA < 1 || rq > 0 ? (rc.canvas.width !== cv.width || rc.canvas.height !== cv.height ? (rc.canvas.width = cv.width, rc.canvas.height = cv.height, rc) : rc) : c;
@@ -4047,13 +4088,13 @@ I am looking for AI engineering and software roles in Dubai.`;
           const qL = 0, qA = 0; // no brush-away: the ribbon retracts along the same path it was drawn on // mirror of the entry: the ribbon leaves on the same 1050ms curve it came in on, leg first (it came in last), then the arm // the ribbons are gone ~0.4s into the dive, like the reference
           // leg first (it lives under the fold): body, the soft shade where it tucks under, its threads, then it brushes back up into the fold
           if (legEnd > 0 && qL < 1) own(0, () => { c.save(); upTo(KH, yLeg); fillP(PL, KH, legG);
-            c.save(); pathP(PL, KH); c.clip(); const mx = (VI[0] + FL[0]) / 2 * KH, my = (VI[1] + FL[1]) / 2 * KH, fg = c.createLinearGradient(mx, my, mx + .782 * .13 * KH, my + .623 * .13 * KH);
-            fg.addColorStop(0, `rgba(10,8,40,${.5 * pl})`); fg.addColorStop(1, "rgba(10,8,40,0)"); c.fillStyle = fg; c.fillRect(0, .4 * KH, KH, .6 * KH);
+            c.save(); pathP(PL, KH); c.clip(); const fg = c.createLinearGradient(VI[0] * KH, VI[1] * KH, (VI[0] + .7425 * .2) * KH, (VI[1] + .6697 * .2) * KH); // runs straight across the fold, so the whole fold edge gets the same shade
+            fg.addColorStop(0, `rgba(8,6,32,${.62 * pl})`); fg.addColorStop(.35, `rgba(8,6,32,${.3 * pl})`); fg.addColorStop(1, "rgba(8,6,32,0)"); c.fillStyle = fg; c.fillRect(0, .4 * KH, KH, .6 * KH);
             if (pl < 1) { c.fillStyle = `rgba(236,232,255,${.5 * (1 - pl)})`; c.fillRect(0, (yLeg - .07) * KH, KH, .07 * KH); }
             if (ribShred > 0) shredAlong(KH, LEG, ribShred, t); c.restore(); c.restore();
             if (qL > 0) brushAway(LEG, KH, lerp(1.08, -.5, eIO(qL)), true, sm(0, .3, qL)); });
           // then the arm on top, which brushes away up to the top right
-          if (pa > 0 && yArm > -.03 && qA < 1) own(1, () => { c.save(); upTo(KH, yArm); fillP(PA, KH, armG);
+          if (pa > 0 && yArm > -.03 && qA < 1) own(1, () => { c.save(); upTo(KH, yArm); fillP(PA, KH, armG); { const m = c.getTransform(), px = 1.6 / Math.max(1e-3, Math.hypot(m.a, m.b) / dpr); c.save(); pathP(PL, KH); c.clip(); /* the seam cover stays inside the leg: nothing pokes out past the inner corner */ c.beginPath(); c.moveTo(VI[0] * KH, VI[1] * KH); c.lineTo(FL[0] * KH, FL[1] * KH); c.lineWidth = px; c.strokeStyle = armG; c.stroke(); c.restore(); }
             c.save(); pathP(PA, KH); c.clip(); if (pa < 1) { c.fillStyle = `rgba(236,232,255,${.6 * (1 - pa)})`; c.fillRect(0, (yArm - .07) * KH, KH, .07 * KH); }
             if (ribShred > 0) shredAlong(KH, ARM, ribShred, t); c.restore(); c.restore();
             if (qA > 0) brushAway(ARM, KH, lerp(-.45, 1.5, eIO(qA)), false, sm(0, .3, qA)); });
