@@ -3273,17 +3273,20 @@ I am looking for AI engineering and software roles in Dubai.`;
   // theme switch: the new theme grows as one clean circle from the button. Only the attribute flips inside the snapshot (fast, no stall);
   // canvases and the nav repaint right after, live, while the circle expands. A second tap mid-way finishes the first instantly.
   let themeVT = null; const SOFT_VR = (() => { try { const d = document.createElement("div"); d.style.setProperty("--vr", "5px"); document.body.appendChild(d); const ok = typeof CSS !== "undefined" && "registerProperty" in CSS; d.remove(); return ok; } catch (e) { return false; } })();
+  const themeVeil = { el:null, anim:null };
   function setTheme(t, from = themeBtn) {
     const flip = () => { document.documentElement.setAttribute("data-theme", t); store.set("kmk-theme", t); };
     if (themeVT) { try { themeVT.skipTransition(); } catch (e) {} }
     if (reduce) { flip(); syncTheme(); if (!gate.hidden) gdots.recolor(); return; }
-    if (!gate.hidden) { const h = document.documentElement; clearTimeout(setTheme.ft); h.classList.add("theme-fade"); flip(); syncTheme(); gdots.recolor();
-      setTheme.ft = setTimeout(() => h.classList.remove("theme-fade"), 450); return; }
-    // main site: no frozen snapshot. The new theme lands live underneath a veil of the old background that dissolves away,
-    // so the dots, the trailer and everything else keep moving the whole time (one cheap fading layer, nothing else animates)
-    const h = document.documentElement, old = getComputedStyle(h).getPropertyValue("--bg").trim() || (isDark() ? "#090A16" : "#F5F4FC"), v = document.createElement("div");
-    v.className = "tveil"; v.style.background = old; document.body.appendChild(v); flip(); syncTheme();
-    const a = v.animate([{ opacity:.92 }, { opacity:0 }], { duration:innerWidth < 760 ? 480 : 560, easing:"cubic-bezier(.33,0,.2,1)" }); a.finished.then(() => v.remove(), () => v.remove());
+    // every page, every screen: the whole new theme lands at once (live, nothing freezes), under ONE veil of the old background
+    // that dissolves away. Tapping again mid-fade continues from exactly what is on screen (no flash, no grey jump, no stacking)
+    const h = document.documentElement, old = getComputedStyle(h).getPropertyValue("--bg").trim() || (isDark() ? "#090A16" : "#F5F4FC");
+    let start = .82;
+    if (themeVeil.el && themeVeil.anim) { const o = parseFloat(getComputedStyle(themeVeil.el).opacity) || 0; start = Math.min(.82, 1 - o); themeVeil.anim.cancel(); }
+    else { themeVeil.el = document.createElement("div"); themeVeil.el.className = "tveil"; document.body.appendChild(themeVeil.el); }
+    const v = themeVeil.el; v.style.background = old; flip(); syncTheme(); if (!gate.hidden) gdots.recolor();
+    const a = themeVeil.anim = v.animate([{ opacity:start }, { opacity:0 }], { duration:innerWidth < 760 ? 380 : 440, easing:"cubic-bezier(.2,.7,.2,1)", fill:"forwards" });
+    a.onfinish = () => { if (themeVeil.anim === a) { v.remove(); themeVeil.el = themeVeil.anim = null; } };
   }
   { let q = 0; new MutationObserver(() => { if (!q) q = requestAnimationFrame(() => { q = 0; syncTheme(); }); }).observe(document.documentElement, { attributes:true, attributeFilter:["data-theme"] }); }
   themeBtn.addEventListener("click", () => setTheme(isDark() ? "light" : "dark"));
